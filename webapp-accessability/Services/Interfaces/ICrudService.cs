@@ -1,6 +1,8 @@
-interface ICrudService{
-    void Aanmaken();
-    void Lezen();
-    void Update();
-    void Verwijderen();
+using Microsoft.VisualBasic;
+
+interface ICrudService<T>{
+    void Aanmaken(T obj);
+    void Lezen(int Id);
+    void Update(T obj);
+    void Verwijderen(int Id);
 }
