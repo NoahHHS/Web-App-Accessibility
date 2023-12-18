@@ -12,7 +12,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         : base(options, operationalStoreOptions)
     {
         // FLuent API
-
+        
 
         // Db sets
         
