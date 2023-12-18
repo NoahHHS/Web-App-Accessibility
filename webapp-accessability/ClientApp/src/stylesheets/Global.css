@@ -1,0 +1,27 @@
+/*----------------------------Global styling----------------------------*/
+body{
+    background-color: rgb(29, 35, 79);
+    color: white;
+}
+
+h1{
+    color: #21CEA1;
+}
+
+p{
+    color: white;
+}
+
+.pagetitle{
+    color: #21CEA1;
+    text-align: center;
+}
+
+.subtitle{
+    color: #21CEA1;
+}
+
+/*----------------------------Navbar styling----------------------------*/
+
+
+/*----------------------------Footer styling----------------------------*/
