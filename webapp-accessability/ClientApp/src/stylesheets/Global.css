@@ -6,6 +6,7 @@ body{
 
 h1{
     color: #21CEA1;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 p{
@@ -19,9 +20,29 @@ p{
 
 .subtitle{
     color: #21CEA1;
+    text-align: center;
 }
 
 /*----------------------------Navbar styling----------------------------*/
+.navbar{
+    padding: 20px;
+    background-color: rgb(29, 35, 79);
+    border-bottom: 0.4mm solid black;
+    margin-bottom: 15px;
+    z-index:99;
+}
 
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: #21CEA1;
+    text-decoration: none;
+}
+
+.nav-item{
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+}
 
 /*----------------------------Footer styling----------------------------*/
