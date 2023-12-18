@@ -1,0 +1,3 @@
+interface IRegistreerService{
+    void Aanmelden();
+}
