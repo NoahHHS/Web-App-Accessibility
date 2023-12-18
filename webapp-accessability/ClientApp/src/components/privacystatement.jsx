@@ -34,7 +34,7 @@ export class Privacystatement extends Component {
             </ul>      
         </section>
         <section>
-            <h2>Bijzondere en/of gevoelige persoonsgegevens die wij verwerken </h2>
+            <h2 class="subtitle">Bijzondere en/of gevoelige persoonsgegevens die wij verwerken </h2>
             <p class="beschrijving">Onze website en/of dienst heeft niet de intentie gegevens te verzamelen over websitebezoekers die jonger zijn dan 16 jaar. Tenzij ze toestemming hebben van ouders of voogd. We kunnen echter niet controleren of een bezoeker ouder dan 16 is. Wij raden ouders dan ook aan betrokken te zijn bij de online activiteiten van hun kinderen, om zo te voorkomen dat er gegevens over kinderen verzameld worden zonder ouderlijke toestemming. Als u er van overtuigd bent dat wij zonder die toestemming persoonlijke gegevens hebben verzameld over een minderjarige, neem dan contact met ons op via accessibility@bartimeus.nl, dan verwijderen wij deze informatie. </p>
         </section>
         <section>
