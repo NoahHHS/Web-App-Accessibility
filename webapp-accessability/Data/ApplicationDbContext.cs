@@ -14,7 +14,8 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
         // FLuent API
 
 
-        // Db sets
-        
     }
+
+        // Db sets
+        public DbSet<Adres> Adres {get; set;}
 }
