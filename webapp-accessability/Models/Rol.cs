@@ -1,5 +1,5 @@
-namespace webapp_accessability.Models;
+// namespace webapp_accessability.Models;
 
-public class Rol {
-    public string UserRole {get; set;}
-}
+// public class Rol {
+//     public string UserRole {get; set;}
+// }
