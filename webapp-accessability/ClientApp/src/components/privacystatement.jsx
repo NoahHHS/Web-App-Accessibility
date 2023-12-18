@@ -6,7 +6,7 @@ export class Privacystatement extends Component {
   render() {
     return (
       <div>
-        <h1 class="pagetitle">Access-Ability</h1>
+        <h1 class="pagetitle">Privacystatement</h1>
         <section>
             <h2 class="subtitle">Persoonsgegevens die wij verwerken</h2>
             <p class="beschrijving">Accessibility verwerkt uw persoonsgegevens doordat u gebruik maakt van onze diensten en/of omdat u deze zelf aan ons verstrekt. Hieronder vindt u een overzicht van de persoonsgegevens die wij verwerken: </p>
@@ -25,7 +25,7 @@ export class Privacystatement extends Component {
             </ul>
         </section>
         <section>
-            <h2>Bijzondere en/ of gevoelige persoonsgegevens die wij verwerken </h2>
+            <h2 class="subtitle">Bijzondere en/ of gevoelige persoonsgegevens die wij verwerken </h2>
             <p class="beschrijving">Accessibility verwerkt de volgende bijzondere en/of gevoelige persoonsgegevens van u: </p>
             <ul>
                 <li>gezondheid</li>
@@ -38,7 +38,7 @@ export class Privacystatement extends Component {
             <p class="beschrijving">Onze website en/of dienst heeft niet de intentie gegevens te verzamelen over websitebezoekers die jonger zijn dan 16 jaar. Tenzij ze toestemming hebben van ouders of voogd. We kunnen echter niet controleren of een bezoeker ouder dan 16 is. Wij raden ouders dan ook aan betrokken te zijn bij de online activiteiten van hun kinderen, om zo te voorkomen dat er gegevens over kinderen verzameld worden zonder ouderlijke toestemming. Als u er van overtuigd bent dat wij zonder die toestemming persoonlijke gegevens hebben verzameld over een minderjarige, neem dan contact met ons op via accessibility@bartimeus.nl, dan verwijderen wij deze informatie. </p>
         </section>
         <section>
-            <h2>Met welk doel en op basis van welke grondslag wij persoonsgegevens verwerken </h2>
+            <h2 class="subtitle">Met welk doel en op basis van welke grondslag wij persoonsgegevens verwerken </h2>
             <p class="beschrijving">Accessibility verwerkt uw persoonsgegevens voor de volgende doelen: </p>
             <ul>
                 <li>Het afhandelen van uw betaling</li>
