@@ -10,7 +10,7 @@ public class Medischegegevens
     public string Hulpmiddelen { get; set; }
 
     // Foreign keys
-    // Naar medischegegevens
+    // Naar ApplicationUser
     public int? ApplicationUserId { get; set; }
     public ApplicationUser ApplicationUser { get; set; }
 }

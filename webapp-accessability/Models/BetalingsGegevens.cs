@@ -10,7 +10,7 @@ public class Betalingsgegevens
     public double Salaris { get; set; }
 
     // Foreign keys
-    // Naar Account
+    // Naar ApplicationUser
     public int? ApplicationUserId { get; set; }
     public ApplicationUser ApplicationUser { get; set; }
 }
