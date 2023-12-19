@@ -37,6 +37,10 @@
     color: white;
 }
 
+.onderzoekbutton{
+    background-color: #21CEA1;
+}
+
 @media screen and (max-width: 768px) {
     .buttonContainer {
       width: 90%; /* Adjust width for smaller screens */
