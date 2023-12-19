@@ -1,11 +1,12 @@
 .Intro{
     border-radius: 10px;
-    background-image: linear-gradient(to right, white , #54c6ff);
+    background-color: white;
     width: 90%;
     height: 400px;
     max-width: 850px;
     margin-left: auto;
     margin-right: auto;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 .contentSection{
@@ -30,6 +31,7 @@
     width: 400px;
     height: 250px;
     font-size: 28px;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 .pageButton:hover{
     background-color: darkgray;
