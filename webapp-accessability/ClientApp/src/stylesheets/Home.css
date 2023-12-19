@@ -35,6 +35,10 @@
     background-color: darkgray;
     color: white;
 }
+.pageButton:active{
+    background-color: white;
+    color: black;
+}
 
 .profilebutton{
     background-color: #2B50EB;
