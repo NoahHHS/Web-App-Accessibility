@@ -14,21 +14,21 @@ export class Home extends Component {
   }
 }
 
+// 1e section van de homepage
+// dit is het verwelkomingscherm
 const HomeIntro = () => {
   return(
     <section id="Home">
       <div className='Intro'>
-        <div className='textSection'>
-          <p>test text</p>
-        </div>
-        <div className='imageSection'>
-          <img className='logo' src="../../Assets/icon_accessibility_on-dark_transp.png" alt="" />
-        </div>
+        <div className='textSection'></div>
+        <div className='imgSection'></div>
       </div>
     </section>
   );
 }
 
+// 2e section van de homepage
+// hier komen de content buttons die je verwijzen naar andere paginas
 const HomeContent = () => {
   return(
     <section className="contentSection">

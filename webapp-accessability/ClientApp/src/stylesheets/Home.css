@@ -1,33 +1,26 @@
 /*---------------------------- Home Intro ----------------------------*/
 .Intro {
-  position: relative;
-  border-radius: 10px;
-  background-color: white;
-  width: 90%;
-  max-width: 850px;
-  margin: 0 auto;
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    border-radius: 10px;
+    background-color: white;
+    width: 90%;
+    height: 300px;
+    max-width: 850px;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
-/* Maintain a 16:9 aspect ratio */
-.Intro::before {
-  content: '';
-  display: block;
-  padding-top: 56.25%; /* 16:9 aspect ratio */
-}
-
-.Intro > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.logo{
+.textSection{
+    background-color: grey;
     width: 50px;
-    height: 60px;
+    height: 50px
 }
+
+.imgSection{
+    background-color: red;
+    width: 50px;
+    height: 50px
+}
+
+  
 /*---------------------------- Content-Buttons ----------------------------*/
 .contentSection{
     margin-top: 50px;
@@ -38,7 +31,7 @@
     display: flex; /* Use flexbox for button layout */
     flex-wrap: wrap; /* Allow buttons to wrap when screen size decreases */
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
     width: 90%;
     height: 600px;
     margin-left: auto;
