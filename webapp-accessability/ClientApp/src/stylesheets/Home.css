@@ -31,6 +31,10 @@
     height: 250px;
     font-size: 28px;
 }
+.pageButton:hover{
+    background-color: darkgray;
+    color: white;
+}
 
 .profilebutton{
     background-color: #2B50EB;
