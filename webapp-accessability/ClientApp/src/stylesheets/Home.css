@@ -1,12 +1,27 @@
-.Intro{
-    border-radius: 10px;
-    background-color: white;
-    width: 90%;
-    height: 400px;
-    max-width: 850px;
-    margin-left: auto;
-    margin-right: auto;
-    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+/*---------------------------- Home Intro ----------------------------*/
+.Intro {
+  position: relative;
+  border-radius: 10px;
+  background-color: white;
+  width: 90%;
+  max-width: 850px;
+  margin: 0 auto;
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+/* Maintain a 16:9 aspect ratio */
+.Intro::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.Intro > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .contentSection{
@@ -14,6 +29,7 @@
     text-align: center;
 }
 
+/*---------------------------- Content-Buttons ----------------------------*/
 .buttonContainer{
     display: flex; /* Use flexbox for button layout */
     flex-wrap: wrap; /* Allow buttons to wrap when screen size decreases */
