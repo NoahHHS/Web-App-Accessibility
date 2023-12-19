@@ -1,4 +1,5 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
+import { Bedrijfs } from './components/bedrijfs/Bedrijf';
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
@@ -21,6 +22,10 @@ const AppRoutes = [
   {
     path: '/privacystatement',
     element: <Privacystatement/>
+  },
+  {
+    path: '/bedrijfs',
+    element: <Bedrijfs/>
   },
   ...ApiAuthorzationRoutes
 ];
