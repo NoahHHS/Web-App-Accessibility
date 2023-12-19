@@ -17,7 +17,14 @@ export class Home extends Component {
 const HomeIntro = () => {
   return(
     <section id="Home">
-      <div className='Intro'></div>
+      <div className='Intro'>
+        <div className='textSection'>
+          <p>test text</p>
+        </div>
+        <div className='imageSection'>
+          <img className='logo' src="../../Assets/icon_accessibility_on-dark_transp.png" alt="" />
+        </div>
+      </div>
     </section>
   );
 }

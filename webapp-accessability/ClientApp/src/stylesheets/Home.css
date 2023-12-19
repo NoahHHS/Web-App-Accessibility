@@ -24,12 +24,12 @@
   bottom: 0;
 }
 
+/*---------------------------- Content-Buttons ----------------------------*/
 .contentSection{
     margin-top: 50px;
     text-align: center;
 }
 
-/*---------------------------- Content-Buttons ----------------------------*/
 .buttonContainer{
     display: flex; /* Use flexbox for button layout */
     flex-wrap: wrap; /* Allow buttons to wrap when screen size decreases */
@@ -42,12 +42,13 @@
 }
 
 .pageButton{
+    background-color: white;
     border: none;
     border-radius: 20px;
     width: 400px;
     height: 250px;
     font-size: 28px;
-    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    filter: drop-shadow(5px 5px 5px rgb(0 0 0 / 0.4));
 }
 .pageButton:hover{
     background-color: darkgray;
@@ -75,7 +76,6 @@
     .pageButton {
       width: 100%; /* Make buttons full width on smaller screens */
       height: 100px; /* Adjust button height for smaller screens */
-      margin-top: 5px;
       font-size: 20px;
     }
   }
