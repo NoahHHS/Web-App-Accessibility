@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../stylesheets/Home.css'
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -6,13 +7,30 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <h1 className='pagetitle'>Access-Ability</h1>
-        
+        <HomeIntro />
+        <HomeContent />
       </div>
     );
   }
 }
 
-const Intro = () => {
-  
+const HomeIntro = () => {
+  return(
+    <section id="Home">
+      <div className='Intro'></div>
+    </section>
+  );
+}
+
+const HomeContent = () => {
+  return(
+    <section className="contentSection">
+      <div className='buttonContainer'>
+        <button className='pageButton'>Mijn Profiel</button>
+        <button className='pageButton'>Onderzoeken</button>
+        <button className='pageButton'>Privacy</button>
+        <button className='pageButton'>Over ons</button>
+      </div>
+    </section>
+  );
 }

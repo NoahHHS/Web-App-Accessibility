@@ -1,0 +1,46 @@
+.Intro{
+    border-radius: 10px;
+    background-image: linear-gradient(to right, white , #15c193);
+    width: 90%;
+    height: 400px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contentSection{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.buttonContainer{
+    display: flex; /* Use flexbox for button layout */
+    flex-wrap: wrap; /* Allow buttons to wrap when screen size decreases */
+    justify-content: center;
+    gap: 50px;
+    width: 90%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pageButton{
+    border: none;
+    border-radius: 20px;
+    width: 400px;
+    height: 250px;
+    font-size: 28px;
+}
+
+@media screen and (max-width: 768px) {
+    .buttonContainer {
+      width: 90%; /* Adjust width for smaller screens */
+    }
+  
+    .pageButton {
+      width: 100%; /* Make buttons full width on smaller screens */
+      height: 100px; /* Adjust button height for smaller screens */
+      margin-top: 5px;
+      font-size: 20px;
+    }
+  }
