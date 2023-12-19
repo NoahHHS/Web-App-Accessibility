@@ -32,6 +32,11 @@
     font-size: 28px;
 }
 
+.profilebutton{
+    background-color: #2B50EB;
+    color: white;
+}
+
 @media screen and (max-width: 768px) {
     .buttonContainer {
       width: 90%; /* Adjust width for smaller screens */

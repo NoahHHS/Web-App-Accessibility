@@ -26,8 +26,8 @@ const HomeContent = () => {
   return(
     <section className="contentSection">
       <div className='buttonContainer'>
-        <button className='pageButton'>Mijn Profiel</button>
-        <button className='pageButton'>Onderzoeken</button>
+        <button className='pageButton profilebutton'>Mijn Profiel</button>
+        <button className='pageButton onderzoekbutton'>Onderzoeken</button>
         <button className='pageButton'>Privacy</button>
         <button className='pageButton'>Over ons</button>
       </div>
