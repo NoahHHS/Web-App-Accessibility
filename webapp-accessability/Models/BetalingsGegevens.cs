@@ -11,6 +11,6 @@ public class Betalingsgegevens
 
     // Foreign keys
     // Naar ApplicationUser
-    public int? ApplicationUserId { get; set; }
+    public string? ApplicationUserId { get; set; }
     public ApplicationUser ApplicationUser { get; set; }
 }

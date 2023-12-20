@@ -22,4 +22,10 @@ public class Onderzoek
 
     public int? LocatieId { get; set; }
     public OnderzoekLocatie Locatie { get; set; }
+
+    // Navigatie-eigenschap voor Deelnames
+    public ICollection<Deelname> Deelnames { get; set; }
+
+    public int? OnderzoekComponentId { get; set; }
+    public OnderzoekComponent OnderzoekComponent { get; set; }
 }

@@ -16,4 +16,14 @@ public class ApplicationUser : IdentityUser
     // Naar adresgegevens
     public int AdresId { get; set; }
     public Adres Adres { get; set; }
+
+    // Navigatie-eigenschap voor Medischegegevens
+    public ICollection<Medischegegevens> Medischegegevens { get; set; }
+
+    // Navigatie-eigenschap voor Deelnames
+    public ICollection<Deelname> Deelnames { get; set; }
+
+    // Navigatie-eigenschap voor Onderzoek (1-op-1)
+    public Onderzoek Onderzoek { get; set; }
+
 }
