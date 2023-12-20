@@ -11,14 +11,14 @@ using webapp_accessability.Data;
 namespace webapp_accessability.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231220134656_EersteModelsEnDbSetsEnFluentApi")]
-    partial class EersteModelsEnDbSetsEnFluentApi
+    [Migration("20231220205657_EersteMigration")]
+    partial class EersteMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
@@ -547,7 +547,6 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(21)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

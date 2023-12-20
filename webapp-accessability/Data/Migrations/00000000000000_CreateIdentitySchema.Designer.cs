@@ -18,7 +18,7 @@ namespace webapp_accessability.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.0-rc.1.20417.2");
 
-            modelBuilder.Entity("testAuthenticatieProject.Models.ApplicationUser", b =>
+            modelBuilder.Entity("webapp_accessability.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -98,7 +98,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50200)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -147,7 +147,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50200)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("DataProtected")
@@ -189,7 +189,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(50200)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -368,7 +368,7 @@ namespace webapp_accessability.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("testAuthenticatieProject.Models.ApplicationUser", null)
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -377,7 +377,7 @@ namespace webapp_accessability.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("testAuthenticatieProject.Models.ApplicationUser", null)
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,7 +392,7 @@ namespace webapp_accessability.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("testAuthenticatieProject.Models.ApplicationUser", null)
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -401,7 +401,7 @@ namespace webapp_accessability.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("testAuthenticatieProject.Models.ApplicationUser", null)
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -4,8 +4,8 @@ using Microsoft.Extensions.Options;
 using Duende.IdentityServer.EntityFramework.Options;
 using webapp_accessability.Models;
 
-namespace webapp_accessability.Data
-{
+namespace webapp_accessability.Data;
+
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         public ApplicationDbContext(
@@ -155,4 +155,3 @@ namespace webapp_accessability.Data
                 .HasBaseType<OnderzoekComponent>();
         }
     }
-}

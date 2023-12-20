@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace webapp_accessability.Models;
 
-// Model voor medische gegevens
 public class Medischegegevens
 {
     public int Id { get; set; }
