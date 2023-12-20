@@ -2,12 +2,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace webapp_accessability.Models;
 
-// Model voor betalingsgegevens
-public class Betalingsgegevens
+public class Medischegegevens
 {
     public int Id { get; set; }
-    public string Iban { get; set; }
-    public double Salaris { get; set; }
+    public string Beperking { get; set; }
+    public string Hulpmiddelen { get; set; }
 
     // Foreign keys
     // Naar ApplicationUser

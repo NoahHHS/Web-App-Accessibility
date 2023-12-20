@@ -98,7 +98,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(51480)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
@@ -147,7 +147,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(51480)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("DataProtected")
@@ -189,7 +189,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
-                        .HasMaxLength(51480)
+                        .HasMaxLength(50850)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
