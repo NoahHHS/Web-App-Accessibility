@@ -5,19 +5,36 @@
     width: 90%;
     height: 300px;
     max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
     filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 .textSection{
-    background-color: grey;
-    width: 50px;
-    height: 50px
+    flex-direction: column;
 }
 
-.imgSection{
-    background-color: red;
-    width: 50px;
-    height: 50px
+.textSection, .imgSection {
+    float:left; 
+    display:inline; 
+    width: 49%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeimg {
+    width: 220px;
+    height: 240px;
+}
+
+.motto{
+    color: black;
+}
+
+.hometitle{
+    font-size: 50px;
 }
 
   

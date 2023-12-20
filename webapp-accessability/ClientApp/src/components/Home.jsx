@@ -20,8 +20,13 @@ const HomeIntro = () => {
   return(
     <section id="Home">
       <div className='Intro'>
-        <div className='textSection'></div>
-        <div className='imgSection'></div>
+        <div className='textSection'>
+          <h1 className='hometitle'>Access-Ability</h1>
+          <h2 className='motto'>motto</h2>
+        </div>
+        <div className='imgSection'>
+          <img className="homeimg" src="../../Assets/icon_accessibility_on-dark_transp.png" alt="intro foto" />
+        </div>
       </div>
     </section>
   );
