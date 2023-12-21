@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+//---------------------------- Parent Component ----------------------------
 const NavMenu = () => {
     return (
         <nav className='navbar navbar-expand-lg navbar-dark' style={{ backgroundColor: 'rgb(29, 35, 79)', borderBottom: '0.4mm solid black', marginBottom: '15px', zIndex: '99' }}>
@@ -12,6 +13,7 @@ const NavMenu = () => {
     );
 }
 
+//---------------------------- NavMenu components ----------------------------
 const Hamburger = () => {
     return (
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,4 +35,5 @@ const Navitems = () => {
     );
 }
 
+//---------------------------- Export ----------------------------
 export default NavMenu;
