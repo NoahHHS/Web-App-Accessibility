@@ -32,17 +32,21 @@
 /* Stijlen voor de afbeelding */
 .homeimg {
     width: 220px;
-    height: 240px;
+    height: 250px;
 }
 
 /* Stijl voor het motto */
 .motto {
     color: black;
+    text-align: center;
+    font-size: large;
+    margin-left: 5px;
 }
 
 /* Stijl voor de hoofdtitel */
 .hometitle {
     font-size: 50px;
+    margin-left: 5px;
 }
 
 /*---------------------------- Content-Buttons ----------------------------*/
@@ -118,12 +122,12 @@
 
     /* Aanpassingen voor de hoofdtitel op kleinere schermen */
     .hometitle {
-        font-size: 20px;
+        font-size: 24px;
     }
     
     /* Aanpassingen voor het motto op kleinere schermen */
     .motto {
-        font-size: 18px;
+        font-size: 14px;
     }
 
     /* Aanpassingen voor de afbeelding op kleinere schermen */

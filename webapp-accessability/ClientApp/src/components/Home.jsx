@@ -20,7 +20,7 @@ const IntroText = () => {
   return(
     <div className='textSection'>
       <h1 className='hometitle'>Access-Ability</h1>
-      <h2 className='motto'>motto</h2>
+      <h2 className='motto'>“The only disability is when people cannot see human potential.” – Debra Ruh</h2>
     </div>
   );
 }
