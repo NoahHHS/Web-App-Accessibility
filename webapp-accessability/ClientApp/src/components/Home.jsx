@@ -14,6 +14,8 @@ export class Home extends Component {
   }
 }
 
+
+
 // 1e section van de homepage
 // dit is het verwelkomingscherm
 const HomeIntro = () => {

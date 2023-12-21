@@ -82,6 +82,7 @@
     background-color: #21CEA1;
 }
 
+/*---------------------------- Mobile-Screen-Settings ----------------------------*/
 @media screen and (max-width: 768px) {
     .buttonContainer {
       width: 90%; /* Adjust width for smaller screens */
@@ -91,5 +92,18 @@
       width: 100%; /* Make buttons full width on smaller screens */
       height: 100px; /* Adjust button height for smaller screens */
       font-size: 20px;
+    }
+
+    .hometitle {
+        font-size: 20px; /* Adjust the font size for smaller screens */
+    }
+    
+    .motto {
+        font-size: 18px; /* Adjust the font size for smaller screens */
+    }
+
+    .homeimg {
+        width: 90%;
+        height: 60%;
     }
   }
