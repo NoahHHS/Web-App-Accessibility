@@ -46,3 +46,58 @@ p{
 }
 
 /*----------------------------Footer styling----------------------------*/
+.footer {
+    display: flex;
+    align-items: stretch;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-top: 0.4mm solid black;
+  }
+  
+  .footerContact-container {
+    display: inline-block;
+    color: white;
+    vertical-align: text-bottom;
+    margin: auto;
+  }
+  
+  #contact {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .contact-items {
+    margin-bottom: 10px;
+  }
+  
+  #contact-info {
+    border-bottom: 0.1mm solid rgb(33, 206, 161);
+  }
+
+  .footerNav-Container {
+    display: inline-block;
+    color: white;
+    margin: auto;
+  }
+
+  .socialNav-Container {
+    display: inline-block;
+    color: white;
+    margin: auto;
+  }
+  
+  .socials-list {
+    padding:2px;
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .socials-bol {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
