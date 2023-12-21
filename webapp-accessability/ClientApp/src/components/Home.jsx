@@ -14,6 +14,7 @@ export class Home extends Component {
   }
 }
 
+//---------------------------- Top Section-Components ----------------------------
 // Component die de titel en de beschrijving bepaald in de intro
 const IntroText = () => {
   return(
@@ -34,8 +35,8 @@ const Introimg = () => {
 }
 
 
-// 1e section van de homepage
-// dit is het verwelkomingscherm
+//---------------------------- Top Section ----------------------------
+// dit is het verwelkomingsscherm
 const HomeIntro = () => {
   return(
     <section id="Home">
@@ -47,7 +48,7 @@ const HomeIntro = () => {
   );
 }
 
-// 2e section van de homepage
+//---------------------------- Bottom Section ----------------------------
 // hier komen de content buttons die je verwijzen naar andere paginas
 const HomeContent = () => {
   return(
