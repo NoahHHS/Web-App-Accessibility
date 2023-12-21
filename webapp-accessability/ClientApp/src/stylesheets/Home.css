@@ -45,8 +45,8 @@
 }
 
 .buttonContainer{
-    display: flex; /* Use flexbox for button layout */
-    flex-wrap: wrap; /* Allow buttons to wrap when screen size decreases */
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
     width: 90%;
@@ -85,21 +85,21 @@
 /*---------------------------- Mobile-Screen-Settings ----------------------------*/
 @media screen and (max-width: 768px) {
     .buttonContainer {
-      width: 90%; /* Adjust width for smaller screens */
+      width: 90%;
     }
   
     .pageButton {
-      width: 100%; /* Make buttons full width on smaller screens */
-      height: 100px; /* Adjust button height for smaller screens */
+      width: 100%;
+      height: 100px;
       font-size: 20px;
     }
 
     .hometitle {
-        font-size: 20px; /* Adjust the font size for smaller screens */
+        font-size: 20px;
     }
     
     .motto {
-        font-size: 18px; /* Adjust the font size for smaller screens */
+        font-size: 18px;
     }
 
     .homeimg {
