@@ -1,26 +1,24 @@
-img {
-  width: 50px;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
+/* styling searchbar */
+.searchbar {
+  padding-top: 20px;
+  padding-left: 20%;
+  display: flex;
 }
 
-button{
-  background-color: transparent;
-  border-radius: 5px;
-}
-  
-input[type='text'] {
+.searchbar input[type='text'] {
   height: 50px;
-  width: 50%;
+  width: 70%;
   border: 2px solid #21CEA1;
   outline: none;
   border-radius: 5px;
   color: black;
-  }
-  
-.searchbar{
-  padding: 100px 0;
-  display: flex;
-  align-items: center;
+}
+
+.searchbar button {
+  background-color: transparent;
+  border: none;
+}
+
+.searchbar button img{
+  width: 100%;
 }
