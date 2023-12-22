@@ -1,12 +1,12 @@
+import React, { Component } from 'react';
+
 export class Profiel extends Component {
-    static displayName = Home.name;
-  
-    render() {
-      return (
-        <div>
-          <HomeIntro />
-          <HomeContent />
-        </div>
-      );
-    }
+    static displayName = Profiel.name;
+
+  render() {
+    return (
+      <div>
+      </div>
+    );
   }
+}

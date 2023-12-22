@@ -4,12 +4,12 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { Privacystatement } from "./components/privacystatement"
-import { OverOns } from "./components/overons";
-import { Onderzoek } from "./components/onderzoek";
-import { Profiel } from "./components/profiel";
-import { Login } from "./components/login";
-import { Registreer } from "./components/registreer";
-import { Medewerker } from "./components/medewerker";
+import { OverOns } from './components/overons/OverOns';
+import { Onderzoek } from './components/onderzoek/Onderzoek';
+import { Profiel } from './components/profiel/Profiel';
+import { Login } from './components/api-authorization/Login';
+import { Registreer } from './components/registreer/Registreer';
+import { Medewerker } from './components/medewerker/Medewerker';
 
 const AppRoutes = [
   {
