@@ -1,0 +1,12 @@
+section {
+    text-align: center;
+}
+
+.DataItem{
+    margin: auto;
+}
+
+.DataItem-Field {
+    border-radius: 5px;
+    border: none;
+}
