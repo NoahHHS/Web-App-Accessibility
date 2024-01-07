@@ -4,6 +4,36 @@ import '../../stylesheets/Bedrijf.css'
 export class Bedrijfs extends Component {
     static displayName = Bedrijfs.name;
 
+
+    constructor(props) {
+      super(props);
+      this.state = {
+          isModalOpen: false,
+          inputData: '',
+      };
+  }
+
+  openModal = () => {
+      this.setState({ isModalOpen: true });
+  }
+
+  closeModal = () => {
+      this.setState({ isModalOpen: false });
+  }
+
+  handleInputChange = (e) => {
+      this.setState({ inputData: e.target.value });
+  }
+
+  handleAddButtonClick = () => {
+      // Perform any actions you need when the "Add" button is clicked
+      // For example, you can add the input data to your list
+      console.log('Data added:', this.state.inputData);
+
+      // Close the modal
+      this.closeModal();
+  }
+
   render() {
     return (
       <div>
@@ -21,9 +51,22 @@ export class Bedrijfs extends Component {
                   {/* Add more list items as needed */}
               </ul>
           </div>
-          <div className="add-button-container">
-            <button className="add-button">Toevoegen</button>
-          </div>        
+                <div className="add-button-container">
+                    <button className="add-button" onClick={this.openModal}>Add</button>
+                </div>
+
+                {/* Modal/Pop-up */}
+                {this.state.isModalOpen && (
+  <div>
+    <div className="modal-overlay"></div>
+    <div className="modal-container">
+      <span className="close" onClick={this.closeModal}>&times;</span>
+      <h2>Enter Data</h2>
+      <input type="text" value={this.state.inputData} onChange={this.handleInputChange} />
+      <button onClick={this.handleAddButtonClick}>Add</button>
+    </div>
+  </div>
+)} 
       </div>
     );
   }
