@@ -9,7 +9,7 @@ export class Profiel extends Component {
       <div>
         <h1 className='pagetitle'>Mijn Gegevens</h1>
         <section className='persoonsGegevens'>
-          <DataItem>Naam</DataItem>
+          <DataItem value="Naam"/>
         </section>
         <section className='Adres'>
 
@@ -28,8 +28,8 @@ export class Profiel extends Component {
 const DataItem = (prop) => {
   return(
     <div className='DataItem'>
-      <p className='DataItem-Name'>{prop}</p>
-      <input id='info-name' className="DataItem-Field" type="text" />
+      <p className='DataItem-Name'>{prop.value}</p>
+      <input id='info-name' className="DataItem-Field" type="text"/>
     </div>
   );
 }
