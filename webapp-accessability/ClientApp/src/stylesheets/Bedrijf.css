@@ -1,6 +1,7 @@
 /* styling searchbar */
 .searchbar {
   padding-top: 20px;
+  padding-bottom: 25px;
   padding-left: 20%;
   display: flex;
 }
@@ -21,4 +22,38 @@
 
 .searchbar button img{
   width: 100%;
+}
+
+.dark-list-container {
+  background-color: rgb(5, 3, 70); /* Set the background color to a darker shade */
+  border: 2px solid #21CEA1;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.dark-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dark-list-item {
+  color: #fff; /* Set the text color to white */
+  padding: 10px;
+  border-bottom: 1px solid #555; /* Add a border between list items */
+}
+
+/* Add Button Styles */
+.add-button-container {
+padding-top: 20px;
+}
+
+.add-button {
+  background-color: #21CEA1;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

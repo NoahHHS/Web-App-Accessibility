@@ -12,6 +12,18 @@ export class Bedrijfs extends Component {
               <input type="text" placeholder="Onderzoek.." name="search"/>
               <button type="submit"><img src='../../../Assets/SearchIcon.png' alt="SearchIcon"/></button>
         </section>
+            {/* Unordered List Section */}
+          <div className="dark-list-container">
+              <ul className="dark-list">
+                  <li className="dark-list-item">List Item 1</li>
+                  <li className="dark-list-item">List Item 2</li>
+                  <li className="dark-list-item">List Item 3</li>
+                  {/* Add more list items as needed */}
+              </ul>
+          </div>
+          <div className="add-button-container">
+            <button className="add-button">Toevoegen</button>
+          </div>        
       </div>
     );
   }
