@@ -10,6 +10,8 @@ export class Profiel extends Component {
         <h1 className='pagetitle'>Mijn Gegevens</h1>
         <section className='persoonsGegevens'>
           <DataItem value="Naam"/>
+          <DataItem value="Achternaam"/>
+          <DataItem value="Email"/>
         </section>
         <section className='Adres'>
 
