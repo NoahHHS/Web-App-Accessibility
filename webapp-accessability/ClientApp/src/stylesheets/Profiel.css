@@ -1,5 +1,6 @@
 section {
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .DataItem{
@@ -12,4 +13,8 @@ section {
     border-radius: 10px;
     border: none;
     box-shadow: 0px 2px 3px 1px black;
+}
+
+.subtitle{
+    font-size: 20px;
 }
