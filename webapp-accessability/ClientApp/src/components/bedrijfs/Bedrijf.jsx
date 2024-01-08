@@ -45,14 +45,14 @@ export class Bedrijfs extends Component {
             {/* Unordered List Section */}
           <div className="dark-list-container">
               <ul className="dark-list">
-                  <li className="dark-list-item">List Item 1</li>
-                  <li className="dark-list-item">List Item 2</li>
-                  <li className="dark-list-item">List Item 3</li>
+                  <li className="dark-list-item">Onderzoek 1</li>
+                  <li className="dark-list-item">Onderzoek 2</li>
+                  <li className="dark-list-item">Onderzoek 3</li>
                   {/* Add more list items as needed */}
               </ul>
           </div>
                 <div className="add-button-container">
-                    <button className="add-button" onClick={this.openModal}>Add</button>
+                    <button className="add-button" onClick={this.openModal}>Toevoegen</button>
                 </div>
 
                 {/* Modal/Pop-up */}
@@ -63,7 +63,7 @@ export class Bedrijfs extends Component {
       <span className="close" onClick={this.closeModal}>&times;</span>
       <h2>Enter Data</h2>
       <input type="text" value={this.state.inputData} onChange={this.handleInputChange} />
-      <button onClick={this.handleAddButtonClick}>Add</button>
+      <button onClick={this.handleAddButtonClick}>Toevoegen</button>
     </div>
   </div>
 )} 
