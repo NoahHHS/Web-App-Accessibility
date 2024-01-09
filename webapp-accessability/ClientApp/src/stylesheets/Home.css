@@ -1,0 +1,138 @@
+/*---------------------------- Home Intro ----------------------------*/
+/* Stijlen voor het introductiegedeelte van de homepage */
+
+/* Algemene opmaak van het introductiegedeelte */
+.Intro {
+    border-radius: 10px;
+    background-color: white;
+    width: 90%;
+    height: 300px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+/* Opmaak voor de sectie met tekst */
+.textSection {
+    flex-direction: column;
+}
+
+/* Opmaak voor tekst- en afbeeldingssecties */
+.textSection, .imgSection {
+    float: left; 
+    display: inline; 
+    width: 49%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Stijlen voor de afbeelding */
+.homeimg {
+    width: 220px;
+    height: 250px;
+}
+
+/* Stijl voor het motto */
+.motto {
+    color: black;
+    text-align: center;
+    font-size: large;
+    margin-left: 5px;
+}
+
+/* Stijl voor de hoofdtitel */
+.hometitle {
+    font-size: 50px;
+    margin-left: 5px;
+}
+
+/*---------------------------- Content-Buttons ----------------------------*/
+/* Opmaak voor de knoppen met inhoud op de homepage */
+
+/* Algemene opmaak voor de sectie met knoppen */
+.contentSection {
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Opmaak voor de container met knoppen */
+.buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stijlen voor de pagina-knoppen */
+.pageButton {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    width: 400px;
+    height: 250px;
+    font-size: 28px;
+    filter: drop-shadow(5px 5px 5px rgb(0 0 0 / 0.4));
+}
+
+/* Opmaak voor de knoppen bij hover */
+.pageButton:hover {
+    background-color: darkgray;
+    color: white;
+}
+
+/* Opmaak voor de knoppen bij activeren */
+.pageButton:active {
+    background-color: white;
+    color: black;
+}
+
+/* Stijl voor de profielknop */
+.profilebutton {
+    background-color: #2B50EB;
+    color: white;
+}
+
+/* Stijl voor de onderzoeksknop */
+.onderzoekbutton {
+    background-color: #21CEA1;
+}
+
+/*---------------------------- Mobile-Screen-Settings ----------------------------*/
+/* Aanpassingen voor mobiele schermen */
+
+@media screen and (max-width: 768px) {
+    /* Aanpassingen voor de knopcontainer op kleinere schermen */
+    .buttonContainer {
+        width: 90%;
+    }
+  
+    /* Aanpassingen voor de pagina-knoppen op kleinere schermen */
+    .pageButton {
+        width: 100%;
+        height: 100px;
+        font-size: 20px;
+    }
+
+    /* Aanpassingen voor de hoofdtitel op kleinere schermen */
+    .hometitle {
+        font-size: 24px;
+    }
+    
+    /* Aanpassingen voor het motto op kleinere schermen */
+    .motto {
+        font-size: 14px;
+    }
+
+    /* Aanpassingen voor de afbeelding op kleinere schermen */
+    .homeimg {
+        width: 90%;
+        height: 60%;
+    }
+}

@@ -1,50 +1,39 @@
-import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { LoginMenu } from '../api-authorization/LoginMenu';
-import '../../stylesheets/NavMenu.css';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-export class NavMenu extends Component {
-  static displayName = NavMenu.name;
-
-  constructor (props) {
-    super(props);
-
-    this.toggleNavbar = this.toggleNavbar.bind(this);
-    this.state = {
-      collapsed: true
-    };
-  }
-
-  toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  }
-
-  render() {
+//---------------------------- Parent Component ----------------------------
+const NavMenu = () => {
     return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-          <NavbarBrand tag={Link} to="/">webapp_accessability</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-            <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-              </NavItem>
-              <LoginMenu>
-              </LoginMenu>
-            </ul>
-          </Collapse>
-        </Navbar>
-      </header>
+        <nav className='navbar navbar-expand-lg navbar-dark' style={{ backgroundColor: 'rgb(29, 35, 79)', borderBottom: '0.4mm solid black', marginBottom: '15px', zIndex: '99' }}>
+            <a className='title' href="#">Access-Ability</a>
+            <Hamburger />
+            <Navitems />
+        </nav>
     );
-  }
 }
+
+//---------------------------- NavMenu components ----------------------------
+const Hamburger = () => {
+    return (
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+        </button>
+    );
+}
+
+const Navitems = () => {
+    return (
+        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav">
+                <a className='nav-item' href="#">item1</a>
+                <a className='nav-item' href="#">item2</a>
+                <a className='nav-item' href="#">item3</a>
+                <a className='nav-item' href="#">item4</a>
+            </div>
+        </div>
+    );
+}
+
+//---------------------------- Export ----------------------------
+export default NavMenu;

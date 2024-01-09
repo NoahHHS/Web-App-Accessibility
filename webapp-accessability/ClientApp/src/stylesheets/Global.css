@@ -1,0 +1,120 @@
+/*---------------------------- Global styling ----------------------------*/
+body{
+    background-color: rgb(29, 35, 79);
+    color: white;
+}
+
+h1{
+    color: #21CEA1;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+p{
+    color: white;
+}
+
+.pagetitle{
+    color: #21CEA1;
+    text-align: center;
+}
+
+.subtitle{
+    color: #21CEA1;
+    text-align: center;
+}
+
+/*
+.MainContainer {
+    position: relative;
+}
+^ als je deze weglaat en position absolute doet op footer krijg je een vies resultaat.
+*/
+
+/*---------------------------- Navbar styling ----------------------------*/
+.navbar{
+    padding: 20px;
+    background-color: rgb(29, 35, 79);
+    border-bottom: 0.4mm solid black;
+    margin-bottom: 15px;
+    z-index:99;
+}
+
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: #21CEA1;
+    text-decoration: none;
+}
+
+.nav-item{
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+}
+
+/*----------------------------Footer styling----------------------------*/
+.footer {
+    display: flex;
+    align-items: stretch;
+    left: 0; /* left en bottom werken niet zonder position: absolute en zijn daarom overbodig. */
+    bottom: 0;
+    width: 100%;
+    border-top: 0.4mm solid black;
+}
+
+.footerContact-container {
+    display: inline-block;
+    color: white;
+    vertical-align: text-bottom;
+    margin: auto;
+}
+
+#contact {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.contact-items {
+    margin-bottom: 10px;
+}
+
+#contact-info {
+    border-bottom: 0.1mm solid rgb(33, 206, 161);
+}
+
+.footerNav-Container {
+    display: inline-block;
+    color: white;
+    margin: auto;
+}
+
+.socialNav-Container {
+    display: inline-block;
+    color: white;
+    margin: auto;
+}
+
+.socials-list {
+    padding:2px;
+    list-style-type: none;
+    display: flex;
+}
+
+.socials-bol {
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/*---------------------------- Mobile-Screen-Settings ----------------------------*/
+@media screen and (max-width: 768px) {
+    #contact{
+       font-size: medium;
+    }
+    .footerNav-Container {
+        font-size: small;
+    }
+}
