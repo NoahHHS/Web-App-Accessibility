@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../stylesheets/privacystatement.css'
 
 export class Privacystatement extends Component {
     static displayName = Privacystatement.name;
