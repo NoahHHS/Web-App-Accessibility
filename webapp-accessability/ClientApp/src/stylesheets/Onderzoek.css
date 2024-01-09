@@ -1,0 +1,113 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ /*---------------------styling onderzoekbox----------------------------*/
+
+.Onderzoek {
+    position: relative;
+    display: flex;
+    background-color: white;
+    justify-content: flex-start;
+    padding: 1.5em;
+    gap: 3em;
+    border-radius: 25px;
+    align-items: center;
+    width: 80%;
+    margin: 1em;
+}
+
+.OnderzoekInhoud {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.Onderzoek > section > * {
+    color: black;
+}
+
+.DeelneemKnop {
+    background-color: rgba(0, 255, 194, 1);
+    width: 30%;
+    height: 2.5em;
+    border-radius: 15px;
+}
+
+.logo {
+    display: flex;
+}
+
+.Onderzoekspagina {
+    padding: 10em 0 10em 0;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/*-----------------------------styling zoekbalk-----------------------------*/
+
+.OnderzoekSearchInput {
+   background-color: transparent;
+   border: none;
+   outline: none;
+   border-bottom: 2px solid rgba(0, 255, 194, 1);
+   padding: 3px;
+}
+
+::placeholder {
+    color: white;
+}
+
+
+.search {
+    width: 10%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    align-self: flex-end;
+}
+
+.Zoekbalk {
+   display: flex;
+   flex-direction: column;
+   width: 600px;
+   position: relative;
+   margin-bottom: 1em;
+}
+
+.search-icon {
+    position: absolute;
+    right: 0.3em;
+    top: 50%;
+    transform: translate(0%, -50%);
+}
+
+/*-----------------------------styling titel-----------------------------------*/
+.Titel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.Titel > * {
+    margin: 0;
+}
+
+.vervolgh1 {
+    font-size: x-large
+}

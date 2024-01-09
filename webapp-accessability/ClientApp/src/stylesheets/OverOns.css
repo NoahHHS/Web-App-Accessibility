@@ -1,0 +1,28 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.overOns {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-y: auto;
+}
+
+.h1,h2 {
+    color: #21CEA1;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.footer {
+    position: absolute;
+    left: 0;
+    background-color: rgb(29, 35, 79);
+}
