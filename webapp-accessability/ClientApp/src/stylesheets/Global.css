@@ -23,12 +23,9 @@ p{
     text-align: center;
 }
 
-/*
 .MainContainer {
     position: relative;
 }
-^ als je deze weglaat en position absolute doet op footer krijg je een vies resultaat.
-*/
 
 /*---------------------------- Navbar styling ----------------------------*/
 .navbar{
@@ -56,8 +53,6 @@ p{
 .footer {
     display: flex;
     align-items: stretch;
-    left: 0; /* left en bottom werken niet zonder position: absolute en zijn daarom overbodig. */
-    bottom: 0;
     width: 100%;
     border-top: 0.4mm solid black;
 }
