@@ -26,10 +26,10 @@ const Navitems = () => {
     return (
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-                <a className='nav-item' href="#">item1</a>
-                <a className='nav-item' href="#">item2</a>
-                <a className='nav-item' href="#">item3</a>
-                <a className='nav-item' href="#">item4</a>
+                <a className='nav-item' href="/onderzoek">Onderzoek</a>
+                <a className='nav-item' href="/profiel">Profiel</a>
+                <a className='nav-item' href="/overons">Over Ons</a>
+                <a className='nav-item' href="/privacystatement">Privacy</a>
             </div>
         </div>
     );
