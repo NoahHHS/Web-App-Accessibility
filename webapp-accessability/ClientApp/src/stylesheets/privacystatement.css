@@ -1,8 +1,8 @@
-ul, p{
+.Plist, .beschrijving {
     text-align: left;
 }
 
-h2{ 
+.subtitle{ 
     padding-top: 50px;
     padding-bottom: 10px;
 }
