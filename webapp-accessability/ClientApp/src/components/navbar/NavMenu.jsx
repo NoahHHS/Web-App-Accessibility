@@ -2,6 +2,9 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+//---------------------------- Variables and State ----------------------------
+let singedIn = false; // hardcoded state of de user ingelogd is op het moment
+
 //---------------------------- Parent Component ----------------------------
 const NavMenu = () => {
     return (
@@ -31,8 +34,23 @@ const Navitems = () => {
                 <a className='nav-item' href="/overons">Over Ons</a>
                 <a className='nav-item' href="/privacystatement">Privacy</a>
             </div>
+            <ButtonLogIn />
         </div>
     );
+}
+
+const ButtonLogIn = () => {
+    if(singedIn === false){
+        return(
+            <div className='loginContainer'>
+                <button className='loginButton'>Login</button>
+            </div>
+            
+        );
+    }
+    else{
+        return;
+    }
 }
 
 //---------------------------- Export ----------------------------

@@ -51,6 +51,11 @@ p{
     margin-left: 20px;
 }
 
+.loginButton{
+    width: 125px;
+    height: 50px;
+}
+
 /*----------------------------Footer styling----------------------------*/
 .footer {
     display: flex;
