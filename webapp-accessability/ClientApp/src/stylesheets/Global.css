@@ -2,7 +2,7 @@
 body{
     background-color: rgb(29, 35, 79);
     color: white;
-}
+  }
 
 h1{
     color: #21CEA1;
@@ -55,52 +55,97 @@ p{
     border-top: 0.4mm solid black;
 }
 
-.footerContact-container {
-    display: inline-block;
-    color: white;
-    vertical-align: text-bottom;
-    margin: auto;
-}
-
-#contact {
+#footerContact {
     margin-top: 10px;
     margin-bottom: 5px;
+}
+
+/* ----------------------------------------------- */
+/* bevat Home, Over ons, privacy statement */
+
+.footerNav-Container {
+    /* display: inline-block; */
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footerNav-bullets {
+    color:white; 
+    width: fit-content;
+    list-style: none;
+}
+
+.footerContact-link {
+    color: white;
+    text-decoration:none;
+}
+
+.footerContact-link:hover {
+    color: rgb(33, 206, 161);
+}
+
+#ulContact-link {
+    padding-left: 0px;
+}
+
+/* ----------------------------------------------- */
+/* bevat contactgegevens */
+
+.footerContact-container {
+    /* display: inline-block; */
+    color: white;
+    /* vertical-align: text-bottom; */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-items {
     margin-bottom: 10px;
 }
 
-#contact-info {
+.contact-info {
     border-bottom: 0.1mm solid rgb(33, 206, 161);
 }
 
-.footerNav-Container {
-    display: inline-block;
-    color: white;
-    margin: auto;
-}
+/* ----------------------------------------------- */
+/* bevat sociale media links */
 
 .socialNav-Container {
-    display: inline-block;
-    color: white;
-    margin: auto;
-}
-
-.socials-list {
-    padding:2px;
-    list-style-type: none;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.socials-bol {
+.socials-link {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px 10px 0px 10px;
+}
+
+.socials-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 40px;
     width: 40px;
     background-color: white;
     border-radius: 50%;
-    margin-left: 10px;
-    margin-right: 10px;
 }
+
+.socials-circle:hover {
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #FFFF;
+    transition: 0.5s;
+}
+
+.socials-picture{
+    height: 22px;
+    width: 22px;
+}
+
 
 /*---------------------------- Mobile-Screen-Settings ----------------------------*/
 @media screen and (max-width: 768px) {
