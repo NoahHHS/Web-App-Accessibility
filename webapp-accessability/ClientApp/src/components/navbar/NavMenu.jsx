@@ -1,9 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { User } from 'react-feather';
 
 //---------------------------- Variables and State ----------------------------
-let singedIn = false; // hardcoded state of de user ingelogd is op het moment
+let signedIn = true; // hardcoded state of de user ingelogd is op het moment
+
 
 //---------------------------- Parent Component ----------------------------
 const NavMenu = () => {
@@ -40,7 +42,7 @@ const Navitems = () => {
 }
 
 const ButtonLogIn = () => {
-    if(singedIn === false){
+    if(signedIn === false){
         return(
             <div className='loginContainer'>
                 <button className='loginButton'><strong>Login</strong></button>
@@ -49,7 +51,11 @@ const ButtonLogIn = () => {
         );
     }
     else{
-        return;
+        return(
+            <div className='loginContainer'>
+                <User className='iconNav'/>
+            </div>
+        );
     }
 }
 
