@@ -43,7 +43,7 @@ const ButtonLogIn = () => {
     if(singedIn === false){
         return(
             <div className='loginContainer'>
-                <button className='loginButton'>Login</button>
+                <button className='loginButton'><strong>Login</strong></button>
             </div>
             
         );

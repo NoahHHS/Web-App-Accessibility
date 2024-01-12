@@ -54,6 +54,21 @@ p{
 .loginButton{
     width: 125px;
     height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #21CEA1;
+    font-size: large;
+} 
+.loginButton:hover {
+    background-color: #167f63;
+    color: white;
+}
+.loginButton:active {
+    background-color: #21CEA1;
+}
+
+.loginContainer{
+    margin-left: auto;
 }
 
 /*----------------------------Footer styling----------------------------*/
