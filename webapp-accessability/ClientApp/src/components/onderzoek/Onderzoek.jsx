@@ -9,6 +9,7 @@ export class Onderzoek extends Component {
       <div className='Onderzoekspagina'>
         <OnderzoekTop />
         <OnderzoekDetails />
+        <OnderzoekDetails />
       </div>
     );
   }

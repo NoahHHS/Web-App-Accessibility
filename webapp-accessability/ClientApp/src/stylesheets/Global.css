@@ -24,11 +24,9 @@ p{
 }
 
 .MainContainer {
-    /* position: relative; */
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-  
 }
 
 /*---------------------------- Navbar styling ----------------------------*/
