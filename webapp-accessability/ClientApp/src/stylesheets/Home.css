@@ -78,18 +78,18 @@
     width: 400px;
     height: 250px;
     font-size: 28px;
-    filter: drop-shadow(5px 5px 5px rgb(0 0 0 / 0.4));
+    filter: drop-shadow(0px 5px 5px rgb(0 0 0 / 0.4));
 }
 
 /* Opmaak voor de knoppen bij hover */
 .pageButton:hover {
-    background-color: darkgray;
-    color: white;
+    text-decoration: underline;
+    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.703));
+    transition: filter 0.25s ease;
 }
 
 /* Opmaak voor de knoppen bij activeren */
 .pageButton:active {
-    background-color: white;
     color: black;
 }
 

@@ -57,7 +57,7 @@ const HomeContent = () => {
         <a href="/onderzoek"><button className='pageButton onderzoekbutton'>Onderzoeken</button></a>
         <a href="/profiel"><button className='pageButton profilebutton'>Mijn Profiel</button></a>
         <a href="/privacystatement"><button className='pageButton'>Privacy</button></a>
-        <a href="/overons"><button className='pageButton'>Over ons</button></a>
+        <a href="/overons"><button className='pageButton'>Over Ons</button></a>
       </div>
     </section>
   );
