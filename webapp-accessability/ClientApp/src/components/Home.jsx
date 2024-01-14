@@ -53,10 +53,12 @@ const HomeIntro = () => {
 const HomeContent = () => {
   return(
     <section className="Home-contentSection">
+      <h1 className='Home-ContetSectionTitle'>Ga aan de slag</h1>
       <div className='Home-buttonContainer'>
         <a href="/onderzoek"><button className='pageButton onderzoekbutton'>Onderzoeken</button></a>
         <a href="/profiel"><button className='pageButton profilebutton'>Mijn Profiel</button></a>
       </div>
+      <h1 className='Home-ContetSectionTitle'>Handige info</h1>
       <div className='Home-buttonContainer'>
         <a href="/privacystatement"><button className='pageButton'>Privacy</button></a>
         <a href="/overons"><button className='pageButton'>Over Ons</button></a>
