@@ -48,7 +48,7 @@
 padding-top: 20px;
 }
 
-.add-button {
+.add-button, .ToevoegKnop {
   background-color: #21CEA1;
   color: #fff;
   padding: 10px 20px;
@@ -78,7 +78,7 @@ padding-top: 20px;
   max-width: 400px;
   min-height: 200px; /* Adjust the min-height as needed */
   z-index: 1001; /* Ensure the modal container is above the overlay */
-  background-color: #fff; /* Set a background color for visibility */
+  background-color: rgb(29, 35, 79); /* Set a background color for visibility */
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -94,4 +94,20 @@ padding-top: 20px;
   right: 10px;
   cursor: pointer;
   font-size: 18px;
+}
+
+.Otitel {
+  color: #21CEA1;
+}
+
+.Otext {
+  padding-top: 10px;
+}
+
+.Oinput{
+  border-radius: 5px;
+}
+
+.mid-section {
+  flex: 1;
 }

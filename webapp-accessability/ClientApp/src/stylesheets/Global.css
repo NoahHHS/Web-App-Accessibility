@@ -78,6 +78,7 @@ p{
     align-items: stretch;
     width: 100%;
     border-top: 0.4mm solid black;
+    margin-top: auto;
 }
 
 #footerContact {
