@@ -64,9 +64,6 @@
    color: white;
 }
 
-::placeholder {
-    color: white;
-}
 
 .search {
     width: 10%;
