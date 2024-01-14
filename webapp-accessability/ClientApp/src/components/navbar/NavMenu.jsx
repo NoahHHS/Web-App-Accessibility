@@ -11,7 +11,7 @@ let signedIn = false; // hardcoded state of de user ingelogd is op het moment
 const NavMenu = () => {
     return (
         <nav className='navbar navbar-expand-lg navbar-dark' style={{ backgroundColor: 'rgb(29, 35, 79)', borderBottom: '0.4mm solid black', marginBottom: '15px', zIndex: '99' }}>
-            <a className='title' href="#">Access-Ability</a>
+            <a className='title' title='Homepage Access-Ability' href="/">Access-Ability</a>
             <Hamburger />
             <Navitems />
         </nav>
@@ -31,10 +31,10 @@ const Navitems = () => {
     return (
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-                <a className='nav-item' href="/onderzoek">Onderzoek</a>
-                <a className='nav-item' href="/profiel">Profiel</a>
-                <a className='nav-item' href="/overons">Over Ons</a>
-                <a className='nav-item' href="/privacystatement">Privacy</a>
+                <a className='nav-item' title='Ga naar de onderzoekspagina' href="/onderzoek">Onderzoek</a>
+                <a className='nav-item' title='Ga naar je profielspagina' href="/profiel">Profiel</a>
+                <a className='nav-item' title='Leer meer over ons' href="/overons">Over Ons</a>
+                <a className='nav-item' title='Krijg inzicht op je privacy' href="/privacystatement">Privacy</a>
             </div>
             <ButtonLogIn />
         </div>
@@ -46,7 +46,7 @@ const ButtonLogIn = () => {
         return(
             <div className='loginContainer'>
                 <a href="/login">
-                    <button className='loginButton'><strong>Login</strong></button>
+                    <button className='loginButton' title='Je bent nog niet ingelogd'><strong>Login</strong></button>
                 </a>
             </div>
             
