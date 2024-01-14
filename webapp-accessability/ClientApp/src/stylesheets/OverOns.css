@@ -11,3 +11,23 @@
     color: #21CEA1;
     font-family: 'Times New Roman', Times, serif;
 }
+
+.overOnsSpan{
+    color: #21CEA1;
+}
+
+.doeMeeButton{
+    width: 127px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    background-color: #21CEA1;
+    font-size: large;
+} 
+.doeMeeButton:hover {
+    background-color: #167f63;
+    color: white;
+}
+.doeMeeButton:active {
+    background-color: #21CEA1;
+}
