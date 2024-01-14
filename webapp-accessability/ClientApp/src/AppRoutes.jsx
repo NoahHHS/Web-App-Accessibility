@@ -7,7 +7,8 @@ import { Privacystatement } from "./components/privacystatement"
 import { OverOns } from './components/overons/OverOns';
 import { Onderzoek } from './components/onderzoek/Onderzoek';
 import { Profiel } from './components/profiel/Profiel';
-import { Login } from './components/api-authorization/Login';
+// import { Login } from './components/api-authorization/Login';
+import { Login } from './components/login/Login';
 import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
 
