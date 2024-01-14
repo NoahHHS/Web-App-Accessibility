@@ -18,7 +18,7 @@ export class Home extends Component {
 // Component die de titel en de beschrijving bepaald in de intro
 const IntroText = () => {
   return(
-    <div className='textSection'>
+    <div className='Home-textSection'>
       <h1 className='hometitle'>Access-Ability</h1>
       <h2 className='motto'>“The only disability is when people cannot see human potential.” – Debra Ruh</h2>
     </div>
@@ -28,7 +28,7 @@ const IntroText = () => {
 // Component die de hoofdpagina foto of logo levert
 const Introimg = () => {
   return(
-    <div className='imgSection'>
+    <div className='Home-imgSection'>
       <img className="homeimg" src="../../Assets/icon_accessibility_on-dark_transp.png" alt="intro foto" />
     </div>
   );
@@ -40,7 +40,7 @@ const Introimg = () => {
 const HomeIntro = () => {
   return(
     <section id="Home">
-      <div className='Intro'>
+      <div className='Home-Intro'>
         <IntroText />
         <Introimg />
       </div>
@@ -52,10 +52,12 @@ const HomeIntro = () => {
 // hier komen de content buttons die je verwijzen naar andere paginas
 const HomeContent = () => {
   return(
-    <section className="contentSection">
-      <div className='buttonContainer'>
+    <section className="Home-contentSection">
+      <div className='Home-buttonContainer'>
         <a href="/onderzoek"><button className='pageButton onderzoekbutton'>Onderzoeken</button></a>
         <a href="/profiel"><button className='pageButton profilebutton'>Mijn Profiel</button></a>
+      </div>
+      <div className='Home-buttonContainer'>
         <a href="/privacystatement"><button className='pageButton'>Privacy</button></a>
         <a href="/overons"><button className='pageButton'>Over Ons</button></a>
       </div>

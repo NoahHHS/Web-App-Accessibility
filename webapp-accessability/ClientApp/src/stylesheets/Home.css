@@ -2,7 +2,7 @@
 /* Stijlen voor het introductiegedeelte van de homepage */
 
 /* Algemene opmaak van het introductiegedeelte */
-.Intro {
+.Home-Intro {
     border-radius: 10px;
     background-color: white;
     width: 90%;
@@ -14,12 +14,12 @@
 }
 
 /* Opmaak voor de sectie met tekst */
-.textSection {
+.Home-textSection {
     flex-direction: column;
 }
 
 /* Opmaak voor tekst- en afbeeldingssecties */
-.textSection, .imgSection {
+.Home-textSection, .Home-imgSection {
     float: left; 
     display: inline; 
     width: 49%;
@@ -53,13 +53,13 @@
 /* Opmaak voor de knoppen met inhoud op de homepage */
 
 /* Algemene opmaak voor de sectie met knoppen */
-.contentSection {
+.Home-contentSection {
     margin-top: 50px;
     text-align: center;
 }
 
 /* Opmaak voor de container met knoppen */
-.buttonContainer {
+.Home-buttonContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -68,6 +68,7 @@
     height: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 25px;
 }
 
 /* Stijlen voor de pagina-knoppen */
@@ -109,13 +110,13 @@
 
 @media screen and (max-width: 768px) {
     /* Aanpassingen voor de knopcontainer op kleinere schermen */
-    .buttonContainer {
+    .Home-buttonContainer {
         width: 90%;
     }
   
     /* Aanpassingen voor de pagina-knoppen op kleinere schermen */
     .pageButton {
-        width: 100%;
+        max-width: 100%;
         height: 100px;
         font-size: 20px;
     }
