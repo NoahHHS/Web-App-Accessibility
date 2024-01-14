@@ -4,9 +4,28 @@
     box-sizing: border-box;
 }
 
+.OverOns-content{
+    padding: 10px;
+    max-width: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.OverOnsTekst{
+    text-align: left;
+}
+
+.overOns-Section {
+    margin-bottom: 30px;
+}
+
 .OveronsTitel, .OverOnsSubTitle{
     color: #21CEA1;
     font-family: 'Times New Roman', Times, serif;
+}
+
+.Vacature{
+    text-align: center;
 }
 
 .overOnsSpan{
@@ -27,8 +46,4 @@
 }
 .doeMeeButton:active {
     background-color: #21CEA1;
-}
-
-.overOns-Section {
-    margin-bottom: 30px;
 }
