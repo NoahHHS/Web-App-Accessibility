@@ -48,6 +48,7 @@ p{
 /*----------------------------Footer styling----------------------------*/
 .footer {
     display: flex;
+    flex-wrap: wrap;
     align-items: stretch;
     left: 0;
     bottom: 0;

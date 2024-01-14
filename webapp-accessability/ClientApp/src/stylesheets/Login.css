@@ -1,0 +1,93 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ----------------------------------------------------- */
+.login-text-container {
+    margin-bottom: 8px;
+}
+
+.login-titel {
+    margin-bottom: 0;
+}
+
+/* ----------------------------------------------------- */
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.input-info {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.input-gegevens{
+    height: 40px;
+    width: 190px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-text {
+    margin: 0 5px;  
+    font-size: 12px;
+}
+#login-button {
+    background-color: rgb(33, 206, 161);
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* ----------------------------------------------------- */
+.login-opties-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.login-wachtwoord-vergeten {
+    margin-bottom: 2px;
+}
+
+.login-geen-account {
+    margin-bottom: 2px;
+}
+
+.login-opties-text {
+    margin-bottom: 2px;
+    text-decoration:none;
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------- */
+.google-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+#google-login-button {
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 152px;
+}
