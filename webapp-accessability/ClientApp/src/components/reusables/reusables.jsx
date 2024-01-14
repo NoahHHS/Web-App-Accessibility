@@ -8,3 +8,5 @@ const Zoekbalk = () => {
       </div>
     )
   }
+
+  export {Zoekbalk};

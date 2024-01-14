@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Zoekbalk} from '../reusables/reusables.jsx'
 import '../../stylesheets/Bedrijf.css'
+import '../../stylesheets/reusables.css'
 
 export class Bedrijfs extends Component {
     static displayName = Bedrijfs.name;
@@ -36,12 +38,9 @@ export class Bedrijfs extends Component {
 
   render() {
     return (
-      <div>
+      <div className='mid-section'>
         <h1 class="pagetitle">Bedrijfs Pagina</h1>
-          <section class="searchbar">         {/* een search bar met de knop als img er naast */}
-              <input type="text" placeholder="Onderzoek.." name="search"/>
-              <button type="submit"><img src='../../../Assets/SearchIcon.png' alt="SearchIcon"/></button>
-        </section>
+          <Zoekbalk />
             {/* Unordered List Section */}
           <div className="dark-list-container">
               <ul className="dark-list">
@@ -61,9 +60,20 @@ export class Bedrijfs extends Component {
     <div className="modal-overlay"></div>
     <div className="modal-container">
       <span className="close" onClick={this.closeModal}>&times;</span>
-      <h2>Enter Data</h2>
-      <input type="text" value={this.state.inputData} onChange={this.handleInputChange} />
-      <button onClick={this.handleAddButtonClick}>Toevoegen</button>
+      <h2 className="Otitel">Onderzoeksdata</h2>
+          <p className="Otext">Naam van het onderzoek</p>
+          <input type="text" id="titel" className="Oinput" />
+          <p className="Otext">geef een beschrijving van het onderzoek</p>
+          <input type="text" id="beschrijving" className="Oinput" />
+          <p className="Otext">Waar bevind het onderzoek?</p>
+          <input type="text" id="plek" className="Oinput"/>
+          <p className="Otext">Wanneer is het onderzoek?</p>
+          <input type="date" id="tijd" className="Oinput" />
+          <p className="Otext">Voeg hier de link naar het onderzoek toe.</p>
+          <input type="text" id="link" className="Oinput" />
+          <div className="add-button-container">
+            <button className="ToevoegKnop" onClick={this.handleAddButtonClick}>Toevoegen</button>
+          </div>
     </div>
   </div>
 )} 
