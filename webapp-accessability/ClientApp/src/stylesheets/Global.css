@@ -137,4 +137,12 @@ p{
     .iconNav{
         display: none;
     }
+    .navbar-nav{
+        margin: 10px;
+        font-size: large;
+        text-align: right;
+    }
+    .loginContainer{
+        text-align: right;
+    }
 }
