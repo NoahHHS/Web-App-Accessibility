@@ -23,7 +23,7 @@ const LoginTitel = () => {
 const LoginForm = () => {
     return (
         <div className='login-form-container'>
-            <p className='input-info'>Email</p>
+            <p className='input-info-email'>Email</p>
             <input
             className='input-gegevens'
             type="email"
@@ -32,7 +32,7 @@ const LoginForm = () => {
             required
             />
 
-            <p className='input-info'>Wachtwoord</p>
+            <p className='input-info-wachtwoord'>Wachtwoord</p>
             <input
             className='input-gegevens'
             type="password"

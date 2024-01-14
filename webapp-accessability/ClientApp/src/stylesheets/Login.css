@@ -17,14 +17,19 @@
 .login-form-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin-bottom: 8px;
 }
 
-.input-info {
-    margin: 0;
-    border: 0;
-    padding: 0;
+.input-info-email {
+    margin: 0px 0px 0px 10px;
+    padding: 0px 150px 0px 0px;
+    font-size: 14px;
+}
+
+.input-info-wachtwoord {
+    margin: 0px 0px 0px 10px;
+    padding: 0px 105px 0px 0px;
     font-size: 14px;
 }
 
@@ -36,12 +41,15 @@
 }
 
 .checkbox-label {
+    margin: 0px 0px 8px 10px;
     display: flex;
     align-items: center;
+    padding: 0px 50px 0px 0px;
 }
 
 .checkbox-text {
-    margin: 0 5px;  
+    margin: 0px 0px 0px 3px;
+    /* margin: 0 5px;   */
     font-size: 12px;
 }
 #login-button {
@@ -53,6 +61,13 @@
     border-radius: 12px;
     font-weight: bold;
 }
+
+#login-button:hover {
+    background-color: #1dac86;
+    color: white;
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #1dac86;
+    transition: 0.5s;
+  }
 
 /* ----------------------------------------------------- */
 .login-opties-container {
@@ -81,7 +96,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 8px;
+    margin: 0px 0px 16px 0px;
 }
 
 #google-login-button {
@@ -89,5 +104,10 @@
     height: 35px;
     width: 150px;
     border: none;
-    border-radius: 152px;
+    border-radius: 12px;
 }
+
+#google-login-button:hover { 
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px white;
+    transition: 0.5s;
+  }
