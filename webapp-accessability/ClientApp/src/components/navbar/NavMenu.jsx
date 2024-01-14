@@ -4,7 +4,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { User } from 'react-feather';
 
 //---------------------------- Variables and State ----------------------------
-let signedIn = true; // hardcoded state of de user ingelogd is op het moment
+let signedIn = false; // hardcoded state of de user ingelogd is op het moment
 
 
 //---------------------------- Parent Component ----------------------------
@@ -45,7 +45,9 @@ const ButtonLogIn = () => {
     if(signedIn === false){
         return(
             <div className='loginContainer'>
-                <button className='loginButton'><strong>Login</strong></button>
+                <a href="/login">
+                    <button className='loginButton'><strong>Login</strong></button>
+                </a>
             </div>
             
         );
