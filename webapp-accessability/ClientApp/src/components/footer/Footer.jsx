@@ -1,4 +1,5 @@
 import React from 'react';
+
 // ---------------------------------------Parent Components---------------------------------------
 
 const CustomFooter = () => {
@@ -13,49 +14,60 @@ const CustomFooter = () => {
 
 // ---------------------------------------Child Components---------------------------------------
 
+const FooterNav = () => {
+    return (
+        <div className='footerNav-Container'>
+            <h2 id='footerContact'>Site Links</h2>
+            <ul id='ulContact-link'>
+                <li className='footerNav-bullets'><a className='footerContact-link' href='#'>Home</a></li>
+                <li className='footerNav-bullets'><a className='footerContact-link' href='overons'>Over Ons</a></li>
+                <li className='footerNav-bullets'><a className='footerContact-link' href='privacystatement'>Privacy Statement & Cookies</a></li>
+            </ul>
+        </div>
+    );
+};
+
 const FooterContact = () => {
     return (
         <div className='footerContact-container'>
-            <h2 id='contact'>Contact</h2>
+            <h2 id='footerContact'>Contact</h2>
             <div className='contact-items'>
-                <a>
-                    <span id='contact-info'>030 - 239 82 70</span>
-                </a>
+                    <span className='contact-info'>030 - 239 82 70</span>
                 <br />
-                <a>
-                    <span id='contact-info'>info@accessibility.nl</span>
-                </a>
+                    <span className='contact-info'>info@accessibility.nl</span>
             </div>
         </div>
     );
 };
 
-const FooterNav = () => {
-    return (
-        <div className='footerNav-Container'>
-            <h2 id='contact'>Site Links</h2>
-            <ul className='nav-list'>
-                <li className='nav-bullets'><span className='nav-items'>Home</span></li>
-                <li className='nav-bullets'><span className='nav-items'>Over ons</span></li>
-                <li className='nav-bullets'><span className='nav-items'>Privacy Statement & Cookies</span></li>
-            </ul>
-        </div>
-    );
-};
 
 const FooterSocials = () => {
     return (
         <div className='socialNav-Container'>
-            {/*https://ionic.io/ library voor icons + tutorial https://www.youtube.com/watch?v=Hskt1jN7JTc&ab_channel=dcode*/}
-            {/* <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-            <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script> */}
-            <ul className='socials-list'>
-                <li className='socials-bol'><a className='socials-link' href='https://nl.linkedin.com/company/accessibilitynl' target='_blank'>linkedin{/*<ion-icon className='linkedin' name="logo-linkedin"></ion-icon>*/}</a></li>
-                <li className='socials-bol'><a className='socials-link' href='https://twitter.com/AccessibilityNL' target='_blank'>Twitter{/*<ion-icon className='twitter' name="logo-twitter"></ion-icon>*/}</a></li>
-                <li className='socials-bol'><a className='socials-link' href='https://www.youtube.com/channel/UCSFsnRBNIDCgYJEW_ZLfTrg' target='_blank'>YouTube{/*<ion-icon className='youtube' name="logo-youtube"></ion-icon>*/}</a></li>
-            </ul>
+            <a className='socials-link' href='https://nl.linkedin.com/company/accessibilitynl' target="_blank">
+                <div className='socials-circle'>
+                    <img className='socials-picture' src="../../../Assets/LinkedIn-logo.png" alt="" />
+                </div>
+            </a>
+            <a className='socials-link' href='https://twitter.com/AccessibilityNL' target="_blank">
+                <div className='socials-circle'>
+                    <img className='socials-picture' src="../../../Assets/twitter-logo.png" alt="" />
+                </div>
+            </a>
+            <a className='socials-link' href='https://www.youtube.com/channel/UCSFsnRBNIDCgYJEW_ZLfTrg' target="_blank">
+                <div className='socials-circle'>
+                    <img className='socials-picture' src="../../../Assets/youtube-logo.png" alt="" />
+                </div>
+            </a>
         </div>
     );
 };
+
+
+{/* <ul className='socials-list'>
+<li className='socials-bol'><a className='socials-link' href='https://nl.linkedin.com/company/accessibilitynl' target='_blank'></a></li>
+<li className='socials-bol'><a className='socials-link' href='https://twitter.com/AccessibilityNL' target='_blank'>Twitter</a></li>
+<li className='socials-bol'><a className='socials-link' href='https://www.youtube.com/channel/UCSFsnRBNIDCgYJEW_ZLfTrg' target='_blank'>YouTube</a></li>
+</ul> */}
 
 export default CustomFooter;

@@ -1,6 +1,5 @@
-section {
+.profiel-section {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 .DataItem{
@@ -15,6 +14,28 @@ section {
     box-shadow: 0px 2px 3px 1px black;
 }
 
-.subtitle{
-    font-size: 20px;
+.SaveButton-Content {
+    margin: 30px;
+    text-align: center;
+}
+.SaveButton-Warning {
+    font-size: small;
+}
+
+.SaveButton {
+    font-size: large;
+    width: 200px;
+    height: 50px;
+    background-color: #21CEA1;
+    border-radius: 10px;
+    border: none;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.462));
+    margin-bottom: 5px;
+}
+.SaveButton:hover {
+    background-color: #10a57e;
+    color: white;
+}
+.SaveButton:active {
+    background-color: #21CEA1;
 }
