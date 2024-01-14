@@ -54,10 +54,10 @@ const HomeContent = () => {
   return(
     <section className="contentSection">
       <div className='buttonContainer'>
-        <button className='pageButton onderzoekbutton'>Onderzoeken</button>
-        <button className='pageButton profilebutton'>Mijn Profiel</button>
-        <button className='pageButton'>Privacy</button>
-        <button className='pageButton'>Over ons</button>
+        <a href="/onderzoek"><button className='pageButton onderzoekbutton'>Onderzoeken</button></a>
+        <a href="/profiel"><button className='pageButton profilebutton'>Mijn Profiel</button></a>
+        <a href="/privacystatement"><button className='pageButton'>Privacy</button></a>
+        <a href="/overons"><button className='pageButton'>Over ons</button></a>
       </div>
     </section>
   );
