@@ -1,0 +1,112 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ----------------------------------------------------- */
+.login-text-container {
+    margin-bottom: 8px;
+}
+
+.login-titel {
+    margin-bottom: 0;
+}
+
+/* ----------------------------------------------------- */
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.input-info-email {
+    margin: 0px 0px 0px 10px;
+    padding: 0px 150px 0px 0px;
+    font-size: 14px;
+}
+
+.input-info-wachtwoord {
+    margin: 0px 0px 0px 10px;
+    padding: 0px 105px 0px 0px;
+    font-size: 14px;
+}
+
+.input-gegevens{
+    height: 40px;
+    width: 190px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.checkbox-label {
+    margin: 0px 0px 8px 10px;
+    display: flex;
+    align-items: center;
+    padding: 0px 50px 0px 0px;
+}
+
+.checkbox-text {
+    margin: 0px 0px 0px 3px;
+    font-size: 12px;
+}
+#login-button {
+    background-color: rgb(33, 206, 161);
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+#login-button:hover {
+    background-color: #1dac86;
+    color: white;
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #1dac86;
+    transition: 0.5s;
+  }
+
+/* ----------------------------------------------------- */
+.login-opties-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.login-wachtwoord-vergeten {
+    margin-bottom: 2px;
+}
+
+.login-geen-account {
+    margin-bottom: 2px;
+}
+
+.login-opties-text {
+    margin-bottom: 2px;
+    text-decoration:none;
+    text-decoration: underline;
+}
+
+/* ----------------------------------------------------- */
+.google-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 16px 0px;
+}
+
+#google-login-button {
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+}
+
+#google-login-button:hover { 
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px white;
+    transition: 0.5s;
+  }
