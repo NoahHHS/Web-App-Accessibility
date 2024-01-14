@@ -14,13 +14,30 @@ export class Home extends Component {
   }
 }
 
+//---------------------------- Variables and State ----------------------------
+//---------------------------- Variables and State ----------------------------
+let signedIn = false; // hardcoded state of de user ingelogd is op het moment
+
 //---------------------------- Top Section-Components ----------------------------
 // Component die de titel en de beschrijving bepaald in de intro
+const IntroButton = () => {
+  if(signedIn === false){
+    return(
+      <a href="/registreer"><button className='Home-IntroButton' title='Ga naar registreerpagina'><strong>Start nu!</strong></button></a>
+    );
+  }
+  else{
+    <a href="/registreer"><button className='Home-IntroButton' title='Ga naar onderzoekspagina'><strong>Bekijk Onderzoeken</strong></button></a>
+  }
+
+}
+
 const IntroText = () => {
   return(
     <div className='Home-textSection'>
       <h1 className='hometitle'>Access-Ability</h1>
       <h2 className='motto'>“The only disability is when people cannot see human potential.” – Debra Ruh</h2>
+      <IntroButton />
     </div>
   );
 }
@@ -29,7 +46,7 @@ const IntroText = () => {
 const Introimg = () => {
   return(
     <div className='Home-imgSection'>
-      <img className="homeimg" src="../../Assets/icon_accessibility_on-dark_transp.png" alt="intro foto" />
+      <a href="/overons"><img className="homeimg" title="Logo Accessibility" src="../../Assets/icon_accessibility_on-dark_transp.png" alt="intro foto" /></a>
     </div>
   );
 }
