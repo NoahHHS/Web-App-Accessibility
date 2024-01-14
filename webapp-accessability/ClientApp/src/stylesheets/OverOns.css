@@ -4,9 +4,6 @@
     box-sizing: border-box;
 }
 
-
-
-
 .OveronsTitel, .OverOnsSubTitle{
     color: #21CEA1;
     font-family: 'Times New Roman', Times, serif;
@@ -30,4 +27,8 @@
 }
 .doeMeeButton:active {
     background-color: #21CEA1;
+}
+
+.overOns-Section {
+    margin-bottom: 30px;
 }

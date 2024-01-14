@@ -7,13 +7,13 @@ export class OverOns extends Component {
   render() {
     return (
       <div className='overOns'>
-        <section>
+        <section className='overOns-Section'>
         <h1 className='OveronsTitel'>Over Ons</h1>
         <p className='OverOnsTekst'>
           Stichting Accessibility zet zich in voor een <span className='overOnsSpan'>digitaal</span>, <span className='overOnsSpan'>fysiek</span> en <span className='overOnsSpan'>sociaal</span> toegankelijke samenleving. Een samenleving waarin iedereen zelfstandig kan meedoen en zich optimaal kan ontplooien, ook als je een beperking hebt. Accessibility ondersteunt (maatschappelijke) organisaties bij het realiseren van toegankelijkheid. Zo dragen wij bij aan een inclusieve samenleving met voorzieningen die toegankelijk en bruikbaar zijn voor iedereen.
         </p>
         </section>
-        <section>
+        <section className='overOns-Section'>
           <h2 className='OverOnsSubTitle'>Onze Missie</h2>
           <p className='OnzeMissieTekst'>
             Bij Accessibility werken we aan een inclusieve samenleving waarin <span className='overOnsSpan'><strong>iedereen</strong></span> kan meedoen en tot zijn recht komt. Steeds meer organisaties sluiten zich aan bij onze ambities. Al zoeken ze nog naar hoe ze dit voor elkaar kunnen krijgen. Samen met onze klanten en partners bouwen we iedere dag aan een toegankelijker Nederland. We zetten onze kennis en expertise in om fysieke, sociale én digitale omgevingen toegankelijk te maken; in het bijzonder voor mensen met een (visuele) beperking. Onze experts denken graag met hen mee en bieden begeleiding op maat. Dit doen zij in nauwe samenwerking met ervaringsdeskundigen.
@@ -23,7 +23,7 @@ export class OverOns extends Component {
             <DoeMeeButton />
           </p>
         </section>
-        <section>
+        <section className='overOns-Section'>
           <h2 className='OverOnsSubTitle'>Achtergrond</h2>
           <p className='AchtergrondTekst'>
             Begin deze eeuw digitaliseerde de samenleving in een rap tempo. Maar waren al die websites en digitale hulpmiddelen wel door iedereen te gebruiken? Toegankelijkheid stond nog in de kinderschoenen. Als eerste organisatie in Nederland begon Stichting Accessibility in 2001 met het toegankelijk maken van ICT voor mensen met een visuele beperking. 
@@ -33,7 +33,7 @@ Onze beweging blijft niet onopgemerkt. De regelgeving beweegt mee: mede dankzij 
 Stichting Accessibility heeft een ANBI-status en zit in de adviescommissie van het W3C.
           </p>
         </section>
-        <section>
+        <section className='overOns-Section'>
           <h2 className='OverOnsSubTitle'>Nieuwsgierig naar onze vacatures?</h2>
           <p className='VacatureTekst'>
             Bekijk op deze pagina de vacatures die we momenteel open hebben staan. 
