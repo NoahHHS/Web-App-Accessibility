@@ -21,8 +21,8 @@ export class Onderzoek extends Component {
 const PaginaTitel = () => {
   return(
     <div className='Titel'>
-      <h1 className='OnderzoekPaginaTitel'>Onderzoeken</h1>
-      <h2 className='vervolgh1'>Van Access-Ability en partners.</h2>
+      <h1 className='OnderzoekPaginaTitel' title='Paginatitel'>Onderzoeken</h1>
+      <h2 className='vervolgh1' title='vervolgpTitel'>Van Access-Ability en partners.</h2>
     </div>
   )
 }
@@ -31,8 +31,8 @@ const Zoekbalk = () => {
   return(
     <div>
       <section className='Zoekbalk' >
-      <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam"/>
-      <button className='search'><div class="search-icon">&#128269;</div></button>
+      <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
+      <button className='search'><div class="search-icon" title='zoekbalk-knop'>&#128269;</div></button>
       </section>
     </div>
   )
@@ -57,17 +57,17 @@ if(modal) {
         <img src='../../Assets/image.png' width='250px' height='250px'/>
         </section>
         <section className='OnderzoekInhoud'>
-      <h1 className='Onderzoekstitel'>Onderzoek</h1>
-      <p className='OnderzoeksTekst'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut egestas ante, nec tempus massa. Aenean tristique fermentum neque nec aliquam. Donec laoreet interdum commodo.p</p>
-      <button onClick={toggleModal} className='DeelneemKnop'>Neem deel</button>
+      <h1 className='Onderzoekstitel' title='OnderzoeksTitel'>Onderzoek</h1>
+      <p className='OnderzoeksTekst' title='OnderzoeksBeschrijving'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut egestas ante, nec tempus massa. Aenean tristique fermentum neque nec aliquam. Donec laoreet interdum commodo.p</p>
+      <button onClick={toggleModal} className='DeelneemKnop' title='deelneem-knop'>Neem deel</button>
       </section>
       {modal && (<section className="pmodal">
         <div className="poverlay"></div>
         <div className="pmodal-content">
-          <h2 className="popuptitel"><strong>LET OP</strong></h2>
-          <p className="popuptekst">Je gaat nu deelnemen -onderzoeksnaam-</p>
-          <button className='add-modal' onClick={toggleModal}>Neem Deel</button>
-          <button className="cancel-modal" onClick={toggleModal}>Cancel</button>
+          <h2 className="popuptitel" title='Popuptitel'><strong>LET OP</strong></h2>
+          <p className="popuptekst" title='Popuptekst'>Je gaat nu deelnemen -onderzoeksnaam-</p>
+          <button className='add-modal' onClick={toggleModal} title='Deelnemen'>Neem Deel</button>
+          <button className="cancel-modal" onClick={toggleModal} title='NietDeelnemen'>Cancel</button>
         </div>
       </section>)
 }
