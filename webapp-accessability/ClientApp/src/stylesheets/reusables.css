@@ -1,0 +1,35 @@
+.OnderzoekSearchInput {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgba(0, 255, 194, 1);
+    padding: 3px;
+ }
+ 
+ ::placeholder {
+     color: white;
+ }
+ 
+ 
+ .search {
+     width: 10%;
+     background-color: transparent;
+     border: none;
+     outline: none;
+     align-self: flex-end;
+ }
+ 
+ .Zoekbalk {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    position: relative;
+    margin-bottom: 1em;
+ }
+ 
+ .search-icon {
+     position: absolute;
+     right: 0.3em;
+     top: 50%;
+     transform: translate(0%, -50%);
+ }

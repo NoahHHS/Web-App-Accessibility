@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useState } from 'react';
 import '../../stylesheets/Onderzoek.css'
 
 export class Onderzoek extends Component {
@@ -13,6 +14,8 @@ export class Onderzoek extends Component {
       </div>
     );
   }
+
+
 }
 
 const PaginaTitel = () => {
@@ -35,7 +38,19 @@ const Zoekbalk = () => {
   )
 }
 
-const OnderzoekDetails = () => {
+function OnderzoekDetails() {
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+  setModal(!modal);
+  console.log("called");
+}
+
+if(modal) {
+  document.body.classList.add('active-modal')
+} else {
+  document.body.classList.remove('active-modal')
+}
   return (
       <section className='Onderzoek'>
         <section className='logo'>
@@ -44,9 +59,20 @@ const OnderzoekDetails = () => {
         <section className='OnderzoekInhoud'>
       <h1 className='Onderzoekstitel'>Onderzoek</h1>
       <p className='OnderzoeksTekst'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut egestas ante, nec tempus massa. Aenean tristique fermentum neque nec aliquam. Donec laoreet interdum commodo.p</p>
-      <button className='DeelneemKnop'>Neem deel</button>
+      <button onClick={toggleModal} className='DeelneemKnop'>Neem deel</button>
       </section>
+      {modal && (<section className="pmodal">
+        <div className="poverlay"></div>
+        <div className="pmodal-content">
+          <h2 className="popuptitel"><strong>LET OP</strong></h2>
+          <p className="popuptekst">Je gaat nu deelnemen -onderzoeksnaam-</p>
+          <button className='add-modal' onClick={toggleModal}>Neem Deel</button>
+          <button className="cancel-modal" onClick={toggleModal}>Cancel</button>
+        </div>
+      </section>)
+}
       </section>
+      
   )
 }
 
