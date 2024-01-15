@@ -24,7 +24,7 @@ const LoginTitel = () => {
 const LoginForm = () => {
     return (
         <div className='login-form-container'>
-            <p className='input-info-email'>Email</p>
+            <label htmlFor="email" className='input-info-email'>Email</label>
             <input
             className='input-gegevens-login'
             type="email"
@@ -33,7 +33,7 @@ const LoginForm = () => {
             required
             />
 
-            <p className='input-info-wachtwoord'>Wachtwoord</p>
+            <label htmlFor="wachtwoord" className='input-info-wachtwoord'>Wachtwoord</label>
             <input
             className='input-gegevens-login'
             type="password"
@@ -41,8 +41,8 @@ const LoginForm = () => {
             name="wachtwoord"
             required
             />
-            <label className='checkbox-label'><input type="checkbox" name="remember" /><p className='checkbox-text'>Onthoud wachtwoord</ p></label>
-            <button id='login-button' type="submit">Login</button>
+            <label className='checkbox-label'><input type="checkbox" name="remember" /><span className='checkbox-text'>Onthoud wachtwoord</ span></label>
+            <button type="submit" id='login-button' >Login</button>
         </div>
     );
 }
