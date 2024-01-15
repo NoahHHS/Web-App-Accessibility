@@ -25,10 +25,12 @@
 }
 
 .dark-list-container {
-  background-color: rgb(5, 3, 70); /* Set the background color to a darker shade */
+  background-color: rgb(5, 3, 70);
   border: 2px solid #21CEA1;
   border-radius: 5px;
   padding: 20px;
+  max-height: 200px; /* Set the maximum height you want */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 .dark-list {
@@ -120,4 +122,9 @@ padding-top: 20px;
 
 .sluiten{
   color: red;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
 }

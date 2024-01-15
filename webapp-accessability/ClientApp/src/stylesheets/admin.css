@@ -1,0 +1,19 @@
+.itemtitle{
+    padding-top: 20px;
+    color: #21CEA1;
+}
+
+.list-gebruiker{
+    cursor: pointer;
+}
+
+.OplsaanKnop{
+    background-color: #21CEA1;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
