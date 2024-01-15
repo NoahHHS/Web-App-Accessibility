@@ -62,7 +62,7 @@ const RegistreerTitel = () => {
 
 
                 <div className="registreer-voorwaarden-gegevens">
-                    <label className='checkbox-label'><input className='checkbox-registreer' type="checkbox" name="voorwaarden" /><p className='checkbox-text'>Ik ga akkoort met de voorwaarden van <a href="/privacy" target="_blank">Accessibility</a><br /> en het verwerken van mijn persoonsgegevens.</ p></label>
+                    <label className='checkbox-label'><input className='checkbox-registreer' type="checkbox" name="voorwaarden" /><p className='checkbox-text'>Ik ga akkoort met de voorwaarden van <a href="/privacystatement" target="_blank">Accessibility</a><br /> en het verwerken van mijn persoonsgegevens.</ p></label>
                 </div>
                 <div className="registreer-maak-account">
                     <button id='registreer-button' type="submit">Maak account aan</button>
