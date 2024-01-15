@@ -15,7 +15,6 @@ export class Home extends Component {
 }
 
 //---------------------------- Variables and State ----------------------------
-//---------------------------- Variables and State ----------------------------
 let signedIn = false; // hardcoded state of de user ingelogd is op het moment
 
 //---------------------------- Top Section-Components ----------------------------
@@ -23,7 +22,7 @@ let signedIn = false; // hardcoded state of de user ingelogd is op het moment
 const IntroButton = () => {
   if(signedIn === false){
     return(
-      <a href="/registreer"><button className='Home-IntroButton' title='Ga naar registreerpagina'><strong>Start nu!</strong></button></a>
+      <a href="/registreer"><button className='Home-IntroButton' aria-label='Maak account' title='Ga naar registreerpagina'><strong>Start nu!</strong></button></a>
     );
   }
   else{

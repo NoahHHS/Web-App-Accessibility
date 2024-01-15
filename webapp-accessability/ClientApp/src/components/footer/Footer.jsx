@@ -30,7 +30,7 @@ const FooterNav = () => {
 const FooterContact = () => {
     return (
         <div className='footerContact-container'>
-            <h2 id='footerContact'>Contact</h2>
+            <h2 id='footerContact' title='Onze contactgegevens'>Contact</h2>
             <div className='contact-items'>
                     <span className='contact-info'>Telefoon: 030 - 239 82 70</span>
                 <br />

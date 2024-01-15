@@ -31,8 +31,8 @@ const Zoekbalk = () => {
   return(
     <div>
       <section className='Zoekbalk' >
-      <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
-      <button className='search'><div class="search-icon" title='zoekbalk-knop'>&#128269;</div></button>
+        <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
+        <button className='search' aria-label="Zoek input"><div class="search-icon" title='zoekbalk-knop'>&#128269;</div></button>
       </section>
     </div>
   )
@@ -54,12 +54,12 @@ if(modal) {
   return (
       <section className='Onderzoek'>
         <section className='logo'>
-        <img src='../../Assets/image.png' width='250px' height='250px'/>
+        <img src='../../Assets/image.png' width='250px' height='250px' alt='Afbeelding onderzoek'/>
         </section>
         <section className='OnderzoekInhoud'>
-      <h1 className='Onderzoekstitel' title='OnderzoeksTitel'>Onderzoek</h1>
-      <p className='OnderzoeksTekst' title='OnderzoeksBeschrijving'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut egestas ante, nec tempus massa. Aenean tristique fermentum neque nec aliquam. Donec laoreet interdum commodo.p</p>
-      <button onClick={toggleModal} className='DeelneemKnop' title='deelneem-knop'>Neem deel</button>
+      <h1 className='Onderzoekstitel' title='Naam onderzoek'>Onderzoek</h1>
+      <p className='OnderzoeksTekst' title='beschrijving onderzoek'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut egestas ante, nec tempus massa. Aenean tristique fermentum neque nec aliquam. Donec laoreet interdum commodo.p</p>
+      <button onClick={toggleModal} className='DeelneemKnop' title='Neem deel aan onderzoek'>Neem deel</button>
       </section>
       {modal && (<section className="pmodal">
         <div className="poverlay"></div>
@@ -67,7 +67,7 @@ if(modal) {
           <h2 className="popuptitel" title='Popuptitel'><strong>LET OP</strong></h2>
           <p className="popuptekst" title='Popuptekst'>Je gaat nu deelnemen -onderzoeksnaam-</p>
           <button className='add-modal' onClick={toggleModal} title='Deelnemen'>Neem Deel</button>
-          <button className="cancel-modal" onClick={toggleModal} title='NietDeelnemen'>Cancel</button>
+          <button className="cancel-modal" onClick={toggleModal} title='Niet deelnemen'>Cancel</button>
         </div>
       </section>)
 }
