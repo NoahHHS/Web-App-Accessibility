@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { useState } from "react";
-
-import zxcvbn from 'zxcvbn'; // gemaakt door dropbox
+import { zxcvbn } from 'zxcvbn'; // gemaakt door dropbox
 
 import '../../stylesheets/Registreer.css'
 
