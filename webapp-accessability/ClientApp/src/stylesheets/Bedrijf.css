@@ -117,3 +117,7 @@ padding-top: 20px;
   flex-direction: column;
   align-items: center;
 }
+
+.sluiten{
+  color: red;
+}

@@ -39,9 +39,9 @@ export class Admin extends Component {
   render() {
     return (
       <div className='mid-section'>
-        <h1 class="pagetitle">Bedrijfs Pagina</h1>
+        <h1 class="pagetitle">Admin Pagina</h1>
         <div className='ZoekbalkContainer'>
-          <Zoekbalk />
+          <Zoekbalk placeholder="Zoek gebruikers"/>
         </div>
             {/* Unordered List Section */}
           <div className="dark-list-container">

@@ -41,7 +41,7 @@ export class Bedrijfs extends Component {
       <div className='mid-section'>
         <h1 class="pagetitle">Bedrijfs Pagina</h1>
         <div className='ZoekbalkContainer'>
-          <Zoekbalk />
+          <Zoekbalk placeholder="zoek uw onderzoeken" />
         </div>
             {/* Unordered List Section */}
           <div className="dark-list-container">
@@ -61,7 +61,7 @@ export class Bedrijfs extends Component {
   <div>
     <div className="modal-overlay"></div>
     <div className="modal-container">
-      <span className="close" onClick={this.closeModal}>&times;</span>
+      <span className="sluiten" onClick={this.closeModal}>&times;</span>
       <h2 className="Otitel">Onderzoeksdata</h2>
           <p className="Otext">Naam van het onderzoek</p>
           <input type="text" id="titel" className="Oinput" />
