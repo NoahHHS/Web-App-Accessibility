@@ -40,6 +40,7 @@ const FooterContact = () => {
     );
 };
 
+
 const FooterSocials = () => {
     return (
         <div className='socialNav-Container'>
