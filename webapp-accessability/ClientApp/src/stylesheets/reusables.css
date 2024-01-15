@@ -42,8 +42,21 @@
  }
 
  .FontSizeButton{
-    width: 50px;
-    height: 30px;
+    font-size: larger;
+    font-weight: bold;
+    width: 80px;
+    height: 40px;
     background-color: white;
     border-radius: 5px;
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+ }
+
+ .FontSizeButton:hover{
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.52));
+    background-color: rgb(200, 200, 200);
+ }
+ .FontSizeButton:active{
+    background-color: white;
  }
