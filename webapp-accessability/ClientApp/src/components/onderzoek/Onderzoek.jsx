@@ -38,6 +38,10 @@ const Zoekbalk = () => {
   )
 }
 
+const OnderzoekList = [
+  
+]
+
 function OnderzoekDetails() {
   const [modal, setModal] = useState(false);
 
@@ -54,7 +58,7 @@ if(modal) {
   return (
       <section className='Onderzoek'>
         <section className='logo'>
-        <img src='../../Assets/image.png' width='250px' height='250px' alt='Afbeelding onderzoek'/>
+        <img src='../../Assets/image.png' width='250px' height='250px' alt='logo accesability'/>
         </section>
         <section className='OnderzoekInhoud'>
       <h1 className='Onderzoekstitel' title='Naam onderzoek'>Onderzoek</h1>
