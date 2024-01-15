@@ -26,7 +26,7 @@ const LoginForm = () => {
         <div className='login-form-container'>
             <p className='input-info-email'>Email</p>
             <input
-            className='input-gegevens'
+            className='input-gegevens-login'
             type="email"
             placeholder="E-mail"
             name="email"
@@ -35,7 +35,7 @@ const LoginForm = () => {
 
             <p className='input-info-wachtwoord'>Wachtwoord</p>
             <input
-            className='input-gegevens'
+            className='input-gegevens-login'
             type="password"
             placeholder="Wachtwoord"
             name="wachtwoord"
