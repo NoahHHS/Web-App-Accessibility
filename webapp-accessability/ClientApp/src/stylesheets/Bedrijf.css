@@ -111,3 +111,9 @@ padding-top: 20px;
 .mid-section {
   flex: 1;
 }
+
+.ZoekbalkContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

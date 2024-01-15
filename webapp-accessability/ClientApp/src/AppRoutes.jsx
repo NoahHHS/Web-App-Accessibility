@@ -11,6 +11,7 @@ import { Profiel } from './components/profiel/Profiel';
 import { Login } from './components/login/Login';
 import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
+import { Admin } from './components/admin/Admin';
 
 const AppRoutes = [
   {
@@ -57,6 +58,10 @@ const AppRoutes = [
   {
     path: '/overons',
     element: <OverOns/>
+  },
+  {
+    path: '/admin',
+    element: <Admin/>
   },
   ...ApiAuthorzationRoutes
 ];
