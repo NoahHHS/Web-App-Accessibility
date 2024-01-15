@@ -40,7 +40,9 @@ export class Bedrijfs extends Component {
     return (
       <div className='mid-section'>
         <h1 class="pagetitle">Bedrijfs Pagina</h1>
+        <div className='ZoekbalkContainer'>
           <Zoekbalk />
+        </div>
             {/* Unordered List Section */}
           <div className="dark-list-container">
               <ul className="dark-list">
