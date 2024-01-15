@@ -46,7 +46,7 @@ const ButtonLogIn = () => {
         return(
             <div className='loginContainer'>
                 <a href="/login">
-                    <button className='loginButton' title='Je bent nog niet ingelogd'><strong>Login</strong></button>
+                    <button className='loginButton' title='Klik hier om in te loggen'><strong>Login</strong></button>
                 </a>
             </div>
             
