@@ -1,5 +1,5 @@
-const FontSizeAdjuster = (prop) => {
-    let p = document.getElementById(prop.value);
+const FontSizeAdjuster = () => {
+    let paragraphs = document.getElementsByClassName('beschrijving');
     let i = 0
     let FontSizes = ['16px','20px','24px','32px']
 
@@ -8,20 +8,27 @@ const FontSizeAdjuster = (prop) => {
         if(i > 4){
             i--
         }
-        p.style.fontSize = FontSizes[i]
+        for(let j = 0; j < paragraphs.length; j++){
+            paragraphs[j].style.fontSize = FontSizes[i]
+        }
     }
     function decreaseFontSize () {
         i--
         if(i < 0){
             i++
         }
-        p.style.fontSize = FontSizes[i]
+        for(let j = 0; j < paragraphs.length; j++){
+            paragraphs[j].style.fontSize = FontSizes[i]
+        }
     }
 
     return(
         <div className="FontSizeButton-Container">
-            <button className="IncreaseButton" onClick={increaseFontSize}>+</button>
-            <button className="IncreaseButton" onClick={decreaseFontSize}>-</button>
+            <p className="FontSizeButton-text">Increase or Decrease the font size</p>
+            <button className="FontSizeButton" onClick={increaseFontSize}>+</button>
+            <button className="FontSizeButton" onClick={decreaseFontSize}>-</button>
         </div>
     );
 }
+
+export default FontSizeAdjuster;

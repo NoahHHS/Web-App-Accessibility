@@ -7,7 +7,7 @@
  }
  
 
- 
+  /*-----------ZoekBalk-----------*/
  .search {
      width: 10%;
      background-color: transparent;
@@ -29,4 +29,21 @@
      right: 0.3em;
      top: 50%;
      transform: translate(0%, -50%);
+ }
+
+ /*-----------FontSize Button-----------*/
+ .FontSizeButton-Container {
+    text-align: center;
+ }
+
+ .FontSizeButton-text {
+    font-size: small;
+    margin-bottom: 5px;
+ }
+
+ .FontSizeButton{
+    width: 50px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
  }
