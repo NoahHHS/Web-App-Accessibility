@@ -44,11 +44,11 @@ export class Bedrijfs extends Component {
           <Zoekbalk placeholder="zoek uw onderzoeken" />
         </div>
             {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item">Onderzoek 1</li>
-                  <li className="dark-list-item">Onderzoek 2</li>
-                  <li className="dark-list-item">Onderzoek 3</li>
+          <div className="OnderzoekList-container">
+              <ul className="OnderzoekList">
+                  <li className="OnderzoekList-item">Onderzoek 1</li>
+                  <li className="OnderzoekList-item">Onderzoek 2</li>
+                  <li className="OnderzoekList-item">Onderzoek 3</li>
                   {/* Add more list items as needed */}
               </ul>
           </div>

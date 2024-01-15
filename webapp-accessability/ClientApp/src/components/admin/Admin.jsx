@@ -63,14 +63,14 @@ export class Admin extends Component {
           <Zoekbalk placeholder="Zoek gebruikers"/>
         </div>
             {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 1')} style={{ cursor: 'pointer' }}>Gebruiker 1</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 2')} style={{ cursor: 'pointer' }}>Gebruiker 2</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 3')} style={{ cursor: 'pointer' }}>Gebruiker 3</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 4')} style={{ cursor: 'pointer' }}>Gebruiker 4</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 5')} style={{ cursor: 'pointer' }}>Gebruiker 5</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 6')} style={{ cursor: 'pointer' }}>Gebruiker 6</li>
+          <div className="GebruikerList-container">
+              <ul className="GebruikerList">
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 1')} style={{ cursor: 'pointer' }}>Gebruiker 1</li>
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 2')} style={{ cursor: 'pointer' }}>Gebruiker 2</li>
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 3')} style={{ cursor: 'pointer' }}>Gebruiker 3</li>
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 4')} style={{ cursor: 'pointer' }}>Gebruiker 4</li>
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 5')} style={{ cursor: 'pointer' }}>Gebruiker 5</li>
+                  <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 6')} style={{ cursor: 'pointer' }}>Gebruiker 6</li>
                   {/* Add more list items as needed */}
               </ul>
           </div>
@@ -80,14 +80,14 @@ export class Admin extends Component {
           <Zoekbalk placeholder="Zoek door alle onderzoeken"/>
         </div>
             {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 1')} style={{ cursor: 'pointer' }}>Onderzoek 1</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 2')} style={{ cursor: 'pointer' }}>Onderzoek 2</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 3')} style={{ cursor: 'pointer' }}>Onderzoek 3</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 4')} style={{ cursor: 'pointer' }}>Onderzoek 4</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 5')} style={{ cursor: 'pointer' }}>Onderzoek 5</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 6')} style={{ cursor: 'pointer' }}>Onderzoek 6</li>
+          <div className="OnderzoekList-container">
+              <ul className="OnderzoekList">
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 1')} style={{ cursor: 'pointer' }}>Onderzoek 1</li>
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 2')} style={{ cursor: 'pointer' }}>Onderzoek 2</li>
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 3')} style={{ cursor: 'pointer' }}>Onderzoek 3</li>
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 4')} style={{ cursor: 'pointer' }}>Onderzoek 4</li>
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 5')} style={{ cursor: 'pointer' }}>Onderzoek 5</li>
+                  <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 6')} style={{ cursor: 'pointer' }}>Onderzoek 6</li>
                   {/* Add more list items as needed */}
               </ul>
           </div>

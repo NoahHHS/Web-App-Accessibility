@@ -24,7 +24,7 @@
   width: 100%;
 }
 
-.dark-list-container {
+.GebruikerList-container, .OnderzoekList-container {
   background-color: rgb(5, 3, 70);
   border: 2px solid #21CEA1;
   border-radius: 5px;
@@ -33,13 +33,13 @@
   overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.dark-list {
+.OnderzoekList, .GebruikerList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.dark-list-item {
+.GebruikerList-item, .OnderzoekList-item{
   color: #fff; /* Set the text color to white */
   padding: 10px;
   border-bottom: 1px solid #555; /* Add a border between list items */
