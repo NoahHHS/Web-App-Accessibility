@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {Zoekbalk} from '../reusables/reusables.jsx'
-import '../../stylesheets/Medewerker.css'
-import '../../stylesheets/reusables.css'
+
 export class Medewerker extends Component {
  
   constructor(props) {
@@ -54,7 +52,7 @@ handleOnderzoekItemClick = (item) => {
 render() {
   return (
     <div className='mid-section'>
-      <h1 class="pagetitle">Medewerker Pagina</h1>
+      <h1 class="pagetitle">Admin Pagina</h1>
       <h3 class="itemtitle">Gebruikers</h3>
       <div className='ZoekbalkContainer'>
         <Zoekbalk placeholder="Zoek gebruikers"/>
