@@ -39,7 +39,7 @@
   margin: 0;
 }
 
-.GebruikerList-item, .OnderzoekList-item, .BedrijfAccountList-item{
+.GebruikerList-item, .OnderzoekList-item{
   color: #fff; /* Set the text color to white */
   padding: 10px;
   border-bottom: 1px solid #555; /* Add a border between list items */

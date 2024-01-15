@@ -1,6 +1,5 @@
 .Accepteren-Afwijzen-Container{
-    display: flex;
-    padding-top: 10px;
+    padding-inline-start: 10px;
 }
 
 .Accepteren {
@@ -11,7 +10,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 .Afwijzen {

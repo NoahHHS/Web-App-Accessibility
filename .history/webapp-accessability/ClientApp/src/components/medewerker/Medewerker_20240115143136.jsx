@@ -9,7 +9,7 @@ export class Medewerker extends Component {
     this.state = {
       isGebruikerModalOpen: false,
       isOnderzoekModalOpen: false,
-      isBedrijfAccountModalOpen: false,
+      isBedrijfAccountkModalOpen: false,
       inputData: '',
     };
 }
@@ -19,7 +19,7 @@ openGebruikerModal = () => {
 };
 
 openBedrijfAccountModal = () => {
-  this.setState({ isBedrijfAccountModalOpen: true});
+  this.setState({ isBedrijfAccountkModalOpen: true});
 };
 
 openOnderzoekModal = () => {
@@ -91,11 +91,6 @@ render() {
       <div className='BedrijfAccountList-container'>
         <ul className='BedrijfAccountList'>
           <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 1')} style={{ cursor: 'pointer' }}>BedrijfAccount 1</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 2')} style={{ cursor: 'pointer' }}>BedrijfAccount 2</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 3')} style={{ cursor: 'pointer' }}>BedrijfAccount 3</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 4')} style={{ cursor: 'pointer' }}>BedrijfAccount 4</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 5')} style={{ cursor: 'pointer' }}>BedrijfAccount 5</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 6')} style={{ cursor: 'pointer' }}>BedrijfAccount 6</li>
         </ul>
       </div>
 
@@ -142,21 +137,8 @@ render() {
 )} 
 
 {/* BedrijfAccount Modal/pop-up */}
-{this.state.isBedrijfAccountModalOpen &&(
-<div>
-  <div className='modal-overlay'>
-    <div className='modal-container'>
-      <span className='sluiten' onClick={this.closeModal}>&times;</span>
-      <h2 className='Otitel'>BedrijfAccount data</h2>
-      <p className="Otext">Details voor: {this.state.selectedItem}</p>
-      <div className="Accepteren-Afwijzen-Container">
-          <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
-          <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
-      </div>
-    </div>
-  </div>
-</div>
-)}
+{this.state.isBedrijfAccountkModalOpen}
+
 
       {/* Gebruiker Modal/Pop-up */}
       {this.state.isGebruikerModalOpen && (

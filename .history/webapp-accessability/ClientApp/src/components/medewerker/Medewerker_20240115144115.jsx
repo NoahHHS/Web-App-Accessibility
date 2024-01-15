@@ -19,7 +19,7 @@ openGebruikerModal = () => {
 };
 
 openBedrijfAccountModal = () => {
-  this.setState({ isBedrijfAccountModalOpen: true});
+  this.setState({ isBedrijfAccountkModalOpen: true});
 };
 
 openOnderzoekModal = () => {
@@ -142,7 +142,7 @@ render() {
 )} 
 
 {/* BedrijfAccount Modal/pop-up */}
-{this.state.isBedrijfAccountModalOpen &&(
+{this.state.isBedrijfAccountModalOpen}
 <div>
   <div className='modal-overlay'>
     <div className='modal-container'>
@@ -156,7 +156,6 @@ render() {
     </div>
   </div>
 </div>
-)}
 
       {/* Gebruiker Modal/Pop-up */}
       {this.state.isGebruikerModalOpen && (

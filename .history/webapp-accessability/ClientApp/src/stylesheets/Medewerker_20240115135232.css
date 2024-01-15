@@ -1,8 +1,3 @@
-.Accepteren-Afwijzen-Container{
-    display: flex;
-    padding-top: 10px;
-}
-
 .Accepteren {
     background-color: #21CEA1;
     color: #fff;
@@ -11,7 +6,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-right: 10px;
 }
 
 .Afwijzen {

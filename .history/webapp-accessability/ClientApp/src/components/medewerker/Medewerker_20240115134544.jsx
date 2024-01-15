@@ -9,17 +9,12 @@ export class Medewerker extends Component {
     this.state = {
       isGebruikerModalOpen: false,
       isOnderzoekModalOpen: false,
-      isBedrijfAccountModalOpen: false,
       inputData: '',
     };
 }
 
 openGebruikerModal = () => {
   this.setState({ isGebruikerModalOpen: true });
-};
-
-openBedrijfAccountModal = () => {
-  this.setState({ isBedrijfAccountModalOpen: true});
 };
 
 openOnderzoekModal = () => {
@@ -30,7 +25,6 @@ closeModal = () => {
   this.setState({
     isGebruikerModalOpen: false,
     isOnderzoekModalOpen: false,
-    isBedrijfAccountkModalOpen: false,
     selectedItem: '',
   });
 };
@@ -52,11 +46,6 @@ handleGebruikerItemClick = (item) => {
   this.openGebruikerModal();
 };
 
-handleBedrijfAccountItemClick = (item) => {
-  this.setState({ selectedItem: item});
-  this.openBedrijfAccountModal();
-}
-
 handleOnderzoekItemClick = (item) => {
   this.setState({ selectedItem: item });
   this.openOnderzoekModal();
@@ -67,9 +56,9 @@ render() {
     <div className='mid-section'>
       <h1 class="pagetitle">Medewerker Pagina</h1>
 
-      <h2 class="itemtitle">Aangevraagde onderzoeken</h2>
+      <h3 class="itemtitle">Aangevraagde onderzoeken</h3>
       <div className='ZoekbalkContainer'>
-        <Zoekbalk placeholder="Zoek door aangevraagde onderzoeken"/>
+        <Zoekbalk placeholder="Zoek door alle Aaangevraagde onderzoeken"/>
       </div>
           {/* Unordered List Section */}
         <div className="OnderzoekList-container">
@@ -80,26 +69,11 @@ render() {
                 <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 4')} style={{ cursor: 'pointer' }}>Onderzoek 4</li>
                 <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 5')} style={{ cursor: 'pointer' }}>Onderzoek 5</li>
                 <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 6')} style={{ cursor: 'pointer' }}>Onderzoek 6</li>
+                {/* Add more list items as needed */}
             </ul>
         </div>
 
-      <h2 class='itemtitle'>Aaangevraagde bedrijf accounts</h2>
-      <div className='ZoekbalkContainer'>
-        <Zoekbalk placeholder='Zoek door aangevraagde bedrijf accounts'/>
-      </div>
-      {/* Unordered List  BedrijfAccount */}
-      <div className='BedrijfAccountList-container'>
-        <ul className='BedrijfAccountList'>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 1')} style={{ cursor: 'pointer' }}>BedrijfAccount 1</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 2')} style={{ cursor: 'pointer' }}>BedrijfAccount 2</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 3')} style={{ cursor: 'pointer' }}>BedrijfAccount 3</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 4')} style={{ cursor: 'pointer' }}>BedrijfAccount 4</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 5')} style={{ cursor: 'pointer' }}>BedrijfAccount 5</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 6')} style={{ cursor: 'pointer' }}>BedrijfAccount 6</li>
-        </ul>
-      </div>
-
-      <h2 class="itemtitle">Gebruikers</h2>
+      <h3 class="itemtitle">Gebruikers</h3>
       <div className='ZoekbalkContainer'>
         <Zoekbalk placeholder="Zoek gebruikers"/>
       </div>
@@ -116,7 +90,7 @@ render() {
             </ul>
         </div>
 
-              {/* Onderzoek Modal/Pop-up */}
+              {/* Modal/Pop-up */}
               {this.state.isOnderzoekModalOpen && (
 <div>
   <div className="modal-overlay"></div>
@@ -133,7 +107,7 @@ render() {
         <input type="date" id="tijd" className="Oinput" placeholder='01/01/2025'/>
         <p className="Otext">Link naar onderzoek.</p>
         <input type="text" id="link" className="Oinput" placeholder='link' />
-        <div className="Accepteren-Afwijzen-Container">
+        <div className="add-button-container">
           <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
           <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
         </div>
@@ -141,22 +115,6 @@ render() {
 </div>
 )} 
 
-{/* BedrijfAccount Modal/pop-up */}
-{this.state.isBedrijfAccountModalOpen &&(
-<div>
-  <div className='modal-overlay'>
-    <div className='modal-container'>
-      <span className='sluiten' onClick={this.closeModal}>&times;</span>
-      <h2 className='Otitel'>BedrijfAccount data</h2>
-      <p className="Otext">Details voor: {this.state.selectedItem}</p>
-      <div className="Accepteren-Afwijzen-Container">
-          <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
-          <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
-      </div>
-    </div>
-  </div>
-</div>
-)}
 
       {/* Gebruiker Modal/Pop-up */}
       {this.state.isGebruikerModalOpen && (

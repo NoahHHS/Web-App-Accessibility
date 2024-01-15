@@ -9,7 +9,7 @@ export class Medewerker extends Component {
     this.state = {
       isGebruikerModalOpen: false,
       isOnderzoekModalOpen: false,
-      isBedrijfAccountModalOpen: false,
+      isBedrijfAccountkModalOpen: false,
       inputData: '',
     };
 }
@@ -19,7 +19,7 @@ openGebruikerModal = () => {
 };
 
 openBedrijfAccountModal = () => {
-  this.setState({ isBedrijfAccountModalOpen: true});
+  this.setState({ isBedrijfAccountkModalOpen: true});
 };
 
 openOnderzoekModal = () => {
@@ -142,21 +142,8 @@ render() {
 )} 
 
 {/* BedrijfAccount Modal/pop-up */}
-{this.state.isBedrijfAccountModalOpen &&(
-<div>
-  <div className='modal-overlay'>
-    <div className='modal-container'>
-      <span className='sluiten' onClick={this.closeModal}>&times;</span>
-      <h2 className='Otitel'>BedrijfAccount data</h2>
-      <p className="Otext">Details voor: {this.state.selectedItem}</p>
-      <div className="Accepteren-Afwijzen-Container">
-          <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
-          <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
-      </div>
-    </div>
-  </div>
-</div>
-)}
+{this.state.isBedrijfAccountModalOpen}
+
 
       {/* Gebruiker Modal/Pop-up */}
       {this.state.isGebruikerModalOpen && (
