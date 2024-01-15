@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FontSizeAdjuster from './fontSizeAdjuster'
 import '../stylesheets/privacystatement.css'
 
 export class Privacystatement extends Component {
@@ -9,6 +10,7 @@ export class Privacystatement extends Component {
       <div>
         <div className='Privacy-Content'>
             <h1 class="pagetitle">Privacystatement</h1>
+            <FontSizeAdjuster/>
             <section>
                 <h2 class="subtitle">Persoonsgegevens die wij verwerken</h2>
                 <p class="beschrijving">Accessibility verwerkt uw persoonsgegevens doordat u gebruik maakt van onze diensten en/of omdat u deze zelf aan ons verstrekt.< br/>Hieronder vindt u een overzicht van de persoonsgegevens die wij verwerken: </p>

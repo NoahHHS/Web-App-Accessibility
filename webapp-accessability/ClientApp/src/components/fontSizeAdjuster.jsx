@@ -24,7 +24,7 @@ const FontSizeAdjuster = () => {
 
     return(
         <div className="FontSizeButton-Container">
-            <p className="FontSizeButton-text">Increase or Decrease the font size</p>
+            <p className="FontSizeButton-text">Pas tekst grootte aan</p>
             <button className="FontSizeButton" onClick={increaseFontSize}>+</button>
             <button className="FontSizeButton" onClick={decreaseFontSize}>-</button>
         </div>
