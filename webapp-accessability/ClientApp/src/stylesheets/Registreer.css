@@ -4,62 +4,42 @@
     align-items: center;
 }
 
-/* ----------------------------------------------------- */
-.registreer-form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.registreer-pagina-container h2 {
+    font-size: 25px;
+    margin-bottom: 30px;
 }
 
-.registreer-invul-gegevens {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.registreer-pagina-container label {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.email-registreer-input {
-    margin: 0px 0px 0px 10px;
-    padding: 0px 150px 0px 0px;
-    font-size: 14px;
+.registreer-pagina-container .inline-p-account-type {
+    display: inline-block;
 }
 
-.wachtwoord-registreer-input {
-    margin: 0px 0px 0px 10px;
-    padding: 0px 110px 0px 0px;
-    font-size: 14px;
+.registreer-pagina-container .inline-span-voorwaarden {
+    font-size: 11px;
 }
 
-.wachtwoord-herhaal-registreer-input {
-    margin: 0px 0px 0px 10px;
-    padding: 0px 50px 0px 0px;
-    font-size: 14px;
-}
-
-.input-gegevens-registreer {
-    height: 40px;
-    width: 190px;
-    border-radius: 15px;
-    margin-bottom: 10px;
+.registreer-pagina-container .input-form-field, 
+.registreer-pagina-container form {
+    margin-bottom: 15px;
+    width: 220px;
 
 }
 
-.checkbox-label {
-    display: flex;
-    margin-top: 16px;
-    /* align-items: center; */
-
-    padding: 0px 0px 0px 0px;
+.registreer-pagina-container .input-form-field {
+    height: 35px;
+    border-radius: 10px;
 }
 
-.checkbox-registreer {
-    margin: 0px 0px 18px 0px;
+.registreer-pagina-container button {
+    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
-.checkbox-text {
-    font-size: 10px;
-}
-
-#registreer-button {
+.registreer-pagina-container .registreer-button {
     background-color: rgb(33, 206, 161);
     color: black;
     height: 35px;
@@ -67,19 +47,17 @@
     border: none;
     border-radius: 12px;
     font-weight: bold;
-    margin: 16px 0px 24px 0px;
 }
 
-#registreer-button:hover {
+.registreer-pagina-container .registreer-button:hover {
     background-color: #1dac86;
     color: white;
     box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #1dac86;
     transition: 0.5s;
   }
 
-
-.wachtwoord-sterkte-text {
-    font-size: 12px;
+.registreer-pagina-container .center-register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
-
