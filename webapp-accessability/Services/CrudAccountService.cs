@@ -1,5 +1,6 @@
 using webapp_accessability.Data;
 using webapp_accessability.Models;
+using System.Linq;
 
 public class CrudAccountService : ICrudService<ApplicationUser>
 {
@@ -21,13 +22,18 @@ public class CrudAccountService : ICrudService<ApplicationUser>
         throw new NotImplementedException();
     }
 
-    public void Update(ApplicationUser obj)
+    public void Update(string id, ApplicationUser obj)
     {
-        throw new NotImplementedException();
+        
     }
 
     public void Delete(string Id)
     {
-        
+        var data = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
+        if(data != null){
+            context.ApplicationUsers.Remove(data);
+            context.SaveChanges();
+            Console.WriteLine("User Deleted. Name: " + data.Naam);
+        }
     }
 }
