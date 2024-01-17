@@ -1,39 +1,56 @@
 using webapp_accessability.Data;
 using webapp_accessability.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 public class CrudAccountService : ICrudService<ApplicationUser>
 {
+    //------------------------- Variables -------------------------
     private ApplicationDbContext context;
 
+    //------------------------- Constructor -------------------------
     public CrudAccountService(ApplicationDbContext _context){
         context = _context;
     }
 
-    public void Create(ApplicationUser newUser)
+    //------------------------- Methods -------------------------
+    // CRUD methods for the ApplicationUser models in the DbContext object named ApplicationDbContext
+    // This service contains the Create, Read, Update & Delete methods
+
+    public void Create(ApplicationUser newUser) // Creates a new user by adding a given ApplicationUser obj to the DbContext
     {
         context.ApplicationUsers.Add(newUser);
         context.SaveChanges();
         Console.WriteLine("User created. Name: " + newUser.Naam);
     }
 
-    public void Read(string Id)
+    public ApplicationUser Read(string Id) // Returns the first ApplicationUser obj that matches the Id in DbContext.ApplicationUsers
     {
-        throw new NotImplementedException();
+        var user = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
+        if (user != null){
+            return user;
+        }
+        else{
+            return null;
+        }
     }
 
-    public void Update(string id, ApplicationUser obj)
+    public void Update(string Id, ApplicationUser updatedUser) // Updates a user in the DbContext that matches with the Id with the given updated user
     {
-        
+        var user = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
+        if (user != null){
+            context.ApplicationUsers.Update(user);
+        }
     }
 
-    public void Delete(string Id)
+    public void Delete(string Id) // Deletes the user from the DbContext that matches the Id
     {
-        var data = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
-        if(data != null){
-            context.ApplicationUsers.Remove(data);
+        var user = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
+        if(user != null){
+            context.ApplicationUsers.Remove(user);
             context.SaveChanges();
-            Console.WriteLine("User Deleted. Name: " + data.Naam);
+            Console.WriteLine("User Deleted. Name: " + user.Naam);
         }
     }
 }
