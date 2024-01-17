@@ -1,13 +1,22 @@
+using webapp_accessability.Data;
 using webapp_accessability.Models;
 
 public class CrudAccountService : ICrudService<ApplicationUser>
 {
-    public void Aanmaken(ApplicationUser obj)
-    {
-        throw new NotImplementedException();
+    private ApplicationDbContext context;
+
+    public CrudAccountService(ApplicationDbContext _context){
+        context = _context;
     }
 
-    public void Lezen(string Id)
+    public void Create(ApplicationUser newUser)
+    {
+        context.ApplicationUsers.Add(newUser);
+        context.SaveChanges();
+        Console.WriteLine("User created. Name: " + newUser.Naam);
+    }
+
+    public void Read(string Id)
     {
         throw new NotImplementedException();
     }
@@ -17,8 +26,8 @@ public class CrudAccountService : ICrudService<ApplicationUser>
         throw new NotImplementedException();
     }
 
-    public void Verwijderen(string Id)
+    public void Delete(string Id)
     {
-        throw new NotImplementedException();
+        
     }
 }
