@@ -2,7 +2,7 @@ using Microsoft.VisualBasic;
 
 interface ICrudService<T>{
     void Create(T obj);
-    void Read(String Id);
-    void Update(string id, T obj);
+    T Read(String Id);
+    void Update(string Id, T obj);
     void Delete(String Id);
 }
