@@ -61,3 +61,24 @@
     flex-direction: column;
     align-items: center;
 }
+
+/* ----------------------------------------------------- */
+.google-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 16px 0px;
+}
+
+#google-login-button {
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+}
+
+#google-login-button:hover { 
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px white;
+    transition: 0.5s;
+  }

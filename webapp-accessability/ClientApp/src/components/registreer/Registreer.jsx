@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { useState } from "react";
 import zxcvbn from "zxcvbn"; // gemaakt door dropbox
 
-import '../../stylesheets/Registreer.css'
+import '../../stylesheets/RegistreerEnLogin.css'
 
 
 export class Registreer extends Component {
@@ -31,35 +31,44 @@ const NormaalGebruikerForm = ({ onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-                <label>Email:</label>
+                <label htmlFor="email">Email:</label>
                 <input 
                 className="input-form-field"
                 placeholder="Email"
                 type="email" 
                 value={email} 
-                onChange={(e) => setEmail(e.target.value)} />
+                onChange={(e) => setEmail(e.target.value)} 
+                required
+                />
                 
-                <label>Wachtwoord:</label>
+                <label htmlFor="wachtwoord">Wachtwoord:</label>
                 <input 
                 className="input-form-field"
                 placeholder="Wachtwoord"
                 type="password" 
                 value={wachtwoord} 
-                onChange={(e) => setWachtwoord(e.target.value)} />  
+                onChange={(e) => setWachtwoord(e.target.value)} 
+                required
+                />  
                 <WachtwoordSterkteMeterScript wachtwoord={wachtwoord} />
 
-                <label>Herhaal wachtwoord:</label>
+                <label htmlFor="herhaalWachtwoord">Herhaal wachtwoord:</label>
                 <input 
                 className="input-form-field"
                 placeholder="Herhaal wachtwoord"
                 type="password" 
                 value={herhaalWachtwoord} 
-                onChange={(e) => setHerhaalWachtwoord(e.target.value)} />
+                onChange={(e) => setHerhaalWachtwoord(e.target.value)} 
+                required
+                />
 
 
             <label>
                 <input 
-                type="checkbox" />
+                type="checkbox" 
+                id="voorwaardenCheckbox"
+                required
+                />
                 <span className="inline-span-voorwaarden">Ik ga akkoort met de voorwaarden van 
                     <a href="/privacystatement" target="_blank"><span> Accessibility</span></a>
                 </ span>
@@ -98,47 +107,57 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
     
     return (
     <form onSubmit={handleSubmit}>
-        <label>Email:</label>
+        <label htmlFor="email">Email:</label>
         <input 
         className="input-form-field"
         placeholder="Email"
         type="email" 
         value={email} 
-        onChange={(e) => setEmail(e.target.value)} />
+        onChange={(e) => setEmail(e.target.value)} 
+        required
+        />
 
-        <label>Bedrijfsnaam:</label>
+        <label htmlFor="bedrijfsnaam">Bedrijfsnaam:</label>
         <input 
         className="input-form-field"
         placeholder="Bedrijfsnaam"
         type="text" 
         value={bedrijfsnaam} 
-        onChange={(e) => setBedrijfsnaam(e.target.value)} />
+        onChange={(e) => setBedrijfsnaam(e.target.value)} 
+        required
+        />
 
-        <label>Postcode:</label>
+        <label htmlFor="postcode">Postcode:</label>
         <input 
         className="input-form-field"
         placeholder="Postcode"
         type="text" 
         value={postcode} 
-        onChange={(e) => setPostCode(e.target.value)} />
+        onChange={(e) => setPostCode(e.target.value)} 
+        required
+        />
 
-        <label>Straatnaam:</label>
+        <label htmlFor="straatnaam">Straatnaam:</label>
         <input 
         className="input-form-field"
         placeholder="Straatnaam"
         type="text" 
         value={straatnaam} 
-        onChange={(e) => setStraatnaam(e.target.value)} />
+        onChange={(e) => setStraatnaam(e.target.value)} 
+        required
+        />
 
-        <label>Huisnummer:</label>
+        <label htmlFor="huisnummer">Huisnummer:</label>
         <input 
         className="input-form-field"
         placeholder="Huisnummer"
         type="text" 
         value={huisnummer} 
-        onChange={(e) => setHuisnummer(e.target.value)} />
+        onChange={(e) => setHuisnummer(e.target.value)} 
+        required
+        />
 
-        <label>Toevoeging:</label>
+        <label htmlFor="toevoeging">Toevoeging:</label>
         <input 
         className="input-form-field"
         placeholder="Toevoeging huisnummer"
@@ -146,26 +165,32 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
         value={toevoeging} 
         onChange={(e) => setToevoeging(e.target.value)} />
 
-        <label>Wachtwoord:</label>
+        <label htmlFor="wachtwoord">Wachtwoord:</label>
         <input 
         className="input-form-field"
         placeholder="Wachtwoord"
         type="password" 
         value={wachtwoord} 
-        onChange={(e) => setWachtwoord(e.target.value)} />  
+        onChange={(e) => setWachtwoord(e.target.value)} 
+        required
+        />  
         <WachtwoordSterkteMeterScript wachtwoord={wachtwoord} />
 
-        <label>Herhaal wachtwoord:</label>
+        <label htmlFor="herhaalWachtwoord">Herhaal wachtwoord:</label>
         <input 
         className="input-form-field"
         placeholder="Herhaal wachtwoord"
         type="password" 
         value={herhaalWachtwoord} 
-        onChange={(e) => setHerhaalWachtwoord(e.target.value)} />
+        onChange={(e) => setHerhaalWachtwoord(e.target.value)} 
+        required
+        />
 
         <label>
             <input 
-            type="checkbox" />
+            type="checkbox" 
+            id="voorwaardenCheckbox"
+            required/>
             <span className="inline-span-voorwaarden">Ik ga akkoort met de voorwaarden van 
                 <a href="/privacystatement" target="_blank"><span> Accessibility</span></a>
             </ span>
@@ -195,7 +220,7 @@ const RegistreerForm = () => {
 
     const handleSubmit = (data) => {
         // Handle form submission here, you can send the data to the server or perform further actions
-        console.log('Registreer opgeslagen met data:', data);
+        // console.log('Registreer opgeslagen met data:', data); komt in console in browser
     };
 
     return (
@@ -222,7 +247,7 @@ const RegistreerForm = () => {
 const WachtwoordSterkteMeterScript = ({wachtwoord}) => {
     const testResult = zxcvbn(wachtwoord);
     const num = testResult.score * 100/4;
-    console.log(num);
+    // console.log(num);
 
     const createPassLabel = () => {
         switch(testResult.score) {

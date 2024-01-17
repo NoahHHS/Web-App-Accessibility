@@ -1,49 +1,63 @@
 // import React, { useState } from 'react';
 import React, { Component } from 'react';
-import '../../stylesheets/Login.css'
+import { useState } from "react";
+import '../../stylesheets/RegistreerEnLogin.css'
 
 export const Login = () => {
   return (
-    <div className='login-container'>
-        <LoginTitel />
-        <LoginForm />
+    <div className="registreer-pagina-container">
+        <h1>Login</h1>
+        <GebruikerInlogForm />
         <LoginOpties />
         <GoogleLogin />
     </div>
   );
 };
 
-const LoginTitel = () => {
-    return (
-        <div className='login-text-container'>
-            <h1 className='login-titel'>Login</h1>
-        </div>
-    ); 
-}
+const GebruikerInlogForm = ({ onSubmit }) => {
+    const [email, setEmail] = useState('');
+    const [wachtwoord, setWachtwoord] = useState('');
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Add validation logic here before submitting
+        onSubmit({ email, wachtwoord});
+      };
 
-const LoginForm = () => {
     return (
-        <div className='login-form-container'>
-            <label htmlFor="email" className='input-info-email'>Email</label>
-            <input
-            className='input-gegevens-login'
-            type="email"
-            placeholder="E-mail"
-            name="email"
+        <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email:</label>
+            <input 
+            className="input-form-field"
+            placeholder="Email"
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
             required
             />
-
-            <label htmlFor="wachtwoord" className='input-info-wachtwoord'>Wachtwoord</label>
-            <input
-            className='input-gegevens-login'
-            type="password"
+            
+            <label htmlFor="wachtwoord">Wachtwoord:</label>
+            <input 
+            className="input-form-field"
             placeholder="Wachtwoord"
-            name="wachtwoord"
+            type="password" 
+            value={wachtwoord} 
+            onChange={(e) => setWachtwoord(e.target.value)} 
             required
-            />
-            <label className='checkbox-label'><input type="checkbox" name="remember" /><span className='checkbox-text'>Onthoud wachtwoord</ span></label>
-            <button type="submit" id='login-button' >Login</button>
-        </div>
+            />  
+
+            <label>
+                <input 
+                type="checkbox" 
+                id="voorwaardenCheckbox"
+                required
+                />
+                <span>Onthoud wachtwoord </ span>
+            </label>
+            <div className="center-register-button">
+                <button className="registreer-button" type="submit">Login</button>
+            </div>
+        </form>
     );
 }
 
