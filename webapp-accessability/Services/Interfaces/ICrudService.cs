@@ -1,8 +1,8 @@
 using Microsoft.VisualBasic;
 
 interface ICrudService<T>{
-    void Aanmaken(T obj);
-    void Lezen(String Id);
+    void Create(T obj);
+    void Read(String Id);
     void Update(T obj);
-    void Verwijderen(String Id);
+    void Delete(String Id);
 }
