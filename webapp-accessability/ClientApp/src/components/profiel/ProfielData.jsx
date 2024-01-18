@@ -9,35 +9,41 @@ export class ProfielData extends Component {
       <div>
         <h1 className='pagetitle'>Mijn Gegevens</h1>
         <section className='profiel-section'>
-          <h2 className='subtitle'>Persoonlijke gegevens</h2>
-          <DataItem value="Naam" aria-label='Naam invoerveld, voer hier je naam in'/>
-          <DataItem value="Achternaam" aria-label='Achternaam invoerveld, voer hier je achternaam in'/>
-          <DataItem value="Email" aria-label='Email invoerveld, voer hier je email in'/>
+          <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
+          <ProfielGegeven typeGegeven="Naam"/>
+          <ProfielGegeven typeGegeven="Achternaam"/>
+          <ProfielGegeven typeGegeven="Email"/>
         </section>
-        <SaveButton/>
         <section className='profiel-section'>
-        <h2 className='subtitle'>Adres</h2>
-          <DataItem value="Straatnaam" aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
-          <DataItem value="Huisnummer" aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
-          <DataItem value="Postcode" aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
-          <DataItem value="Stad" aria-label='Stad invoerveld, voer hier in, in welke stad je woont'/>
+        <h2 className='subtitle profielh2'>Adres</h2>
+          <ProfielGegeven typeGegeven="Straatnaam"/>
+          <ProfielGegeven typeGegeven="Huisnummer"/>
+          <ProfielGegeven typeGegeven="Postcode"/>
+          <ProfielGegeven typeGegeven="Stad"/>
         </section>
-        <SaveButton/>
         <section className='profiel-section'>
-        <h2 className='subtitle'>Medische gegevens</h2>
-          <DataItem value="Ziekte" aria-label='Ziekte invoerveld, voer hier je Ziektes in, onderschijd de ziektes met een komma en een spatie'/>
-          <DataItem value="Hulpmiddelen" aria-label='Hulpmiddelen invoerveld, voer de hulpmiddelen in die je gebruikt, onderschijd de middelen met een komma en spatie'/>
+        <h2 className='subtitle profielh2'>Medische gegevens</h2>
+          <ProfielGegeven typeGegeven="Ziekte"/>
+          <ProfielGegeven typeGegeven="Hulpmiddelen" />
         </section>
-        <SaveButton/>
+        <ProfileButton/>
       </div>
     );
   }
 }
 
+const ProfileButton = () => {
+    return(
+      <div className='ProfileButton-Content'>
+        <a href="/profiel/edit"><button className='ProfileButton' title='Bewerk je gegevens op een andere pagina'><strong>Bewerk Gegevens</strong></button></a>
+      </div>
+    );
+}
+
 const ProfielGegeven = (prop) => {
     return(
-        <div>
-            <p>{prop.typeGegeven}: {prop.value}</p>
+        <div className='Profiel-DataItem'>
+            <p className='Profiel-Data'>{prop.typeGegeven}: {prop.value}</p>
         </div>
     );
 }

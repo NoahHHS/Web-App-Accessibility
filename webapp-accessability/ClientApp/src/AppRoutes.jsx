@@ -6,7 +6,8 @@ import { Home } from "./components/Home";
 import { Privacystatement } from "./components/privacystatement"
 import { OverOns } from './components/overons/OverOns';
 import { Onderzoek } from './components/onderzoek/Onderzoek';
-import { Profiel } from './components/profiel/Profiel';
+import { ProfielEdit } from './components/profiel/ProfielEdit';
+import { ProfielData } from './components/profiel/ProfielData';
 // import { Login } from './components/api-authorization/Login';
 import { Login } from './components/login/Login';
 import { Registreer } from './components/registreer/Registreer';
@@ -41,7 +42,11 @@ const AppRoutes = [
   },
   {
     path: '/profiel',
-    element: <Profiel/>
+    element: <ProfielData/>
+  },
+  {
+    path: '/profiel/edit',
+    element: <ProfielEdit/>
   },
   {
     path: '/login',
