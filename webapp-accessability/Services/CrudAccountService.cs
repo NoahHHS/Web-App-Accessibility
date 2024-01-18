@@ -40,7 +40,7 @@ public class CrudAccountService : ICrudService<ApplicationUser>
     {
         var user = context.ApplicationUsers.FirstOrDefault(User => User.Id == Id);
         if (user != null){
-            context.ApplicationUsers.Update(user);
+            context.ApplicationUsers.Update(updatedUser);
         }
     }
 
