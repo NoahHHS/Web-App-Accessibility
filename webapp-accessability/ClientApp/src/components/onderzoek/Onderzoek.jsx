@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { useState } from 'react';
 import '../../stylesheets/Onderzoek.css'
 
@@ -49,6 +49,10 @@ function OnderzoekDetails() {
   setModal(!modal);
   console.log("called");
 }
+
+useEffect(() => {
+  fetch("/api/onderzoek").then(Response => Response.json()).then(() => {console.log(Response);});
+});
 
 if(modal) {
   document.body.classList.add('active-modal')
