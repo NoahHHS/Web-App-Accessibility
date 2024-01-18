@@ -160,7 +160,7 @@ render() {
       <span className='sluiten' onClick={this.closeModal}>&times;</span>
       <h2 className='Otitel'>BedrijfAccount data</h2>
       <p className="BedrijfAccountText">{this.state.selectedItem} vraagt een bedrijfs account aan.</p>
-      <h3>Persoonsgegevens</h3>
+      <h3 className='BedrijfAccountSubtitel'>Persoonsgegevens</h3>
       <p className="BedrijfAccountText">Naam: {this.state.selectedItem}</p>
       <p className="BedrijfAccountText">Bedrijf: {this.state.selectedItem}</p>
       <p className="BedrijfAccountText">Telefoon: {this.state.selectedItem}</p>
@@ -183,8 +183,8 @@ render() {
             <h2 className="Otitel">Gebruikersdata</h2>
             <p className="Otext">Details voor: {this.state.selectedItem}</p>
             {/* Add more details as needed */}
-            <div className="add-button-container">
-              <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
+            <div className="Opslaanknop-container">
+              <button className="Opslaanknop" onClick={this.handleAddButtonClick}>Opslaan</button>
             </div>
           </div>
         </div>

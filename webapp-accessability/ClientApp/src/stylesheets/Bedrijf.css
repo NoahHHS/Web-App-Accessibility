@@ -47,7 +47,14 @@
 
 /* Add Button Styles */
 .add-button-container {
-padding-top: 20px;
+  padding-top: 20px;
+}
+
+.ToevoegKnop-container {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-button, .ToevoegKnop {
@@ -100,15 +107,29 @@ padding-top: 20px;
 
 .Otitel {
   color: #21CEA1;
+  align-self: center;
 }
 
 .Otext {
   padding-top: 10px;
+  align-self: center;
 }
 
 .Oinput{
   border-radius: 5px;
+  align-self: center;
 }
+.Otextarea{
+  border-radius: 5px;
+  align-self: center;
+  border-radius: 5px;
+  align-self: center;
+  width: 100%;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Set a minimum height */
+  box-sizing: border-box;
+}
+
 
 .mid-section {
   flex: 1;

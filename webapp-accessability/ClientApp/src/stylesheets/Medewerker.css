@@ -1,6 +1,8 @@
 .Accepteren-Afwijzen-Container{
+    padding-top: 20px;
     display: flex;
-    padding-top: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .Accepteren {
@@ -27,3 +29,16 @@
 .modal-container .BedrijfAccountText{
     align-items: left;
 }
+
+.BedrijfAccountSubtitel{
+    align-self: center;
+    padding-bottom: 10px;
+}
+
+.Opslaanknop-container {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
