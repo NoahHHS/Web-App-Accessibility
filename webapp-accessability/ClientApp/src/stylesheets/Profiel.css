@@ -1,7 +1,9 @@
+/* ------------------- Global Profiel ------------------- */
 .profiel-section {
     text-align: center;
 }
 
+/* ------------------- Bewerk Gegevens ------------------- */
 .DataItem{
     display: block;
     margin: auto;
@@ -41,3 +43,5 @@
 .SaveButton:active {
     background-color: #21CEA1;
 }
+
+/* ------------------- Mijn Gegevens ------------------- */
