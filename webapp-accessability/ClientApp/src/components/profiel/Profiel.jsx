@@ -7,7 +7,7 @@ export class Profiel extends Component {
   render() {
     return (
       <div>
-        <h1 className='pagetitle'>Mijn Gegevens</h1>
+        <h1 className='pagetitle'>Bewerk Gegevens</h1>
         <section className='profiel-section'>
           <h2 className='subtitle'>Persoonlijke gegevens</h2>
           <DataItem value="Naam" aria-label='Naam invoerveld, voer hier je naam in'/>
@@ -47,7 +47,7 @@ const DataItem = (prop) => {
   return(
     <div className='DataItem'>
       <p className='DataItem-Name'>{prop.value}</p>
-      <input id='info-name' className="DataItem-Field" type="text"/>
+      <input id='info-name' className="DataItem-Field" type="text" placeholder={prop.value}/>
     </div>
   );
 }
