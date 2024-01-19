@@ -33,6 +33,10 @@ public class CrudOnderzoekService : ICrudService<Onderzoek>
         }
     }
 
+    public IEnumerable<Onderzoek> ReadAll()
+    {
+        return context.Onderzoeken.ToList();    
+    }
     public void Update(string Id, Onderzoek UpdatedOnderzoek)
     {
         var Onderzoek = context.Onderzoeken.FirstOrDefault(O => O.Id.ToString() == Id);
