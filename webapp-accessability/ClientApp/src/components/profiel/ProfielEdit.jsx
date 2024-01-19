@@ -1,8 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import '../../stylesheets/Profiel.css'
 
 export class ProfielEdit extends Component {
     static displayName = ProfielEdit.name;
+
+    constructor(props) {
+      super(props);
+      this.state = {
+        userData: {
+          Naam: '',
+          Email: '',
+          Beschikbaarheid: '',
+          Straatnaam: '',
+          Huisnummer: '',
+          Postcode: '',
+          Stad: '',
+          Ziekte: '',
+          Hulpmiddelen: ''
+        },
+      };
+    }
 
   render() {
     return (
@@ -14,7 +31,6 @@ export class ProfielEdit extends Component {
           <DataItem value="Email" aria-label='Email invoerveld, voer hier je email in'/>
           <DataItem value="Beschikbaarheid" aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
         </section>
-        <SaveButton/>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Adres</h2>
           <DataItem value="Straatnaam" aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
@@ -22,7 +38,6 @@ export class ProfielEdit extends Component {
           <DataItem value="Postcode" aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
           <DataItem value="Stad" aria-label='Stad invoerveld, voer hier in, in welke stad je woont'/>
         </section>
-        <SaveButton/>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Medische gegevens</h2>
           <DataItem value="Ziekte" aria-label='Ziekte invoerveld, voer hier je Ziektes in, onderschijd de ziektes met een komma en een spatie'/>
