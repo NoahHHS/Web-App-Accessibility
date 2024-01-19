@@ -1,13 +1,9 @@
-.itemtitle{
-    padding-top: 20px;
-    color: #21CEA1;
+.Accepteren-Afwijzen-Container{
+    display: flex;
+    padding-top: 10px;
 }
 
-.list-gebruiker{
-    cursor: pointer;
-}
-
-.Opslaanknop{
+.Accepteren {
     background-color: #21CEA1;
     color: #fff;
     padding: 10px 20px;
@@ -16,21 +12,18 @@
     border-radius: 5px;
     cursor: pointer;
     margin-right: 10px;
-  }
+}
 
-  .Verwijderknop{
-    background-color: #df1212;
+.Afwijzen {
+    background-color: red;
     color: #fff;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-.Opslaanknop-Verwijderknop-container{
-    padding-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.BedrijfAccountText{
+    align-items: left;
 }

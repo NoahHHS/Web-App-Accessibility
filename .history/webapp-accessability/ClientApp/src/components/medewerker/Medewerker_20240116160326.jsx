@@ -159,12 +159,13 @@ render() {
     <div className='modal-container'>
       <span className='sluiten' onClick={this.closeModal}>&times;</span>
       <h2 className='Otitel'>BedrijfAccount data</h2>
-      <p className="BedrijfAccountText">{this.state.selectedItem} vraagt een bedrijfs account aan.</p>
-      <h3 className='BedrijfAccountSubtitel'>Persoonsgegevens</h3>
-      <p className="BedrijfAccountText">Naam: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Bedrijf: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Telefoon: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Email: {this.state.selectedItem}</p>
+      <p className="Otext">Details voor: {this.state.selectedItem}</p>
+      <p className="Otext">{this.state.selectedItem} vraagt een bedrijfs account aan.</p>
+      <h3>Persoonsgegevens</h3>
+      <p className="Otext">Naam: {this.state.selectedItem}</p>
+      <p className="Otext">Bedrijf: {this.state.selectedItem}</p>
+      <p className="Otext">Telefoon: {this.state.selectedItem}</p>
+      <p className="Otext">Email: {this.state.selectedItem}</p>
       <div className="Accepteren-Afwijzen-Container">
           <button className="Accepteren" onClick={this.handleAccepterenClick}>Accepteren</button>
           <button className="Afwijzen" onClick={this.handleAfwijzenClick}>Afwijzen</button>
@@ -183,8 +184,8 @@ render() {
             <h2 className="Otitel">Gebruikersdata</h2>
             <p className="Otext">Details voor: {this.state.selectedItem}</p>
             {/* Add more details as needed */}
-            <div className="Opslaanknop-container">
-              <button className="Opslaanknop" onClick={this.handleAddButtonClick}>Opslaan</button>
+            <div className="add-button-container">
+              <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
             </div>
           </div>
         </div>

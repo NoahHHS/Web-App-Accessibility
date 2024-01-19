@@ -44,11 +44,11 @@ export class Bedrijfs extends Component {
           <Zoekbalk placeholder="zoek uw onderzoeken" />
         </div>
             {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item">Onderzoek 1</li>
-                  <li className="dark-list-item">Onderzoek 2</li>
-                  <li className="dark-list-item">Onderzoek 3</li>
+          <div className="OnderzoekList-container">
+              <ul className="OnderzoekList">
+                  <li className="OnderzoekList-item">Onderzoek 1</li>
+                  <li className="OnderzoekList-item">Onderzoek 2</li>
+                  <li className="OnderzoekList-item">Onderzoek 3</li>
                   {/* Add more list items as needed */}
               </ul>
           </div>
@@ -66,14 +66,14 @@ export class Bedrijfs extends Component {
           <p className="Otext">Naam van het onderzoek</p>
           <input type="text" id="titel" className="Oinput" />
           <p className="Otext">geef een beschrijving van het onderzoek</p>
-          <input type="text" id="beschrijving" className="Oinput" />
+          <textarea  type="text" id="beschrijving" className="Otextarea" />
           <p className="Otext">Waar bevind het onderzoek?</p>
           <input type="text" id="plek" className="Oinput"/>
           <p className="Otext">Wanneer is het onderzoek?</p>
           <input type="date" id="tijd" className="Oinput" />
           <p className="Otext">Voeg hier de link naar het onderzoek toe.</p>
           <input type="text" id="link" className="Oinput" />
-          <div className="add-button-container">
+          <div className="ToevoegKnop-container ">
             <button className="ToevoegKnop" onClick={this.handleAddButtonClick}>Toevoegen</button>
           </div>
     </div>

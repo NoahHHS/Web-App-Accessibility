@@ -47,17 +47,6 @@ handleAddButtonClick = () => {
   this.closeModal();
 };
 
-handleAccepterenClick =() => {
-// toe voegen dat dit op geaccepteerd wordt gezet in de data base bij het passende item
-  this.closeModal();
-}
-
-handleAfwijzenClick =() => {
-  // toe voegen dat dit op afgewezen wordt gezet in de data base bij het passende item
-    this.closeModal();
-  }
-  
-
 handleGebruikerItemClick = (item) => {
   this.setState({ selectedItem: item });
   this.openGebruikerModal();
@@ -145,8 +134,8 @@ render() {
         <p className="Otext">Link naar onderzoek.</p>
         <input type="text" id="link" className="Oinput" placeholder='link' />
         <div className="Accepteren-Afwijzen-Container">
-          <button className="Accepteren" onClick={this.handleAccepterenClick}>Accepteren</button>
-          <button className="Afwijzen" onClick={this.handleAfwijzenClick}>Afwijzen</button>
+          <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
+          <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
         </div>
   </div>
 </div>
@@ -159,15 +148,10 @@ render() {
     <div className='modal-container'>
       <span className='sluiten' onClick={this.closeModal}>&times;</span>
       <h2 className='Otitel'>BedrijfAccount data</h2>
-      <p className="BedrijfAccountText">{this.state.selectedItem} vraagt een bedrijfs account aan.</p>
-      <h3 className='BedrijfAccountSubtitel'>Persoonsgegevens</h3>
-      <p className="BedrijfAccountText">Naam: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Bedrijf: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Telefoon: {this.state.selectedItem}</p>
-      <p className="BedrijfAccountText">Email: {this.state.selectedItem}</p>
+      <p className="Otext">Details voor: {this.state.selectedItem}</p>
       <div className="Accepteren-Afwijzen-Container">
-          <button className="Accepteren" onClick={this.handleAccepterenClick}>Accepteren</button>
-          <button className="Afwijzen" onClick={this.handleAfwijzenClick}>Afwijzen</button>
+          <button className="Accepteren" onClick={this.handleAddButtonClick}>Accepteren</button>
+          <button className="Afwijzen" onClick={this.handleAddButtonClick}>Afwijzen</button>
       </div>
     </div>
   </div>
@@ -183,8 +167,8 @@ render() {
             <h2 className="Otitel">Gebruikersdata</h2>
             <p className="Otext">Details voor: {this.state.selectedItem}</p>
             {/* Add more details as needed */}
-            <div className="Opslaanknop-container">
-              <button className="Opslaanknop" onClick={this.handleAddButtonClick}>Opslaan</button>
+            <div className="add-button-container">
+              <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
             </div>
           </div>
         </div>

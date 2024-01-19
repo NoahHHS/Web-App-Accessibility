@@ -101,9 +101,8 @@ export class Admin extends Component {
               <h2 className="Otitel">Gebruikersdata</h2>
               <p className="Otext">Details voor: {this.state.selectedItem}</p>
               {/* Add more details as needed */}
-              <div className="Opslaanknop-Verwijderknop-container">
-                <button className="Opslaanknop" onClick={this.handleAddButtonClick}>Opslaan</button>
-                <button className="Verwijderknop" onClick={this.handleAddButtonClick}>Verwijderen</button>
+              <div className="add-button-container">
+                <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
               </div>
             </div>
           </div>
@@ -126,10 +125,8 @@ export class Admin extends Component {
           <input type="date" id="tijd" className="Oinput" placeholder='01/01/2025'/>
           <p className="Otext">Link naar onderzoek.</p>
           <input type="text" id="link" className="Oinput" placeholder='link' />
-          <div className="Opslaanknop-Verwijderknop-container">
-            <button className="Opslaanknop" onClick={this.handleAddButtonClick}>Opslaan</button>
-            <button className="Verwijderknop" onClick={this.handleAddButtonClick}>Verwijderen</button>
-
+          <div className="add-button-container">
+            <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
           </div>
     </div>
   </div>
