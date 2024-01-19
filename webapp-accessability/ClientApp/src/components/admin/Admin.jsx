@@ -21,7 +21,15 @@ export class Admin extends Component {
   }
 
   componentDidMount() {
-    // Simulate fetching gebruiker data from the database
+    // Fetch gebruiker data from the database or API
+    this.fetchGebruikerData();
+
+    // Fetch onderzoek data from the database or API
+    this.fetchOnderzoekData();
+  }
+
+  fetchGebruikerData = () => {
+    // Simulate fetching gebruiker data from the database or API
     const gebruikerDataFromDB = [
       'Gebruiker 1',
       'Gebruiker 2',
@@ -31,24 +39,24 @@ export class Admin extends Component {
       'Gebruiker 6',
     ];
 
-    // Simulate fetching onderzoek data from the database
-    const onderzoekDataFromDB = [
-      'Onderzoek 1',
-      'Onderzoek 2',
-      'Onderzoek 3',
-      'Onderzoek 4',
-      'Onderzoek 5',
-      'Onderzoek 6',
-    ];
-
-    // Set the fetched data to state
     this.setState({
       gebruikerData: gebruikerDataFromDB,
-      onderzoekData: onderzoekDataFromDB,
       filteredGebruikerData: gebruikerDataFromDB,
-      filteredOnderzoekData: onderzoekDataFromDB,
     });
-  }
+  };
+
+  fetchOnderzoekData = () => {
+    // Fetch onderzoek data from the API or database
+    fetch('/admin/GetOnderzoeken')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          onderzoekData: data,
+          filteredOnderzoekData: data,
+        });
+      })
+      .catch((error) => console.error('Error fetching onderzoek data:', error));
+  };
 
   openGebruikerModal = () => {
     this.setState({ isGebruikerModalOpen: true });
@@ -78,7 +86,20 @@ export class Admin extends Component {
   };
 
   handleVerwijderButtonClick = () => {
-    // Perform any actions you need when the "Verwijder" button is clicked
+    // Perform the delete operation
+    const { selectedItem } = this.state;
+    if (!selectedItem) return;
+
+    fetch(`/admin/VerwijderOnderzoek/${selectedItem.Id}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // Refresh onderzoek data after deletion
+        this.fetchOnderzoekData();
+      })
+      .catch((error) => console.error('Error deleting onderzoek:', error));
 
     // Close the modal
     this.closeModal();
@@ -107,7 +128,7 @@ export class Admin extends Component {
   handleOnderzoekSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.onderzoekData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.Naam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -143,8 +164,8 @@ export class Admin extends Component {
           </ul>
         </div>
 
-        {/* Onderzoeken */}
-        <h2 className="itemtitle">Onderzoeken</h2>
+       {/* Onderzoeken */}
+       <h2 className="itemtitle">Onderzoeken</h2>
         <div className='ZoekbalkContainer'>
           <Zoekbalk
             placeholder="Zoek door alle onderzoeken"
@@ -161,7 +182,7 @@ export class Admin extends Component {
                 onClick={() => this.handleOnderzoekItemClick(onderzoek)}
                 style={{ cursor: 'pointer' }}
               >
-                {onderzoek}
+                {onderzoek.Naam}
               </li>
             ))}
           </ul>
@@ -196,8 +217,8 @@ export class Admin extends Component {
           </div>
         )}
 
-        {/* Onderzoek Modal/Pop-up */}
-        {this.state.isOnderzoekModalOpen && (
+       {/* Onderzoek Modal/Pop-up */}
+       {this.state.isOnderzoekModalOpen && (
           <div>
             <div className="modal-overlay"></div>
             <div className="modal-container">
@@ -205,41 +226,16 @@ export class Admin extends Component {
                 &times;
               </span>
               <h2 className="Otitel">Onderzoeksdata</h2>
-              <p className="Otext">Naam van het onderzoek</p>
-              <input
-                type="text"
-                id="titel"
-                className="Oinput"
-                placeholder={this.state.selectedItem}
-              />
-              <p className="Otext">beschrijving</p>
-              <input
-                type="text"
-                id="beschrijving"
-                className="Oinput"
-                placeholder="onderzoek"
-              />
-              <p className="Otext">Locatie onderzoek</p>
-              <input
-                type="text"
-                id="plek"
-                className="Oinput"
-                placeholder="Locatie"
-              />
-              <p className="Otext">Datum onderzoek</p>
-              <input
-                type="date"
-                id="tijd"
-                className="Oinput"
-                placeholder="01/01/2025"
-              />
-              <p className="Otext">Link naar onderzoek.</p>
-              <input
-                type="text"
-                id="link"
-                className="Oinput"
-                placeholder="link"
-              />
+              <p className="Otext">Naam van het onderzoek: {this.state.selectedItem.Naam}</p>
+              <p className="Otext">Beschrijving: {this.state.selectedItem.Omschrijving}</p>
+              <p className="Otext">StartDatum: {this.state.selectedItem.StartDatum}</p>
+              <p className="Otext">EindDatum: {this.state.selectedItem.EindDatum}</p>
+              <p className="Otext">Status: {this.state.selectedItem.Status}</p>
+              <p className="Otext">Type: {this.state.selectedItem.Type}</p>
+              <p className="Otext">MedewerkerId: {this.state.selectedItem.MedewerkerId}</p>
+              <p className="Otext">LinkId: {this.state.selectedItem.LinkId}</p>
+              <p className="Otext">LocatieId: {this.state.selectedItem.LocatieId}</p>
+
               <div className="Opslaanknop-Verwijderknop-container">
                 <button
                   className="Opslaanknop"
@@ -261,3 +257,5 @@ export class Admin extends Component {
     );
   }
 }
+
+export default Admin;
