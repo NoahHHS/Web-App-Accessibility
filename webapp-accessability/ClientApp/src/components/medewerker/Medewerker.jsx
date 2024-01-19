@@ -11,8 +11,48 @@ export class Medewerker extends Component {
       isOnderzoekModalOpen: false,
       isBedrijfAccountModalOpen: false,
       inputData: '',
+      onderzoekData: [],
+      bedrijfAccountData: [],
+      gebruikerData: [],
+      selectedItem: '',
     };
-}
+  }
+
+  componentDidMount() {
+    // Simulate fetching data from the database
+    const onderzoekDataFromDB = [
+      'Onderzoek 1',
+      'Onderzoek 2',
+      'Onderzoek 3',
+      'Onderzoek 4',
+      'Onderzoek 5',
+      'Onderzoek 6',
+    ];
+
+    const bedrijfAccountDataFromDB = [
+      'BedrijfAccount 1',
+      'BedrijfAccount 2',
+      'BedrijfAccount 3',
+      'BedrijfAccount 4',
+      'BedrijfAccount 5',
+      'BedrijfAccount 6',
+    ];
+
+    const gebruikerDataFromDB = [
+      'Gebruiker 1',
+      'Gebruiker 2',
+      'Gebruiker 3',
+      'Gebruiker 4',
+      'Gebruiker 5',
+      'Gebruiker 6',
+    ];
+
+    this.setState({
+      onderzoekData: onderzoekDataFromDB,
+      bedrijfAccountData: bedrijfAccountDataFromDB,
+      gebruikerData: gebruikerDataFromDB,
+    });
+  }  
 
 openGebruikerModal = () => {
   this.setState({ isGebruikerModalOpen: true });
@@ -75,57 +115,68 @@ handleOnderzoekItemClick = (item) => {
 
 render() {
   return (
-    <div className='mid-section'>
-      <h1 class="pagetitle">Medewerker Pagina</h1>
+    <div className="mid-section">
+      <h1 className="pagetitle">Medewerker Pagina</h1>
 
-      <h2 class="itemtitle">Aangevraagde onderzoeken</h2>
-      <div className='ZoekbalkContainer'>
-        <Zoekbalk placeholder="Zoek door aangevraagde onderzoeken"/>
+      {/* Aangevraagde Onderzoeken */}
+      <h2 className="itemtitle">Aangevraagde onderzoeken</h2>
+      <div className="ZoekbalkContainer">
+        <Zoekbalk placeholder="Zoek door aangevraagde onderzoeken" />
       </div>
-          {/* Unordered List Section */}
-        <div className="OnderzoekList-container">
-            <ul className="OnderzoekList">
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 1')} style={{ cursor: 'pointer' }}>Onderzoek 1</li>
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 2')} style={{ cursor: 'pointer' }}>Onderzoek 2</li>
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 3')} style={{ cursor: 'pointer' }}>Onderzoek 3</li>
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 4')} style={{ cursor: 'pointer' }}>Onderzoek 4</li>
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 5')} style={{ cursor: 'pointer' }}>Onderzoek 5</li>
-                <li className="OnderzoekList-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 6')} style={{ cursor: 'pointer' }}>Onderzoek 6</li>
-            </ul>
-        </div>
-
-      <h2 class='itemtitle'>Aaangevraagde bedrijf accounts</h2>
-      <div className='ZoekbalkContainer'>
-        <Zoekbalk placeholder='Zoek door aangevraagde bedrijf accounts'/>
-      </div>
-      {/* Unordered List  BedrijfAccount */}
-      <div className='BedrijfAccountList-container'>
-        <ul className='BedrijfAccountList'>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 1')} style={{ cursor: 'pointer' }}>BedrijfAccount 1</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 2')} style={{ cursor: 'pointer' }}>BedrijfAccount 2</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 3')} style={{ cursor: 'pointer' }}>BedrijfAccount 3</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 4')} style={{ cursor: 'pointer' }}>BedrijfAccount 4</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 5')} style={{ cursor: 'pointer' }}>BedrijfAccount 5</li>
-          <li className="BedrijfAccountList-item" onClick={() => this.handleBedrijfAccountItemClick('BedrijfAccount 6')} style={{ cursor: 'pointer' }}>BedrijfAccount 6</li>
+      <div className="OnderzoekList-container">
+        <ul className="OnderzoekList">
+          {this.state.onderzoekData.map((onderzoek, index) => (
+            <li
+              key={index}
+              className="OnderzoekList-item"
+              onClick={() => this.handleOnderzoekItemClick(onderzoek)}
+              style={{ cursor: 'pointer' }}
+            >
+              {onderzoek}
+            </li>
+          ))}
         </ul>
       </div>
 
-      <h2 class="itemtitle">Gebruikers</h2>
-      <div className='ZoekbalkContainer'>
-        <Zoekbalk placeholder="Zoek gebruikers"/>
+      {/* Aangevraagde Bedrijf Accounts */}
+      <h2 className="itemtitle">Aaangevraagde bedrijf accounts</h2>
+      <div className="ZoekbalkContainer">
+        <Zoekbalk placeholder="Zoek door aangevraagde bedrijf accounts" />
       </div>
-          {/* Unordered List Section */}
-        <div className="GebruikerList-container">
-            <ul className="GebruikerList">
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 1')} style={{ cursor: 'pointer' }}>Gebruiker 1</li>
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 2')} style={{ cursor: 'pointer' }}>Gebruiker 2</li>
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 3')} style={{ cursor: 'pointer' }}>Gebruiker 3</li>
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 4')} style={{ cursor: 'pointer' }}>Gebruiker 4</li>
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 5')} style={{ cursor: 'pointer' }}>Gebruiker 5</li>
-                <li className="GebruikerList-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 6')} style={{ cursor: 'pointer' }}>Gebruiker 6</li>
-                {/* Add more list items as needed */}
-            </ul>
-        </div>
+      <div className="BedrijfAccountList-container">
+        <ul className="BedrijfAccountList">
+          {this.state.bedrijfAccountData.map((bedrijfAccount, index) => (
+            <li
+              key={index}
+              className="BedrijfAccountList-item"
+              onClick={() => this.handleBedrijfAccountItemClick(bedrijfAccount)}
+              style={{ cursor: 'pointer' }}
+            >
+              {bedrijfAccount}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Gebruikers */}
+      <h2 className="itemtitle">Gebruikers</h2>
+      <div className="ZoekbalkContainer">
+        <Zoekbalk placeholder="Zoek gebruikers" />
+      </div>
+      <div className="GebruikerList-container">
+        <ul className="GebruikerList">
+          {this.state.gebruikerData.map((gebruiker, index) => (
+            <li
+              key={index}
+              className="GebruikerList-item"
+              onClick={() => this.handleGebruikerItemClick(gebruiker)}
+              style={{ cursor: 'pointer' }}
+            >
+              {gebruiker}
+            </li>
+          ))}
+        </ul>
+      </div>
 
               {/* Onderzoek Modal/Pop-up */}
               {this.state.isOnderzoekModalOpen && (
