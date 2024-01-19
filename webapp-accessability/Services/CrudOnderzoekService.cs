@@ -22,6 +22,15 @@ public class CrudOnderzoekService : ICrudService<Onderzoek>
         }
     }
 
+    public IEnumerable<Onderzoek> ReadAll()
+    {
+        return context.Onderzoeken.ToList();    
+    }
+
+    public void AddDeelnemer(Deelname deelname) {
+        
+    }
+
     public Onderzoek Read(string Id)
     {
         var Onderzoek = context.Onderzoeken.FirstOrDefault(O => O.Id.ToString() == Id);
