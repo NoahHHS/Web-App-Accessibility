@@ -11,8 +11,8 @@ export class ProfielData extends Component {
         <section className='profiel-section'>
           <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
           <ProfielGegeven typeGegeven="Naam"/>
-          <ProfielGegeven typeGegeven="Achternaam"/>
           <ProfielGegeven typeGegeven="Email"/>
+          <ProfielGegeven typeGegeven="Beschikbaarheid"/>
         </section>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Adres</h2>

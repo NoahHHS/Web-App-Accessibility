@@ -11,8 +11,8 @@ export class ProfielEdit extends Component {
         <section className='profiel-section'>
           <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
           <DataItem value="Naam" aria-label='Naam invoerveld, voer hier je naam in'/>
-          <DataItem value="Achternaam" aria-label='Achternaam invoerveld, voer hier je achternaam in'/>
           <DataItem value="Email" aria-label='Email invoerveld, voer hier je email in'/>
+          <DataItem value="Beschikbaarheid" aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
         </section>
         <SaveButton/>
         <section className='profiel-section'>
