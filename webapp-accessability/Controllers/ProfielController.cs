@@ -24,7 +24,7 @@ public class ProfielController : ControllerBase
 
    [HttpPut]
    [Route("UpdateAccount")]
-   public async Task<ActionResult> UpdateAccount(String Id, ApplicationUser updatedUser){
+   public async Task<ActionResult> UpdateAccount([FromQuery] String Id, [FromBody] ApplicationUser updatedUser){
       // Find the user in the database
       var user = await _userManager.FindByIdAsync(Id);
       if (user == null)

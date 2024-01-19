@@ -50,32 +50,9 @@ export class ProfielEdit extends Component {
 }
 
 const SaveButton = () => {
-    const handleSaveClick = async () => {
-      try {
-        const response = await fetch('/profil/UpdateAccount', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            Id: this.state.userData.id, // Pass the user ID
-            updatedUser: this.state.userData,
-          }),
-        });
-
-        if (response.ok) {
-          console.log('Account updated successfully');
-        } else {
-          console.error('Failed to update account');
-        }
-      } catch (error) {
-        console.error('Error updating account:', error);
-      }
-    };
-
     return(
       <div className='ProfileButton-Content'>
-        <button className='ProfileButton' title='Sla veranderingen op' onClick={handleSaveClick}><strong>Save</strong></button>
+        <button className='ProfileButton' title='Sla veranderingen op'><strong>Save</strong></button>
         <p className='ProfileButton-Warning'>Sla je veranderingen op!<br/>anders worden ze ongedaan gemaakt</p>
       </div>
     );
