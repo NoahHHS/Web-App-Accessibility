@@ -25,6 +25,7 @@ public class ProfielController : ControllerBase
    [HttpPut]
    [Route("UpdateAccount")]
    public async Task<ActionResult> UpdateAccount(String Id, ApplicationUser updatedUser){
+      // Find the user in the database
       var user = await _userManager.FindByIdAsync(Id);
       if (user == null)
       {
@@ -34,9 +35,11 @@ public class ProfielController : ControllerBase
       // Update user properties
       user.Naam = updatedUser.Naam;
       user.Email = updatedUser.Email;
+      user.Beschikbaarheid = updatedUser.Beschikbaarheid;
       user.Adres = updatedUser.Adres;
       user.Medischegegevens = updatedUser.Medischegegevens;
 
+      // Update the user in the database
       var result = await _userManager.UpdateAsync(user);
       if (result.Succeeded)
          {
