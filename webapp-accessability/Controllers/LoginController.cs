@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using webapp_accessability.Models;
+using System.Security.Cryptography;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -53,13 +54,13 @@ public class LoginController : ControllerBase
             if (result.Succeeded)
             {
                 // User successfully logged in
-                //var token = GenerateJwtToken(user);
+                var token = GenerateJwtToken(user);
 
                 // Log success or additional information
                 _logger.LogInformation($"User {user.UserName} signed in successfully.");
 
-                //return Ok(new { UserId = user.Id, Token = token, Message = "Login successful" });
-                return Ok(new { UserId = user.Id, Message = "Login successful" });
+                return Ok(new { UserId = user.Id, Token = token, Message = "Login successful" });
+                //return Ok(new { UserId = user.Id, Message = "Login successful" });
             }
             else
             {
@@ -88,25 +89,54 @@ public class LoginController : ControllerBase
         }
     }
 
-
     // Method to generate a JWT token
     private string GenerateJwtToken(ApplicationUser user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123"); // your_secret_key
-
-        var tokenDescriptor = new SecurityTokenDescriptor
+        
+        // Use RandomNumberGenerator to generate a random key
+        using (var randomNumberGenerator = RandomNumberGenerator.Create())
         {
-            Subject = new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, user.Id),
-                // Add other claims as needed
-            }),
-            Expires = DateTime.Now.AddMinutes(10), // Token expiration time
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-        };
+            var keyBytes = new byte[32]; // 32 bytes for a 256-bit key
+            randomNumberGenerator.GetBytes(keyBytes);
+            var base64Key = Convert.ToBase64String(keyBytes);
 
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+            var key = Encoding.ASCII.GetBytes(base64Key);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id),
+                    // Add other claims as needed
+                }),
+                Expires = DateTime.Now.AddMinutes(10), // Token expiration time
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
     }
+
+    // oude jwt token generator
+    // private string GenerateJwtToken(ApplicationUser user)
+    // {
+    //     var tokenHandler = new JwtSecurityTokenHandler();
+    //     var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123"); // your_secret_key
+
+    //     var tokenDescriptor = new SecurityTokenDescriptor
+    //     {
+    //         Subject = new ClaimsIdentity(new[]
+    //         {
+    //             new Claim(ClaimTypes.Name, user.Id),
+    //             // Add other claims as needed
+    //         }),
+    //         Expires = DateTime.Now.AddMinutes(10), // Token expiration time
+    //         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+    //     };
+
+    //     var token = tokenHandler.CreateToken(tokenDescriptor);
+    //     return tokenHandler.WriteToken(token);
+    // }
 }
