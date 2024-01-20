@@ -28,7 +28,9 @@ public class CrudOnderzoekService : ICrudService<Onderzoek>
     }
 
     public void AddDeelnemer(Deelname deelname) {
-        
+        context.Deelnames.Add(deelname);
+
+        context.SaveChanges();
     }
 
     public Onderzoek Read(string Id)
