@@ -62,48 +62,11 @@ public class RegistrationController : ControllerBase
         return BadRequest("Invalid registration data");
     }
 
-    //     [HttpPost]
-    // public async Task<IActionResult> Register([FromBody] RegistratieModel model)
-    // {
-    //     if (ModelState.IsValid)
-    //     {
-    //         var user = new IdentityUser
-    //         {
-    //             UserName = model.Email,
-    //             Email = model.Email,
-    //             // Set other properties as needed
-    //         };
-
-    //         var result = await _identityUser.CreateAsync(user, model.Password);
-
-    //         if (result.Succeeded)
-    //         {
-    //             // Customize as needed - here we're signing in the user after successful registration
-    //             await _identitySignInManager.SignInAsync(user, isPersistent: false);
-
-    //             // You can generate and return a JWT token if needed
-    //             //var token = GenerateJwtToken(user);
-
-    //             return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
-    //         }
-    //         else
-    //         {
-    //             _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
-    //             // Registration failed, handle errors
-    //             //return BadRequest(result.Errors);
-    //             return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
-    //         }
-    //     }
-
-    //     // Invalid registration data, handle accordingly
-    //     return BadRequest("Invalid registration data");
-    // }
-
         // Method to generate a JWT token
     private string GenerateJwtToken(ApplicationUser user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123"); // your_secret_key
+        var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123456789012345678901234567890"); // your_secret_key
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {

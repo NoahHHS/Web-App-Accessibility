@@ -1,65 +1,93 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
-using webapp_accessability.Data;
-using webapp_accessability.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using webapp_accessability.Models;
 
-
-namespace webapp_accessability.Controllers;
-
-// Login object wat mee gestuurd wordt met de post om in te loggen
-public class LoginViewModel
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-}
-
-
-[Authorize]
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class LoginController : ControllerBase
 {
-    UserManager<ApplicationUser> _userManager;
-    ApplicationDbContext _context;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _signInManager;
+    private readonly ILogger<LoginController> _logger;
 
-    public LoginController(UserManager<ApplicationUser> u, ApplicationDbContext context)
+    public LoginController(
+        UserManager<ApplicationUser> userManager,
+        SignInManager<ApplicationUser> signInManager,
+        ILogger<LoginController> logger)
     {
-        _userManager = u;
-        _context = context;
+        _userManager = userManager;
+        _signInManager = signInManager;
+        _logger = logger;
     }
 
-
-//Verifying Passwords:
-//When a user tries to log in, you use SignInManager.PasswordSignInAsync to verify the provided password.
-//The SignInManager takes care of comparing the provided password with the hashed password stored in the database.
     [HttpPost]
-    public async Task<ActionResult> Login([FromBody]LoginViewModel loginViewModel) {
-        var user = await _userManager.FindByEmailAsync(loginViewModel.Email);
-        if(user == null)
+    public async Task<IActionResult> Login([FromBody] LoginModel model)
+    {
+        try
         {
-            return BadRequest("Gebruiker niet gevonden");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Invalid login data");
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                _logger.LogError("Invalid login attempt for user with email: {Email}", model.Email);
+                return BadRequest(new { Message = "Invalid login attempt" });
+            }
+
+            // Log the actual password provided during the login attempt
+            _logger.LogError(" WILL SAY FAIL BUT IT SUCCEEDED\nPassword provided for user with email {Email}: {ProvidedPassword}", model.Email, model.Password);
+
+            var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                // User successfully logged in
+                //var token = GenerateJwtToken(user);
+
+                // Log success or additional information
+                _logger.LogInformation($"User {user.UserName} signed in successfully.");
+
+                //return Ok(new { UserId = user.Id, Token = token, Message = "Login successful" });
+                return Ok(new { UserId = user.Id, Message = "Login successful" });
+            }
+            else
+            {
+                // Log failure or additional information
+                _logger.LogWarning($"User {user.UserName} sign-in failed. Result: {result}, IsNotAllowed: {result.IsNotAllowed}, RequiresTwoFactor: {result.RequiresTwoFactor}, IsLockedOut: {result.IsLockedOut}, LockoutEnd: {user.LockoutEnd}");
+
+
+            }
+
+            // Check if the lockout policy is affecting the login attempts
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User with email {Email} is locked out until {LockoutEnd}", model.Email, user.LockoutEnd);
+                return BadRequest(new { Message = "Account is locked out. Please try again later." });
+            }
+
+            // Log failure or additional information
+            _logger.LogError("Invalid login attempt for user with email: {Email}", model.Email);
+
+            return BadRequest(new { Message = "Invalid login attempt" });
         }
-
-        // Checkt wachtwoord
-        var passwordValid = await _userManager.CheckPasswordAsync(user, loginViewModel.Password);
-        if(!passwordValid) {
-            return BadRequest("Ongeldig wachtwoord");
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An unexpected error occurred during login.");
+            return StatusCode(500, "An unexpected error occurred.");
         }
-
-        // Hierna is de gebruiker authenticated
-        // Genereer en set JWT token
-
-        var token = GenerateJwtToken(user);
-
-        return Ok(new { Token = token});
-
     }
+
 
     // Method to generate a JWT token
     private string GenerateJwtToken(ApplicationUser user)
