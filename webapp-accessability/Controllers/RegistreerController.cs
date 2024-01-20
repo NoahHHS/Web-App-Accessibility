@@ -9,7 +9,7 @@ using System.Text;
 using System.Security.Cryptography;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class RegistrationController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _applicationUser;
@@ -27,7 +27,7 @@ public class RegistrationController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register([FromBody] RegistratieModel model)
+    public async Task<IActionResult> Register([FromBody] RegistreerDTO model)
     {
         if (ModelState.IsValid)
         {

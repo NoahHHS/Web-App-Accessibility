@@ -1,7 +1,7 @@
 
 namespace webapp_accessability.Models;
 // RegistrationModel
-public class LoginModel
+public class RegistreerDTO
 {
     public string Email { get; set; }
     public string Password { get; set; }

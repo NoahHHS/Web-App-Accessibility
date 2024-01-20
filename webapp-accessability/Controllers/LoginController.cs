@@ -11,7 +11,7 @@ using webapp_accessability.Models;
 using System.Security.Cryptography;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class LoginController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -29,7 +29,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login([FromBody] LoginModel model)
+    public async Task<IActionResult> Login([FromBody] LoginDTO model)
     {
         try
         {
