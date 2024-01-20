@@ -13,7 +13,7 @@ public class OnderzoeksController : ControllerBase
         _onderzoekService = onderzoekService;
     }
     
-    [Route("api/onderzoek")]
+    [Route("api/onderzoeksNaamEnBeschrijving")]
     public IActionResult GetNaamEnBeschrijving()
     {
 
@@ -29,7 +29,7 @@ public class OnderzoeksController : ControllerBase
         return Ok(result);
     }
     
-    [Route("api/onderzoek")]
+    [Route("api/onderzoeksNaam")]
     public IActionResult GetNaam(string Id)
     {
         var Onderzoek = context.Onderzoeken.FirstOrDefault(O => O.Id.ToString() == Id);
@@ -42,7 +42,7 @@ public class OnderzoeksController : ControllerBase
 
     }
     [HttpPost]
-    [Route("api/onderzoek")]
+    [Route("api/onderzoeksDeelnemer")]
     public IActionResult Deelnemen([FromBody]Deelname deelname)
     {
         if (ModelState.IsValid)
