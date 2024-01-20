@@ -1,0 +1,63 @@
+.OnderzoekSearchInput {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid rgba(0, 255, 194, 1);
+    padding: 3px;
+ }
+ 
+
+  /*-----------ZoekBalk-----------*/
+ .search {
+     width: 10%;
+     background-color: transparent;
+     border: none;
+     outline: none;
+     align-self: flex-end;
+ }
+ 
+ .Zoekbalk {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    position: relative;
+    margin-bottom: 1em;
+ }
+ 
+ .search-icon {
+     position: absolute;
+     right: 0.3em;
+     top: 50%;
+     transform: translate(0%, -50%);
+ }
+
+ /*-----------FontSize Button-----------*/
+ .FontSizeButton-Container {
+    text-align: center;
+ }
+
+ .FontSizeButton-text {
+    font-size: small;
+    margin-bottom: 5px;
+ }
+
+ .FontSizeButton{
+    padding: auto;
+    font-size: larger;
+    font-weight: bold;
+    width: 60px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+ }
+
+ .FontSizeButton:hover{
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.52));
+    background-color: rgb(200, 200, 200);
+ }
+ .FontSizeButton:active{
+    background-color: white;
+ }

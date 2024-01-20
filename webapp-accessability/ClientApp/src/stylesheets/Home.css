@@ -1,0 +1,162 @@
+/*---------------------------- Home Intro ----------------------------*/
+/* Stijlen voor het introductiegedeelte van de homepage */
+
+/* Algemene opmaak van het introductiegedeelte */
+.Home-Intro {
+    border-radius: 10px;
+    background-color: white;
+    width: 90%;
+    height: 300px;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+/* Opmaak voor de sectie met tekst */
+.Home-textSection {
+    flex-direction: column;
+}
+
+/* Opmaak voor tekst- en afbeeldingssecties */
+.Home-textSection, .Home-imgSection {
+    float: left; 
+    display: inline; 
+    width: 49%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Stijlen voor de afbeelding */
+.homeimg {
+    width: 220px;
+    height: 250px;
+}
+
+/* Stijl voor het motto */
+.motto {
+    color: black;
+    text-align: center;
+    font-size: large;
+    margin-left: 5px;
+}
+
+/* Stijl voor de hoofdtitel */
+.hometitle {
+    font-size: 50px;
+    margin-left: 5px;
+}
+
+.Home-IntroButton {
+    margin-top: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: #fe7d01;
+    color: white;
+    font-size: large;
+    border-radius: 20px;
+    border-color: transparent;
+}
+.Home-IntroButton:hover {
+    filter: drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.585));
+    transition: filter 0.2s ease;
+}
+
+/*---------------------------- Content-Buttons ----------------------------*/
+/* Opmaak voor de knoppen met inhoud op de homepage */
+
+/* Algemene opmaak voor de sectie met knoppen */
+.Home-contentSection {
+    margin-top: 50px;
+    text-align: center;
+
+}
+
+.Home-ContetSectionTitle {
+    margin-bottom: 25px;
+    font-family:'Courier New', Courier, monospace;
+    color: white;
+    text-align: center;
+}
+
+/* Opmaak voor de container met knoppen */
+.Home-buttonContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    width: 90%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+/* Stijlen voor de pagina-knoppen */
+.pageButton {
+    background-color: white;
+    border: none;
+    border-radius: 20px;
+    width: 400px;
+    height: 250px;
+    font-size: 28px;
+    filter: drop-shadow(0px 5px 5px rgb(0 0 0 / 0.4));
+}
+
+/* Opmaak voor de knoppen bij hover */
+.pageButton:hover {
+    text-decoration: underline;
+    filter: drop-shadow(0px 10px 10px rgba(0, 0, 0, 0.703));
+    transition: filter 0.25s ease;
+}
+
+/* Opmaak voor de knoppen bij activeren */
+.pageButton:active {
+    color: black;
+}
+
+/* Stijl voor de profielknop */
+.profilebutton {
+    background-color: #2B50EB;
+    color: white;
+}
+
+/* Stijl voor de onderzoeksknop */
+.onderzoekbutton {
+    background-color: #21CEA1;
+}
+
+/*---------------------------- Mobile-Screen-Settings ----------------------------*/
+/* Aanpassingen voor mobiele schermen */
+
+@media screen and (max-width: 768px) {
+    /* Aanpassingen voor de knopcontainer op kleinere schermen */
+    .Home-buttonContainer {
+        width: 90%;
+    }
+  
+    /* Aanpassingen voor de pagina-knoppen op kleinere schermen */
+    .pageButton {
+        max-width: 80%;
+        height: 100px;
+        font-size: 20px;
+    }
+
+    /* Aanpassingen voor de hoofdtitel op kleinere schermen */
+    .hometitle {
+        font-size: 24px;
+    }
+    
+    /* Aanpassingen voor het motto op kleinere schermen */
+    .motto {
+        font-size: 14px;
+    }
+
+    /* Aanpassingen voor de afbeelding op kleinere schermen */
+    .homeimg {
+        width: 90%;
+        height: 60%;
+    }
+}

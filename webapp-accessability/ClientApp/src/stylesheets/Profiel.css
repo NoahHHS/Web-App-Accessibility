@@ -1,0 +1,61 @@
+/* ------------------- Global Profiel ------------------- */
+.profiel-section {
+    text-align: center;
+}
+
+.profielh2 {
+    padding-top: 20px;
+    font-size: 28px;
+}
+
+/* ------------------- Bewerk Gegevens ------------------- */
+.DataItem{
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.DataItem-Field {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 2px 3px 1px black;
+    width: 250px;
+    height: 35px;
+}
+
+.ProfileButton-Content {
+    margin: 30px;
+    text-align: center;
+}
+.ProfileButton-Warning {
+    font-size: small;
+}
+
+.ProfileButton {
+    font-size: large;
+    width: 200px;
+    height: 50px;
+    background-color: #21CEA1;
+    border-radius: 10px;
+    border: none;
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.462));
+    margin-bottom: 5px;
+}
+.ProfileButton:hover {
+    background-color: #10a57e;
+    color: white;
+}
+.ProfileButton:active {
+    background-color: #21CEA1;
+}
+
+/* ------------------- Mijn Gegevens ------------------- */
+.Profiel-DataItem {
+    display: block;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.Profiel-Data {
+    font-size: 22px;
+}

@@ -1,0 +1,96 @@
+/* Style for the main container of the registration and login page */
+.registreer-pagina-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for the heading level 2 within the registration page container */
+.registreer-pagina-container h2 {
+    font-size: 25px;
+    margin-bottom: 30px;
+}
+
+/* Styling for labels within the registration page container */
+.registreer-pagina-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Styling for inline paragraphs related to account type */
+.registreer-pagina-container .inline-p-account-type {
+    display: inline-block;
+}
+
+/* Styling for inline spans within labels for terms and conditions */
+.registreer-pagina-container .inline-span-voorwaarden {
+    font-size: 11px;
+}
+
+/* Styling for input fields and forms within the registration page container */
+.registreer-pagina-container .input-form-field, 
+.registreer-pagina-container form {
+    margin-bottom: 15px;
+    width: 220px;
+}
+
+/* Styling for input fields within the registration page container */
+.registreer-pagina-container .input-form-field {
+    height: 35px;
+    border-radius: 10px;
+}
+
+/* Styling for buttons within the registration page container */
+.registreer-pagina-container button {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+/* Styling for the registration button */
+.registreer-pagina-container .registreer-button {
+    background-color: rgb(33, 206, 161);
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+/* Styling for the hover effect on the registration button */
+.registreer-pagina-container .registreer-button:hover {
+    background-color: #1dac86;
+    color: white;
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #1dac86;
+    transition: 0.5s;
+}
+
+/* Styling for the center-aligned registration button container */
+.registreer-pagina-container .center-register-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for the Google login container */
+.google-login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0px 0px 16px 0px;
+}
+
+/* Styling for the Google login button */
+#google-login-button {
+    color: black;
+    height: 35px;
+    width: 150px;
+    border: none;
+    border-radius: 12px;
+}
+
+/* Styling for the hover effect on the Google login button */
+#google-login-button:hover { 
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px white;
+    transition: 0.5s;
+}

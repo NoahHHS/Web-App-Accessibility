@@ -1,0 +1,16 @@
+.Privacy-Content{
+    text-align: center;
+    padding: 10px;
+    max-width: 80%;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.Plist, .beschrijving {
+    text-align: left;
+}
+
+.subtitle{ 
+    padding-top: 50px;
+    padding-bottom: 10px;
+}

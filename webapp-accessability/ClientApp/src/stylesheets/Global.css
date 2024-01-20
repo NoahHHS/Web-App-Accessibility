@@ -1,0 +1,204 @@
+/*---------------------------- Global styling ----------------------------*/
+body{
+    background-color: rgb(29, 35, 79);
+    color: white;
+  }
+
+h1{
+    color: #21CEA1;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+p{
+    color: white;
+}
+
+.pagetitle{
+    color: #21CEA1;
+    text-align: center;
+}
+
+.subtitle{
+    color: #21CEA1;
+    text-align: center;
+}
+
+.MainContainer {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/*---------------------------- Navbar styling ----------------------------*/
+.navbar{
+    padding: 20px;
+    background-color: rgb(29, 35, 79);
+    border-bottom: 0.4mm solid black;
+    margin-bottom: 15px;
+    z-index:99;
+}
+
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+    color: #21CEA1;
+    text-decoration: none;
+}
+
+.nav-item{
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+}
+
+.Navbar-Button{
+    width: 127px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    background-color: #fe7d01;
+    font-size: large;
+    margin-left: 10px;
+} 
+.Navbar-Button:hover {
+    background-color: #de6d03;
+    color: white;
+}
+.Navbar-Button:active {
+    background-color: #fe7d01;
+}
+
+.Registreerbutton{
+    background-color: #21CEA1;
+}
+.Registreerbutton:hover{
+    background-color: #1db58c;
+    color: white;
+}
+.Registreerbutton:active{
+    background-color: #21CEA1;
+}
+
+.loginContainer{
+    margin-left: auto;
+}
+
+/*----------------------------Footer styling----------------------------*/
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    border-top: 0.4mm solid black;
+    margin-top: auto;
+}
+
+#footerContact {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+/* ----------------------------------------------- */
+/* bevat Home, Over ons, privacy statement */
+
+.footerNav-Container {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footerNav-bullets {
+    color:white; 
+    width: fit-content;
+    list-style: none;
+}
+
+.footerContact-link {
+    color: white;
+    text-decoration:none;
+}
+
+.footerContact-link:hover {
+    color: rgb(33, 206, 161);
+}
+
+#ulContact-link {
+    padding-left: 0px;
+}
+
+/* ----------------------------------------------- */
+/* bevat contactgegevens */
+
+.footerContact-container {
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-items {
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    border-bottom: 0.1mm solid rgb(33, 206, 161);
+}
+
+/* ----------------------------------------------- */
+/* bevat sociale media links */
+
+.socialNav-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.socials-link {
+    text-decoration: none;
+    display: inline-block;
+    margin: 0px 10px 0px 10px;
+}
+
+.socials-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.socials-circle:hover {
+    box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px #FFFF;
+    transition: 0.5s;
+}
+
+.socials-picture{
+    height: 22px;
+    width: 22px;
+}
+
+
+/*---------------------------- Mobile-Screen-Settings ----------------------------*/
+@media screen and (max-width: 768px) {
+    #contact{
+       font-size: medium;
+    }
+    .footerNav-Container {
+        font-size: small;
+    }
+    .iconNav{
+        display: none;
+    }
+    .navbar-nav{
+        margin: 10px;
+        font-size: large;
+        text-align: right;
+    }
+    .loginContainer{
+        text-align: right;
+    }
+}

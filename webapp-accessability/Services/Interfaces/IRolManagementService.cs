@@ -1,0 +1,3 @@
+interface IRolManagementService{
+    void GeefRolAan();
+}

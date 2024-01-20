@@ -1,0 +1,44 @@
+.Accepteren-Afwijzen-Container{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Accepteren {
+    background-color: #21CEA1;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.Afwijzen {
+    background-color: red;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-container .BedrijfAccountText{
+    align-items: left;
+}
+
+.BedrijfAccountSubtitel{
+    align-self: center;
+    padding-bottom: 10px;
+}
+
+.Opslaanknop-container {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
