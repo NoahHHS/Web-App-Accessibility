@@ -22,6 +22,11 @@ public class ProfielController : ControllerBase
       _userManager = userManager;
    }
 
+   private async Task<ApplicationUser> GetCurrentUser(){
+      var user = await _userManager.GetUserAsync(HttpContext.User);
+      return user;
+   }
+
    [HttpPut]
    [Route("UpdateAccount")]
    public async Task<ActionResult> UpdateAccount(String Id, ApplicationUser updatedUser){
