@@ -19,7 +19,6 @@ export class ProfielData extends Component {
           <ProfielGegeven typeGegeven="Straatnaam"/>
           <ProfielGegeven typeGegeven="Huisnummer"/>
           <ProfielGegeven typeGegeven="Postcode"/>
-          <ProfielGegeven typeGegeven="Stad"/>
         </section>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Medische gegevens</h2>
