@@ -28,11 +28,27 @@ public class ProfielController : ControllerBase
       return user;
    }
 
-   // [HttpGet]
-   // [Route("GetGetProfileData")]
-   // public async Task<IActionResult> GetProfileData(){
-   //    var currentUser = GetCurrentUser();
-   // }
+   [HttpGet]
+   [Route("GetGetProfileData")]
+   public async Task<IActionResult> GetProfileData(){
+      var currentUser = GetCurrentUser();
+      var ProfileData = _context.ApplicationUsers.Where(user => user.Id == currentUser.Id.ToString())
+                                                 .Select(u => new ProfielDTO(){
+                                                   Naam = u.Naam,
+                                                   Email = u.Email,
+                                                   Beschikbaarheid = u.Beschikbaarheid,
+                                                   Straat = _context.Adressen.Single(a => a.Id == u.AdresId).Straat,
+                                                   HuisNr = _context.Adressen.Single(a => a.Id == u.AdresId).HuisNr,
+                                                   Postcode = _context.Adressen.Single(a => a.Id == u.AdresId).Postcode
+                                                 });
+      if(ProfileData == null){
+         return NotFound();
+      }
+      else{
+         return Ok(ProfileData);
+      }
+
+   }
 
    [HttpGet]
    [Route("GetMedischeGegevens")]
