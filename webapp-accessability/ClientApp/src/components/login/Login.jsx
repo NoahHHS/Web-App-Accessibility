@@ -1,5 +1,6 @@
 import { useState } from "react";
-import '../../stylesheets/RegistreerEnLogin.css'
+import axios from "axios";
+import '../../stylesheets/RegistreerEnLogin.css';
 
 //---------- Login Component ----------
 export const Login = () => {
@@ -19,11 +20,74 @@ const GebruikerInlogForm = ({ onSubmit }) => {
     const [wachtwoord, setWachtwoord] = useState('');
     
     //---------- Afhandeling van formulierinzending ----------
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Voeg validatielogica hier toe voor het verzenden
-        onSubmit({ email, wachtwoord});
+
+        try {
+            console.log("Request Data:", { email, wachtwoord });
+
+            const response = await axios.post(
+                "https://localhost:7288/Login",
+                { email, wachtwoord },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            // Handle the response, e.g., store the token in local storage
+            const { token, userId } = response.data;
+            localStorage.setItem("JWT_access_token", token);
+            localStorage.setItem("user_id", userId);
+
+            // Call the parent onSubmit callback if provided
+            if (onSubmit) {
+                onSubmit({ email, wachtwoord });
+            }
+        } catch (error) {
+            // Handle login error
+            console.error("Login failed:", error.message);
+        }
     };
+
+    //ZONDER AXIOS
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    
+    //     try {
+    //         console.log("Request Data:", { email, wachtwoord });
+    
+    //         const response = await fetch("https://localhost:7288/Login", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json",
+    //             },
+    //             body: JSON.stringify({ email, wachtwoord }),
+    //         });
+    
+    //         if (!response.ok) {
+    //             throw new Error(`HTTP error! Status: ${response.status}`);
+    //         }
+    
+    //         const responseData = await response.json();
+    
+    //         console.log("Response:", responseData);
+    
+    //         // Handle the response, e.g., store the token in local storage
+    //         const { token, userId } = responseData;
+    //         localStorage.setItem("JWT_access_token", token);
+    //         localStorage.setItem("user_id", userId);
+    
+    //         // Call the parent onSubmit callback if provided
+    //         if (onSubmit) {
+    //             onSubmit({ email, wachtwoord });
+    //         }
+    //     } catch (error) {
+    //         // Handle login error
+    //         console.error("Login failed:", error.message);
+    //     }
+    // };
 
     return (
         <form onSubmit={handleSubmit}>

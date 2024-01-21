@@ -49,7 +49,7 @@ public class LoginController : ControllerBase
                 return BadRequest(new { Message = "Invalid login attempt" });
             }
 
-            var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(user, model.Wachtwoord, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
