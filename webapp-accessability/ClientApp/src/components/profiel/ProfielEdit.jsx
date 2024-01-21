@@ -36,7 +36,6 @@ export class ProfielEdit extends Component {
           <DataItem value="Straatnaam" aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
           <DataItem value="Huisnummer" aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
           <DataItem value="Postcode" aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
-          <DataItem value="Stad" aria-label='Stad invoerveld, voer hier in, in welke stad je woont'/>
         </section>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Medische gegevens</h2>
