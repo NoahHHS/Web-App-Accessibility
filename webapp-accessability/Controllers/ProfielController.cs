@@ -45,7 +45,7 @@ public class ProfielController : ControllerBase
          Hulpmiddelen = _Hulpmiddelen,
          ApplicationUserId = currentUser.Id
       });
-      ._context.SaveChanges();
+      _context.SaveChanges();
       return Ok();
    }
 
