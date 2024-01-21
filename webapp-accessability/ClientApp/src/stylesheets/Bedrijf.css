@@ -24,7 +24,7 @@
   width: 100%;
 }
 
-.dark-list-container {
+.GebruikerList-container, .OnderzoekList-container, .BedrijfAccountList-container {
   background-color: rgb(5, 3, 70);
   border: 2px solid #21CEA1;
   border-radius: 5px;
@@ -33,13 +33,13 @@
   overflow-y: auto; /* Allow vertical scrolling */
 }
 
-.dark-list {
+.OnderzoekList, .GebruikerList, .BedrijfAccountList {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.dark-list-item {
+.GebruikerList-item, .OnderzoekList-item, .BedrijfAccountList-item{
   color: #fff; /* Set the text color to white */
   padding: 10px;
   border-bottom: 1px solid #555; /* Add a border between list items */
@@ -47,7 +47,14 @@
 
 /* Add Button Styles */
 .add-button-container {
-padding-top: 20px;
+  padding-top: 20px;
+}
+
+.ToevoegKnop-container {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .add-button, .ToevoegKnop {
@@ -87,7 +94,7 @@ padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .close {
@@ -100,15 +107,29 @@ padding-top: 20px;
 
 .Otitel {
   color: #21CEA1;
+  align-self: center;
 }
 
 .Otext {
   padding-top: 10px;
+  align-self: center;
 }
 
 .Oinput{
   border-radius: 5px;
+  align-self: center;
 }
+.Otextarea{
+  border-radius: 5px;
+  align-self: center;
+  border-radius: 5px;
+  align-self: center;
+  width: 100%;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 100px; /* Set a minimum height */
+  box-sizing: border-box;
+}
+
 
 .mid-section {
   flex: 1;

@@ -94,3 +94,10 @@
     box-shadow: 0 0 0 3px #1D234f, 0 0 0 4px white;
     transition: 0.5s;
 }
+
+
+.error-message {
+    color: #FF0000;
+    font-size: 14px;
+    margin-top: 5px;
+}

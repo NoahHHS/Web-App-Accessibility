@@ -2,17 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapp_accessability.Data;
 
 #nullable disable
 
-namespace webapp_accessability.Data.Migrations
+namespace webapp_accessability.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240120201702_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
@@ -324,14 +327,13 @@ namespace webapp_accessability.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("AdresId")
+                    b.Property<int?>("AdresId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("BedrijfsNaam")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Beschikbaarheid")
+                    b.Property<DateTime?>("Beschikbaarheid")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -352,7 +354,6 @@ namespace webapp_accessability.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Naam")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")
@@ -373,14 +374,12 @@ namespace webapp_accessability.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Rol")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -391,7 +390,6 @@ namespace webapp_accessability.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("VoorkeurBenadering")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -628,9 +626,7 @@ namespace webapp_accessability.Data.Migrations
                 {
                     b.HasOne("webapp_accessability.Models.Adres", "Adres")
                         .WithOne()
-                        .HasForeignKey("webapp_accessability.Models.ApplicationUser", "AdresId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("webapp_accessability.Models.ApplicationUser", "AdresId");
 
                     b.Navigation("Adres");
                 });
@@ -718,8 +714,7 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Navigation("Medischegegevens");
 
-                    b.Navigation("Onderzoek")
-                        .IsRequired();
+                    b.Navigation("Onderzoek");
                 });
 
             modelBuilder.Entity("webapp_accessability.Models.Onderzoek", b =>

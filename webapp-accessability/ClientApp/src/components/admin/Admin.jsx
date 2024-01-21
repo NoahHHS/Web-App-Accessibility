@@ -1,19 +1,53 @@
 import React, { Component } from 'react';
-import {Zoekbalk} from '../reusables/reusables.jsx'
-import '../../stylesheets/admin.css'
-import '../../stylesheets/reusables.css'
+import { Zoekbalk } from '../reusables/reusables.jsx';
+import '../../stylesheets/admin.css';
+import '../../stylesheets/reusables.css';
 
 export class Admin extends Component {
-    static displayName = Admin.name;
+  static displayName = Admin.name;
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGebruikerModalOpen: false,
+      isOnderzoekModalOpen: false,
+      inputData: '',
+      gebruikerData: [],
+      onderzoekData: [],
+      selectedItem: '',
+      filteredGebruikerData: [],
+      filteredOnderzoekData: [],
+    };
+  }
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        isGebruikerModalOpen: false,
-        isOnderzoekModalOpen: false,
-        inputData: '',
-      };
+  componentDidMount() {
+    // Simulate fetching gebruiker data from the database
+    const gebruikerDataFromDB = [
+      'Gebruiker 1',
+      'Gebruiker 2',
+      'Gebruiker 3',
+      'Gebruiker 4',
+      'Gebruiker 5',
+      'Gebruiker 6',
+    ];
+
+    // Simulate fetching onderzoek data from the database
+    const onderzoekDataFromDB = [
+      'Onderzoek 1',
+      'Onderzoek 2',
+      'Onderzoek 3',
+      'Onderzoek 4',
+      'Onderzoek 5',
+      'Onderzoek 6',
+    ];
+
+    // Set the fetched data to state
+    this.setState({
+      gebruikerData: gebruikerDataFromDB,
+      onderzoekData: onderzoekDataFromDB,
+      filteredGebruikerData: gebruikerDataFromDB,
+      filteredOnderzoekData: onderzoekDataFromDB,
+    });
   }
 
   openGebruikerModal = () => {
@@ -36,10 +70,16 @@ export class Admin extends Component {
     this.setState({ inputData: e.target.value });
   };
 
-  handleAddButtonClick = () => {
+  handleOpslaanButtonClick = () => {
     // Perform any actions you need when the "Opslaan" button is clicked
-    console.log('Data added:', this.state.inputData);
-  
+
+    // Close the modal
+    this.closeModal();
+  };
+
+  handleVerwijderButtonClick = () => {
+    // Perform any actions you need when the "Verwijder" button is clicked
+
     // Close the modal
     this.closeModal();
   };
@@ -54,84 +94,169 @@ export class Admin extends Component {
     this.openOnderzoekModal();
   };
 
+  handleGebruikerSearch = (searchTerm) => {
+    // Implement your search logic here, e.g., filtering the list
+    const filteredData = this.state.gebruikerData.filter((item) =>
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Update the state or perform any other action with the filtered data
+    this.setState({ filteredGebruikerData: filteredData });
+  };
+
+  handleOnderzoekSearch = (searchTerm) => {
+    // Implement your search logic here, e.g., filtering the list
+    const filteredData = this.state.onderzoekData.filter((item) =>
+      item.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Update the state or perform any other action with the filtered data
+    this.setState({ filteredOnderzoekData: filteredData });
+  };
+
   render() {
     return (
       <div className='mid-section'>
-        <h1 class="pagetitle">Admin Pagina</h1>
-        <h3 class="itemtitle">Gebruikers</h3>
-        <div className='ZoekbalkContainer'>
-          <Zoekbalk placeholder="Zoek gebruikers"/>
-        </div>
-            {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 1')} style={{ cursor: 'pointer' }}>Gebruiker 1</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 2')} style={{ cursor: 'pointer' }}>Gebruiker 2</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 3')} style={{ cursor: 'pointer' }}>Gebruiker 3</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 4')} style={{ cursor: 'pointer' }}>Gebruiker 4</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 5')} style={{ cursor: 'pointer' }}>Gebruiker 5</li>
-                  <li className="dark-list-item" onClick={() => this.handleGebruikerItemClick('Gebruiker 6')} style={{ cursor: 'pointer' }}>Gebruiker 6</li>
-                  {/* Add more list items as needed */}
-              </ul>
-          </div>
+        <h1 className="pagetitle">Admin Pagina</h1>
 
-          <h3 class="itemtitle">onderzoeken</h3>
+        {/* Gebruikers */}
+        <h2 className="itemtitle">Gebruikers</h2>
         <div className='ZoekbalkContainer'>
-          <Zoekbalk placeholder="Zoek door alle onderzoeken"/>
+          <Zoekbalk
+            placeholder="Zoek gebruikers"
+            data={this.state.gebruikerData}
+            onSearch={this.handleGebruikerSearch}
+          />
         </div>
-            {/* Unordered List Section */}
-          <div className="dark-list-container">
-              <ul className="dark-list">
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 1')} style={{ cursor: 'pointer' }}>Onderzoek 1</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 2')} style={{ cursor: 'pointer' }}>Onderzoek 2</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 3')} style={{ cursor: 'pointer' }}>Onderzoek 3</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 4')} style={{ cursor: 'pointer' }}>Onderzoek 4</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 5')} style={{ cursor: 'pointer' }}>Onderzoek 5</li>
-                  <li className="dark-list-item" onClick={() => this.handleOnderzoekItemClick('Onderzoek 6')} style={{ cursor: 'pointer' }}>Onderzoek 6</li>
-                  {/* Add more list items as needed */}
-              </ul>
-          </div>
+        <div className="GebruikerList-container">
+          <ul className="GebruikerList">
+            {this.state.filteredGebruikerData.map((gebruiker, index) => (
+              <li
+                key={index}
+                className="GebruikerList-item"
+                onClick={() => this.handleGebruikerItemClick(gebruiker)}
+                style={{ cursor: 'pointer' }}
+              >
+                {gebruiker}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Onderzoeken */}
+        <h2 className="itemtitle">Onderzoeken</h2>
+        <div className='ZoekbalkContainer'>
+          <Zoekbalk
+            placeholder="Zoek door alle onderzoeken"
+            data={this.state.onderzoekData}
+            onSearch={this.handleOnderzoekSearch}
+          />
+        </div>
+        <div className="OnderzoekList-container">
+          <ul className="OnderzoekList">
+            {this.state.filteredOnderzoekData.map((onderzoek, index) => (
+              <li
+                key={index}
+                className="OnderzoekList-item"
+                onClick={() => this.handleOnderzoekItemClick(onderzoek)}
+                style={{ cursor: 'pointer' }}
+              >
+                {onderzoek}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         {/* Gebruiker Modal/Pop-up */}
         {this.state.isGebruikerModalOpen && (
           <div>
             <div className="modal-overlay"></div>
             <div className="modal-container">
-              <span className="sluiten" onClick={this.closeModal}>&times;</span>
+              <span className="sluiten" onClick={this.closeModal}>
+                &times;
+              </span>
               <h2 className="Otitel">Gebruikersdata</h2>
               <p className="Otext">Details voor: {this.state.selectedItem}</p>
               {/* Add more details as needed */}
-              <div className="add-button-container">
-                <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
+              <div className="Opslaanknop-Verwijderknop-container">
+                <button
+                  className="Opslaanknop"
+                  onClick={this.handleOpslaanButtonClick}
+                >
+                  Opslaan
+                </button>
+                <button
+                  className="Verwijderknop"
+                  onClick={this.handleVerwijderButtonClick}
+                >
+                  Verwijderen
+                </button>
               </div>
             </div>
           </div>
         )}
 
-                {/* Modal/Pop-up */}
+        {/* Onderzoek Modal/Pop-up */}
         {this.state.isOnderzoekModalOpen && (
-  <div>
-    <div className="modal-overlay"></div>
-    <div className="modal-container">
-      <span className="sluiten" onClick={this.closeModal}>&times;</span>
-      <h2 className="Otitel">Onderzoeksdata</h2>
-          <p className="Otext">Naam van het onderzoek</p>
-          <input type="text" id="titel" className="Oinput" placeholder={this.state.selectedItem} />
-          <p className="Otext">beschrijving</p>
-          <input type="text" id="beschrijving" className="Oinput" placeholder='onderzoek'/>
-          <p className="Otext">Locatie onderzoek</p>
-          <input type="text" id="plek" className="Oinput" placeholder='Locatie'/>
-          <p className="Otext">Datum onderzoek</p>
-          <input type="date" id="tijd" className="Oinput" placeholder='01/01/2025'/>
-          <p className="Otext">Link naar onderzoek.</p>
-          <input type="text" id="link" className="Oinput" placeholder='link' />
-          <div className="add-button-container">
-            <button className="OplsaanKnop" onClick={this.handleAddButtonClick}>Opslaan</button>
+          <div>
+            <div className="modal-overlay"></div>
+            <div className="modal-container">
+              <span className="sluiten" onClick={this.closeModal}>
+                &times;
+              </span>
+              <h2 className="Otitel">Onderzoeksdata</h2>
+              <p className="Otext">Naam van het onderzoek</p>
+              <input
+                type="text"
+                id="titel"
+                className="Oinput"
+                placeholder={this.state.selectedItem}
+              />
+              <p className="Otext">beschrijving</p>
+              <input
+                type="text"
+                id="beschrijving"
+                className="Oinput"
+                placeholder="onderzoek"
+              />
+              <p className="Otext">Locatie onderzoek</p>
+              <input
+                type="text"
+                id="plek"
+                className="Oinput"
+                placeholder="Locatie"
+              />
+              <p className="Otext">Datum onderzoek</p>
+              <input
+                type="date"
+                id="tijd"
+                className="Oinput"
+                placeholder="01/01/2025"
+              />
+              <p className="Otext">Link naar onderzoek.</p>
+              <input
+                type="text"
+                id="link"
+                className="Oinput"
+                placeholder="link"
+              />
+              <div className="Opslaanknop-Verwijderknop-container">
+                <button
+                  className="Opslaanknop"
+                  onClick={this.handleOpslaanButtonClick}
+                >
+                  Opslaan
+                </button>
+                <button
+                  className="Verwijderknop"
+                  onClick={this.handleVerwijderButtonClick}
+                >
+                  Verwijderen
+                </button>
+              </div>
+            </div>
           </div>
-    </div>
-  </div>
-)} 
-
+        )}
       </div>
     );
   }
