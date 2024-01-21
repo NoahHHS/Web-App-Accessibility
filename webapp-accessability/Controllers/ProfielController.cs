@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using webapp_accessability.Data;
 using webapp_accessability.Models;
@@ -22,25 +23,34 @@ public class ProfielController : ControllerBase
       _userManager = userManager;
    }
 
+   //var HardCodedUser = _context.ApplicationUsers.First();
    private async Task<ApplicationUser> GetCurrentUser(){
       var user = await _userManager.GetUserAsync(HttpContext.User);
-      var HardCodedUser = _context.ApplicationUsers.First();
+      
       return user;
    }
 
    [HttpGet]
    [Route("GetGetProfileData")]
+   [ProducesResponseType(typeof(ProfielDTO), 200)]
    public async Task<IActionResult> GetProfileData(){
-      var currentUser = GetCurrentUser();
+      var currentUser = await GetCurrentUser();
+      if(currentUser == null){
+         return NotFound();
+      }
+
+      var Adres = _context.Adressen.Single(adres => adres.Id == currentUser.AdresId);
       var ProfileData = _context.ApplicationUsers.Where(user => user.Id == currentUser.Id.ToString())
                                                  .Select(u => new ProfielDTO(){
                                                    Naam = u.Naam,
                                                    Email = u.Email,
                                                    Beschikbaarheid = u.Beschikbaarheid,
-                                                   Straat = _context.Adressen.Single(a => a.Id == u.AdresId).Straat,
-                                                   HuisNr = _context.Adressen.Single(a => a.Id == u.AdresId).HuisNr,
-                                                   Postcode = _context.Adressen.Single(a => a.Id == u.AdresId).Postcode
-                                                 });
+                                                   Straat = Adres.Straat,
+                                                   HuisNr = Adres.HuisNr,
+                                                   Postcode = Adres.Postcode
+                                                 })
+                                                 .ToList();
+      
       if(ProfileData == null){
          return NotFound();
       }
@@ -52,9 +62,9 @@ public class ProfielController : ControllerBase
 
    [HttpGet]
    [Route("GetMedischeGegevens")]
-   public IQueryable<MedischDTO> GetMedischeGegevens(){
-      var currentUser = GetCurrentUser();
-      var MedischeData = from M in _context.Medischegegevens.Where(m => m.ApplicationUserId == currentUser.Id.ToString())
+   public async Task<IQueryable<MedischDTO>> GetMedischeGegevens(){
+      var currentUser = await GetCurrentUser();
+      var MedischeData = from M in _context.Medischegegevens.Where(m => m.ApplicationUserId == currentUser.Id)
                          select new MedischDTO()
                          {
                            Beperking = M.Beperking,
