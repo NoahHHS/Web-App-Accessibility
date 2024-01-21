@@ -28,7 +28,7 @@ public class ProfielController : ControllerBase
    //var HardCodedUser = _context.ApplicationUsers.First();
    private async Task<ApplicationUser> GetCurrentUser(){
       var user = await _userManager.GetUserAsync(HttpContext.User);
-      var HardCodedUser = _context.ApplicationUsers.First();
+      var HardCodedUser = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
       return HardCodedUser;
    }
 
@@ -45,6 +45,7 @@ public class ProfielController : ControllerBase
          Hulpmiddelen = _Hulpmiddelen,
          ApplicationUserId = currentUser.Id
       });
+      ._context.SaveChanges();
       return Ok();
    }
 
