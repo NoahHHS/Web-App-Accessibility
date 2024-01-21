@@ -2,23 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webapp_accessability.Data;
 
 #nullable disable
 
-namespace webapp_accessability.Data.Migrations
+namespace webapp_accessability.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231218112642_eersteMigration")]
-    partial class eersteMigration
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.14");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.12");
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
@@ -311,11 +308,12 @@ namespace webapp_accessability.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Toevoeging")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Adres");
+                    b.ToTable("Adressen");
                 });
 
             modelBuilder.Entity("webapp_accessability.Models.ApplicationUser", b =>
@@ -323,16 +321,16 @@ namespace webapp_accessability.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("AangemeldPromos")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Bedrijfsnaam")
+                    b.Property<int?>("AdresId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("BedrijfsNaam")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Beschikbaarheid")
+                    b.Property<DateTime?>("Beschikbaarheid")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -345,9 +343,6 @@ namespace webapp_accessability.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Functie")
-                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -375,11 +370,11 @@ namespace webapp_accessability.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("SecurityStamp")
+                    b.Property<string>("Rol")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Telnr")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Token")
                         .HasColumnType("TEXT");
@@ -394,13 +389,10 @@ namespace webapp_accessability.Data.Migrations
                     b.Property<string>("VoorkeurBenadering")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Wachtwoord")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("bedrijfsTelNr")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AdresId")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -410,6 +402,170 @@ namespace webapp_accessability.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Betalingsgegevens", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Iban")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Salaris")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
+
+                    b.ToTable("Betalingsgegevens");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Deelname", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OnderzoekId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("OnderzoekId");
+
+                    b.ToTable("Deelnames");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Medischegegevens", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Beperking")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Hulpmiddelen")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Medischegegevens");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Onderzoek", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EindDatum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("LinkId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("LocatieId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MedewerkerId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Naam")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Omschrijving")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("OnderzoekComponentId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartDatum")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LinkId");
+
+                    b.HasIndex("LocatieId");
+
+                    b.HasIndex("MedewerkerId")
+                        .IsUnique();
+
+                    b.HasIndex("OnderzoekComponentId")
+                        .IsUnique();
+
+                    b.ToTable("Onderzoeken");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.OnderzoekComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OnderzoekComponent");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("OnderzoekComponent");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.OnderzoekLink", b =>
+                {
+                    b.HasBaseType("webapp_accessability.Models.OnderzoekComponent");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasDiscriminator().HasValue("OnderzoekLink");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.OnderzoekLocatie", b =>
+                {
+                    b.HasBaseType("webapp_accessability.Models.OnderzoekComponent");
+
+                    b.HasDiscriminator().HasValue("OnderzoekLocatie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -461,6 +617,106 @@ namespace webapp_accessability.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.Adres", "Adres")
+                        .WithOne()
+                        .HasForeignKey("webapp_accessability.Models.ApplicationUser", "AdresId");
+
+                    b.Navigation("Adres");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Betalingsgegevens", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", "ApplicationUser")
+                        .WithOne()
+                        .HasForeignKey("webapp_accessability.Models.Betalingsgegevens", "ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Deelname", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", "Account")
+                        .WithMany("Deelnames")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapp_accessability.Models.Onderzoek", "Onderzoek")
+                        .WithMany("Deelnames")
+                        .HasForeignKey("OnderzoekId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+
+                    b.Navigation("Onderzoek");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Medischegegevens", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany("Medischegegevens")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Onderzoek", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.OnderzoekLink", "Link")
+                        .WithMany()
+                        .HasForeignKey("LinkId");
+
+                    b.HasOne("webapp_accessability.Models.OnderzoekLocatie", "Locatie")
+                        .WithMany()
+                        .HasForeignKey("LocatieId");
+
+                    b.HasOne("webapp_accessability.Models.ApplicationUser", "Medewerker")
+                        .WithOne("Onderzoek")
+                        .HasForeignKey("webapp_accessability.Models.Onderzoek", "MedewerkerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webapp_accessability.Models.OnderzoekComponent", "OnderzoekComponent")
+                        .WithOne()
+                        .HasForeignKey("webapp_accessability.Models.Onderzoek", "OnderzoekComponentId");
+
+                    b.Navigation("Link");
+
+                    b.Navigation("Locatie");
+
+                    b.Navigation("Medewerker");
+
+                    b.Navigation("OnderzoekComponent");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.OnderzoekLocatie", b =>
+                {
+                    b.HasOne("webapp_accessability.Models.Adres", "Adres")
+                        .WithOne()
+                        .HasForeignKey("webapp_accessability.Models.OnderzoekLocatie", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adres");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Deelnames");
+
+                    b.Navigation("Medischegegevens");
+
+                    b.Navigation("Onderzoek");
+                });
+
+            modelBuilder.Entity("webapp_accessability.Models.Onderzoek", b =>
+                {
+                    b.Navigation("Deelnames");
                 });
 #pragma warning restore 612, 618
         }

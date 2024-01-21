@@ -23,16 +23,63 @@ const NormaalGebruikerForm = ({ onSubmit }) => {
     const [wachtwoord, setWachtwoord] = useState('');
     const [herhaalWachtwoord, setHerhaalWachtwoord] = useState('');
 
+    // Add state hooks for error messages
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
     //---------- Afhandeling van formulierinzending ----------
+    const validateForm = () => {
+        let isValid = true;
+
+        // Email validation
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setEmailError('Verkeerd email adres.');
+            isValid = false;
+        } else {
+            setEmailError('');
+        }
+
+    // Password validation
+    if (wachtwoord.length < 6) {
+        setPasswordError('Wachtwoord moet minimaal 6 karakters lang zijn.');
+        isValid = false;
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]/.test(wachtwoord)) {
+        setPasswordError('Wachtwoord moet minimaal 1 hoofdletter, 1 cijfer en 1 symbool bevatten.');
+        isValid = false;
+    } else {
+        setPasswordError('');
+    }
+
+        // Confirm password validation
+        if (wachtwoord !== herhaalWachtwoord) {
+            setConfirmPasswordError('Wachtwoorden komen niet overeen.');
+            isValid = false;
+        } else {
+            setConfirmPasswordError('');
+        }
+
+        return isValid;
+    };
+
+    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Voeg validatielogica hier toe voor het verzenden
-        onSubmit({ email, wachtwoord, herhaalWachtwoord });
+
+        if (validateForm()) {
+            // If the form is valid, proceed with form submission
+            const dataToSend = {
+                type: 'NormaalGebruikerForm',
+                email,
+                wachtwoord
+            };
+            onSubmit(dataToSend);
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            {/* Email invoerveld */}
+            {/* Email input field */}
             <label htmlFor="email">Email:</label>
             <input
                 className="input-form-field"
@@ -42,8 +89,10 @@ const NormaalGebruikerForm = ({ onSubmit }) => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
             />
+            {/* Display email error message */}
+            {emailError && <p className="error-message">{emailError}</p>}
 
-            {/* Wachtwoord invoerveld */}
+            {/* Password input field */}
             <label htmlFor="wachtwoord">Wachtwoord:</label>
             <input
                 className="input-form-field"
@@ -54,8 +103,10 @@ const NormaalGebruikerForm = ({ onSubmit }) => {
                 required
             />
             <WachtwoordSterkteMeterScript wachtwoord={wachtwoord} />
+            {/* Display password error message */}
+            {passwordError && <p className="error-message">{passwordError}</p>}
 
-            {/* Herhaal wachtwoord invoerveld */}
+            {/* Confirm password input field */}
             <label htmlFor="herhaalWachtwoord">Herhaal wachtwoord:</label>
             <input
                 className="input-form-field"
@@ -65,8 +116,10 @@ const NormaalGebruikerForm = ({ onSubmit }) => {
                 onChange={(e) => setHerhaalWachtwoord(e.target.value)}
                 required
             />
+            {/* Display confirm password error message */}
+            {confirmPasswordError && <p className="error-message">{confirmPasswordError}</p>}
 
-            {/* Checkbox voor algemene voorwaarden */}
+            {/* Checkbox for algemene voorwaarden */}
             <label>
                 <input
                     type="checkbox"
@@ -97,20 +150,66 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
     const [wachtwoord, setWachtwoord] = useState('');
     const [herhaalWachtwoord, setHerhaalWachtwoord] = useState('');
 
+    // Add state hooks for error messages
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
     //---------- Afhandeling van formulierinzending ----------
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Voeg validatielogica hier toe voor het verzenden
-        onSubmit({
-          email,
-          bedrijfsnaam,
-          postcode,
-          straatnaam,
-          huisnummer,
-          toevoeging,
-          wachtwoord,
-          herhaalWachtwoord,
-        });
+
+        // Validate form inputs
+        const isValid = validateForm();
+
+        if (isValid) {
+            // If the form is valid, proceed with form submission
+            const dataToSend = {
+                type: 'GedrijfsGebruikerForm',
+                email,
+                bedrijfsnaam,
+                postcode,
+                straatnaam,
+                huisnummer,
+                toevoeging,
+                wachtwoord,
+            };
+
+            onSubmit(dataToSend);
+        }
+    };
+
+    const validateForm = () => {
+        let isValid = true;
+
+        // Email validation
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            setEmailError('Verkeerd email adres.');
+            isValid = false;
+        } else {
+            setEmailError('');
+        }
+
+        // Password validation
+        if (wachtwoord.length < 6) {
+            setPasswordError('Wachtwoord moet minimaal 6 karakters lang zijn.');
+            isValid = false;
+        } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]/.test(wachtwoord)) {
+            setPasswordError('Wachtwoord moet minimaal 1 hoofdletter, 1 cijfer en 1 symbool bevatten.');
+            isValid = false;
+        } else {
+            setPasswordError('');
+        }
+
+        // Confirm password validation
+        if (wachtwoord !== herhaalWachtwoord) {
+            setConfirmPasswordError('Wachtwoorden komen niet overeen.');
+            isValid = false;
+        } else {
+            setConfirmPasswordError('');
+        }
+
+        return isValid;
     };
 
     return (
@@ -125,6 +224,8 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
         onChange={(e) => setEmail(e.target.value)}
         required
         />
+        {/* Display email error message */}
+        {emailError && <p className="error-message">{emailError}</p>}
 
         {/* Bedrijfsnaam invoerveld */}
         <label htmlFor="bedrijfsnaam">Bedrijfsnaam:</label>
@@ -190,6 +291,8 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
         required
         />
         <WachtwoordSterkteMeterScript wachtwoord={wachtwoord} />
+        {/* Display password error message */}
+        {passwordError && <p className="error-message">{passwordError}</p>}
 
         {/* Herhaal wachtwoord invoerveld */}
         <label htmlFor="herhaalWachtwoord">Herhaal wachtwoord:</label>
@@ -201,6 +304,8 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
         onChange={(e) => setHerhaalWachtwoord(e.target.value)} 
         required
         />
+        {/* Display confirm password error message */}
+        {confirmPasswordError && <p className="error-message">{confirmPasswordError}</p>}
 
         {/* Checkbox voor algemene voorwaarden */}
         <label>
@@ -222,29 +327,52 @@ const BedrijfsGebruikerForm = ({ onSubmit }) => {
     );
 };
 
-// ... (your existing code)
-
-//---------- RegistreerForm Component ----------
+// ---------- RegistreerForm Component ----------
 const RegistreerForm = () => {
     const [isBedrijfsAccount, setIsBedrijfsAccount] = useState(false);
     const [isNormaalAccount, setIsNormaalAccount] = useState(true);
 
-    //---------- Toggle Bedrijfs Account ----------
+    // ---------- Toggle Bedrijfs Account ----------
     const handleToggleBedrijfsAccount = () => {
         setIsBedrijfsAccount(true);
         setIsNormaalAccount(false);
     };
 
-    //---------- Toggle Normaal Account ----------
+    // ---------- Toggle Normaal Account ----------
     const handleToggleNormaalAccount = () => {
         setIsBedrijfsAccount(false);
         setIsNormaalAccount(true);
     };
 
-    //---------- Handle form submission ----------
-    const handleSubmit = (data) => {
-        // Behandel hier de formulierinzending, stuur de gegevens naar de server of voer verdere acties uit
-        console.log('Registreer opgeslagen met data:', data); //komt in console in browser
+    // ---------- Handle form submission ----------
+    const handleSubmit = async (data) => {
+        let endpoint = '';
+
+        if (isBedrijfsAccount) {
+            endpoint = 'https://localhost:7288/Registreer/Bedrijfsaccount';
+        } else {
+            endpoint = 'https://localhost:7288/Registreer/Account';
+        }
+
+        try {
+            const response = await fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                console.log('Registration successful:', result);
+            } else {
+                const errorResult = await response.json();
+                console.error('Registration failed:', errorResult);
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+        }
     };
 
     return (
