@@ -1,7 +1,9 @@
+using System.CodeDom;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
 using SQLitePCL;
 using webapp_accessability.Data;
 using webapp_accessability.Models;
@@ -28,6 +30,22 @@ public class ProfielController : ControllerBase
       var user = await _userManager.GetUserAsync(HttpContext.User);
       
       return user;
+   }
+
+   [HttpPost]
+   [Route("MaakMedischeGegeven")]
+   public async Task<IActionResult> MaakMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
+      var currentUser = await GetCurrentUser();
+      if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == _Hulpmiddelen) && (m.Beperking == _Beperking))){
+         return BadRequest("Aandoening al toegevoegd");
+      }
+
+      _context.Medischegegevens.Add(new Medischegegevens{
+         Beperking = _Beperking,
+         Hulpmiddelen = _Hulpmiddelen,
+         ApplicationUserId = currentUser.Id
+      });
+      return Ok();
    }
 
    [HttpGet]
