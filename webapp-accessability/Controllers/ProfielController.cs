@@ -28,13 +28,23 @@ public class ProfielController : ControllerBase
       return user;
    }
 
+   // [HttpGet]
+   // [Route("GetGetProfileData")]
+   // public async Task<IActionResult> GetProfileData(){
+   //    var currentUser = GetCurrentUser();
+   // }
+
    [HttpGet]
    [Route("GetMedischeGegevens")]
-   public IEnumerable<Medischegegevens> GetMedischeGegevens(){
+   public IQueryable<MedischDTO> GetMedischeGegevens(){
       var currentUser = GetCurrentUser();
-      var accountData = _context.Medischegegevens.Where(m => m.ApplicationUserId == currentUser.Id.ToString())
-                                                 .ToList();
-      return accountData;
+      var MedischeData = from M in _context.Medischegegevens.Where(m => m.ApplicationUserId == currentUser.Id.ToString())
+                         select new MedischDTO()
+                         {
+                           Beperking = M.Beperking,
+                           Hulpmiddelen = M.Hulpmiddelen
+                         };
+      return MedischeData;
    }
 
    [HttpPut]
