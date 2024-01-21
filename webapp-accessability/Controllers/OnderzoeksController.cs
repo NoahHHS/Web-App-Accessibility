@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using webapp_accessability.Data;
 using webapp_accessability.Models;
 
-[Route("api/onderzoek")]
 [ApiController]
+[Route("[controller]")]
 public class OnderzoeksController : ControllerBase
 {
     private ApplicationDbContext context;
