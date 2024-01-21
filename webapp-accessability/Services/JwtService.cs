@@ -2,39 +2,43 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using webapp_accessability.Models;
 
 public class JwtService : IJwtService
 {
-    private readonly string _secretKey;
 
-    public JwtService(string secretKey)
+
+    public string GenerateJwtToken(ApplicationUser user)
     {
-        _secretKey = secretKey;
-    }
+        var tokenHandler = new JwtSecurityTokenHandler();
 
-    public string GenerateToken(ApplicationUser user)
-    {
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_secretKey));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-        var claims = new List<Claim>
+        // Use RandomNumberGenerator to generate a random key
+        using (var randomNumberGenerator = RandomNumberGenerator.Create())
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-            new Claim(JwtRegisteredClaimNames.Email, user.Email),
-            // Add any additional claims based on your requirements
-        };
+            var keyBytes = new byte[32]; // 32 bytes for a 256-bit key
+            randomNumberGenerator.GetBytes(keyBytes);
+            var base64Key = Convert.ToBase64String(keyBytes);
 
-        var token = new JwtSecurityToken(
-            issuer: "https://localhost:7288",
-            audience: "https://localhost:44412",
-            claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(10), // Adjust expiration as needed
-            signingCredentials: credentials
-        );
+            var key = Encoding.ASCII.GetBytes(base64Key);
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, user.Id),
+                    // Add other claims as needed
+                }),
+                Expires = DateTime.Now.AddMinutes(10), // expiration time controls how long the JWT token is valid on the server side.
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
+        }
     }
 }
+

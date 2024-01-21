@@ -2,5 +2,5 @@ using webapp_accessability.Models;
 
 public interface IJwtService
 {
-    string GenerateToken(ApplicationUser user);
+    string GenerateJwtToken(ApplicationUser user);
 }

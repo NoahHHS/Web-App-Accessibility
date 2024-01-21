@@ -17,15 +17,18 @@ public class LoginController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger<LoginController> _logger;
+    private readonly IJwtService _jwtService;
 
     public LoginController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        ILogger<LoginController> logger)
+        ILogger<LoginController> logger,
+        IJwtService jwtService)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
+        _jwtService = jwtService;
     }
 
     [HttpPost]
@@ -46,21 +49,23 @@ public class LoginController : ControllerBase
                 return BadRequest(new { Message = "Invalid login attempt" });
             }
 
-            // Log the actual password provided during the login attempt
-            _logger.LogError(" WILL SAY FAIL BUT IT SUCCEEDED\nPassword provided for user with email {Email}: {ProvidedPassword}", model.Email, model.Password);
-
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
                 // User successfully logged in
-                var token = GenerateJwtToken(user);
+                var token = _jwtService.GenerateJwtToken(user);
 
-                // Log success or additional information
-                _logger.LogInformation($"User {user.UserName} signed in successfully.");
+                // Attach the token to the response as a cookie
+                Response.Cookies.Append("access_token", token, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.Now.AddMinutes(10), // expiration time controls how long the browser should retain the cookie containing the JWT token.
+                    SameSite = SameSiteMode.Strict,
+                    Secure = true // Use 'Secure' only if your application is served over HTTPS
+                });
 
                 return Ok(new { UserId = user.Id, Token = token, Message = "Login successful" });
-                //return Ok(new { UserId = user.Id, Message = "Login successful" });
             }
             else
             {
@@ -78,7 +83,7 @@ public class LoginController : ControllerBase
             }
 
             // Log failure or additional information
-            _logger.LogError("Invalid login attempt for user with email: {Email}", model.Email);
+            // _logger.LogError("Invalid login attempt for user with email: {Email}", model.Email);
 
             return BadRequest(new { Message = "Invalid login attempt" });
         }
@@ -86,36 +91,6 @@ public class LoginController : ControllerBase
         {
             _logger.LogError(ex, "An unexpected error occurred during login.");
             return StatusCode(500, "An unexpected error occurred.");
-        }
-    }
-
-    // Method to generate a JWT token
-    private string GenerateJwtToken(ApplicationUser user)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        
-        // Use RandomNumberGenerator to generate a random key
-        using (var randomNumberGenerator = RandomNumberGenerator.Create())
-        {
-            var keyBytes = new byte[32]; // 32 bytes for a 256-bit key
-            randomNumberGenerator.GetBytes(keyBytes);
-            var base64Key = Convert.ToBase64String(keyBytes);
-
-            var key = Encoding.ASCII.GetBytes(base64Key);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id),
-                    // Add other claims as needed
-                }),
-                Expires = DateTime.Now.AddMinutes(10), // Token expiration time
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
         }
     }
 }
