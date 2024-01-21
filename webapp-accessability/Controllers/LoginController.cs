@@ -118,25 +118,4 @@ public class LoginController : ControllerBase
             return tokenHandler.WriteToken(token);
         }
     }
-
-    // oude jwt token generator
-    // private string GenerateJwtToken(ApplicationUser user)
-    // {
-    //     var tokenHandler = new JwtSecurityTokenHandler();
-    //     var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123"); // your_secret_key
-
-    //     var tokenDescriptor = new SecurityTokenDescriptor
-    //     {
-    //         Subject = new ClaimsIdentity(new[]
-    //         {
-    //             new Claim(ClaimTypes.Name, user.Id),
-    //             // Add other claims as needed
-    //         }),
-    //         Expires = DateTime.Now.AddMinutes(10), // Token expiration time
-    //         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-    //     };
-
-    //     var token = tokenHandler.CreateToken(tokenDescriptor);
-    //     return tokenHandler.WriteToken(token);
-    // }
 }

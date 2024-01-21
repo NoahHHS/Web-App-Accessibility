@@ -10,16 +10,16 @@ using System.Security.Cryptography;
 
 [ApiController]
 [Route("[controller]")]
-public class RegistrationController : ControllerBase
+public class RegistreerController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _applicationUser;
     private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly ILogger<RegistrationController> _logger;
+    private readonly ILogger<RegistreerController> _logger;
 
-    public RegistrationController(
+    public RegistreerController(
         UserManager<ApplicationUser> userManager, 
         SignInManager<ApplicationUser> signInManager,
-        ILogger<RegistrationController> logger)
+        ILogger<RegistreerController> logger)
     {
         _applicationUser = userManager;
         _signInManager = signInManager;
@@ -39,6 +39,80 @@ public class RegistrationController : ControllerBase
             };
 
             var result = await _applicationUser.CreateAsync(user, model.Password);
+
+            if (result.Succeeded)
+            {
+                // Customize as needed - here we're signing in the user after successful registration
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                // You can generate and return a JWT token if needed
+                //var token = GenerateJwtToken(user);
+
+                return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
+            }
+            else
+            {
+                _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
+                // Registration failed, handle errors
+                //return BadRequest(result.Errors);
+                return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
+            }
+        }
+
+        // Invalid registration data, handle accordingly
+        return BadRequest("Invalid registration data");
+    }
+
+    [HttpPost("Account")]
+    public async Task<IActionResult> RegisterNormaalGebruiker([FromBody] GebruikerRegistreerDTO model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                // Set other properties as needed
+            };
+
+            var result = await _applicationUser.CreateAsync(user, model.Wachtwoord);
+
+            if (result.Succeeded)
+            {
+                // Customize as needed - here we're signing in the user after successful registration
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                // You can generate and return a JWT token if needed
+                //var token = GenerateJwtToken(user);
+
+                return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
+            }
+            else
+            {
+                _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
+                // Registration failed, handle errors
+                //return BadRequest(result.Errors);
+                return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
+            }
+        }
+
+        // Invalid registration data, handle accordingly
+        return BadRequest("Invalid registration data");
+    }
+
+    [HttpPost("Bedrijfsaccount")]
+    public async Task<IActionResult> RegisterBedrijfsGebruiker([FromBody] BedrijfRegistreerDTO model)
+    {
+        if (ModelState.IsValid)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                // Set other properties as needed
+            };
+
+            var result = await _applicationUser.CreateAsync(user, model.Wachtwoord);
 
             if (result.Succeeded)
             {
@@ -92,26 +166,4 @@ public class RegistrationController : ControllerBase
             return tokenHandler.WriteToken(token);
         }
     }
-
-    // oude jwt token generator
-    // private string GenerateJwtToken(ApplicationUser user)
-    // {
-    //     var tokenHandler = new JwtSecurityTokenHandler();
-    //     var key = Encoding.ASCII.GetBytes("asdaaweae_131_12351341@123123"); // your_secret_key
-
-    //     var tokenDescriptor = new SecurityTokenDescriptor
-    //     {
-    //         Subject = new ClaimsIdentity(new[]
-    //         {
-    //             new Claim(ClaimTypes.Name, user.Id),
-    //             // Add other claims as needed
-    //         }),
-    //         Expires = DateTime.Now.AddMinutes(10), // Token expiration time
-    //         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-    //     };
-
-    //     var token = tokenHandler.CreateToken(tokenDescriptor);
-    //     return tokenHandler.WriteToken(token);
-    // }
-
 }
