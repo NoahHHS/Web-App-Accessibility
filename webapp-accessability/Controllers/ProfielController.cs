@@ -24,7 +24,17 @@ public class ProfielController : ControllerBase
 
    private async Task<ApplicationUser> GetCurrentUser(){
       var user = await _userManager.GetUserAsync(HttpContext.User);
+      var HardCodedUser = _context.ApplicationUsers.First();
       return user;
+   }
+
+   [HttpGet]
+   [Route("GetMedischeGegevens")]
+   public IEnumerable<Medischegegevens> GetMedischeGegevens(){
+      var currentUser = GetCurrentUser();
+      var accountData = _context.Medischegegevens.Where(m => m.ApplicationUserId == currentUser.Id.ToString())
+                                                 .ToList();
+      return accountData;
    }
 
    [HttpPut]
