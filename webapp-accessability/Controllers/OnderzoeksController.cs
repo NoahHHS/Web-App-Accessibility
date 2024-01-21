@@ -8,12 +8,15 @@ public class OnderzoeksController : ControllerBase
 {
     private ApplicationDbContext context;
     private readonly CrudOnderzoekService _onderzoekService;
-     public OnderzoeksController(CrudOnderzoekService onderzoekService)
+    
+    public OnderzoeksController(ApplicationDbContext DBcontext)
     {
-        _onderzoekService = onderzoekService;
+        context = DBcontext;
+        _onderzoekService = new CrudOnderzoekService(context);
     }
     
-    [Route("api/onderzoeksNaamEnBeschrijving")]
+    
+    [HttpGet("GetNaamenBeschrijving")]
     public IActionResult GetNaamEnBeschrijving()
     {
 
@@ -29,7 +32,7 @@ public class OnderzoeksController : ControllerBase
         return Ok(result);
     }
     
-    [Route("api/onderzoeksNaam")]
+    [HttpGet("GetNaam")]
     public IActionResult GetNaam(string Id)
     {
         var Onderzoek = context.Onderzoeken.FirstOrDefault(O => O.Id.ToString() == Id);
@@ -41,8 +44,7 @@ public class OnderzoeksController : ControllerBase
         return Ok(result);
 
     }
-    [HttpPost]
-    [Route("api/onderzoeksDeelnemer")]
+    [HttpPost("onderzoeksDeelnemer")]
     public IActionResult Deelnemen([FromBody]Deelname deelname)
     {
         if (ModelState.IsValid)
