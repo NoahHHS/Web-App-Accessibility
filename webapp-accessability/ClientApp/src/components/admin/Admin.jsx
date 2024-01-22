@@ -29,25 +29,21 @@ export class Admin extends Component {
   }
 
   fetchGebruikerData = () => {
-    // Simulate fetching gebruiker data from the database or API
-    const gebruikerDataFromDB = [
-      'Gebruiker 1',
-      'Gebruiker 2',
-      'Gebruiker 3',
-      'Gebruiker 4',
-      'Gebruiker 5',
-      'Gebruiker 6',
-    ];
-
-    this.setState({
-      gebruikerData: gebruikerDataFromDB,
-      filteredGebruikerData: gebruikerDataFromDB,
-    });
+    // Fetch gebruiker data from the API or database
+    fetch('https://localhost:7288/admin/GetGebruikers')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          gebruikerData: data,
+          filteredGebruikerData: data,
+        });
+      })
+      .catch((error) => console.error('Error fetching gebruiker data:', error));
   };
 
   fetchOnderzoekData = () => {
     // Fetch onderzoek data from the API or database
-    fetch('/admin/GetOnderzoeken')
+    fetch('https://localhost:7288/admin/GetOnderzoeken')
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -85,24 +81,42 @@ export class Admin extends Component {
     this.closeModal();
   };
 
-  handleVerwijderButtonClick = () => {
-    // Perform the delete operation
+  handleVerwijderOnderzoekButtonClick = () => {
     const { selectedItem } = this.state;
-    if (!selectedItem) return;
-
-    fetch(`/admin/VerwijderOnderzoek/${selectedItem.Id}`, {
-      method: 'DELETE',
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        // Refresh onderzoek data after deletion
-        this.fetchOnderzoekData();
+    
+    if (selectedItem.id) {
+      // Delete onderzoek
+      fetch(`https://localhost:7288/admin/VerwijderOnderzoek/${selectedItem.id}`, {
+        method: 'DELETE',
       })
-      .catch((error) => console.error('Error deleting onderzoek:', error));
+        .then((response) => response.json())
+        .then(() => {
+          // Refresh data after deletion
+          this.fetchOnderzoekData();
+          // Close the modal
+          this.closeModal();
+        })
+        .catch((error) => console.error('Error deleting onderzoek:', error));
+    }
+  };
 
-    // Close the modal
-    this.closeModal();
+  handleVerwijderGebruikerButtonClick = () => {
+    const { selectedItem } = this.state;
+  
+    if (selectedItem.id) {
+      // Delete gebruiker
+      fetch(`https://localhost:7288/admin/VerwijderGebruiker/${selectedItem.id}`, {
+        method: 'DELETE',
+      })
+        .then((response) => response.json())
+        .then(() => {
+          // Refresh data after deletion
+          this.fetchGebruikerData();
+          // Close the modal
+          this.closeModal();
+        })
+        .catch((error) => console.error('Error deleting gebruiker:', error));
+    }
   };
 
   handleGebruikerItemClick = (item) => {
@@ -118,7 +132,7 @@ export class Admin extends Component {
   handleGebruikerSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.gebruikerData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.userName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -128,7 +142,7 @@ export class Admin extends Component {
   handleOnderzoekSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.onderzoekData.filter((item) =>
-      item.Naam.toLowerCase().includes(searchTerm.toLowerCase())
+      item.naam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -158,7 +172,7 @@ export class Admin extends Component {
                 onClick={() => this.handleGebruikerItemClick(gebruiker)}
                 style={{ cursor: 'pointer' }}
               >
-                {gebruiker}
+                {gebruiker.userName}
               </li>
             ))}
           </ul>
@@ -182,7 +196,7 @@ export class Admin extends Component {
                 onClick={() => this.handleOnderzoekItemClick(onderzoek)}
                 style={{ cursor: 'pointer' }}
               >
-                {onderzoek.Naam}
+                {onderzoek.naam}
               </li>
             ))}
           </ul>
@@ -190,32 +204,97 @@ export class Admin extends Component {
 
         {/* Gebruiker Modal/Pop-up */}
         {this.state.isGebruikerModalOpen && (
-          <div>
-            <div className="modal-overlay"></div>
-            <div className="modal-container">
-              <span className="sluiten" onClick={this.closeModal}>
-                &times;
-              </span>
-              <h2 className="Otitel">Gebruikersdata</h2>
-              <p className="Otext">Details voor: {this.state.selectedItem}</p>
-              {/* Add more details as needed */}
-              <div className="Opslaanknop-Verwijderknop-container">
-                <button
-                  className="Opslaanknop"
-                  onClick={this.handleOpslaanButtonClick}
-                >
-                  Opslaan
-                </button>
-                <button
-                  className="Verwijderknop"
-                  onClick={this.handleVerwijderButtonClick}
-                >
-                  Verwijderen
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
+  <div>
+    <div className="modal-overlay"></div>
+    <div className="modal-container">
+      <span className="sluiten" onClick={this.closeModal}>
+        &times;
+      </span>
+      <h2 className="Otitel">Gebruikersdata</h2>
+
+      {/* Conditionally render rows */}
+      {this.state.selectedItem.naam && (
+        <p className="Otext">Naam: {this.state.selectedItem.naam}</p>
+      )}
+      {this.state.selectedItem.userName && (
+        <p className="Otext">Gebruikersnaam: {this.state.selectedItem.userName}</p>
+      )}
+      {this.state.selectedItem.email && (
+        <p className="Otext">E-mail: {this.state.selectedItem.email}</p>
+      )}
+      {this.state.selectedItem.rol && (
+        <p className="Otext">Rol: {this.state.selectedItem.rol}</p>
+      )}
+      {this.state.selectedItem.bedrijfsNaam && (
+        <p className="Otext">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
+      )}
+      {this.state.selectedItem.voorkeurBenadering && (
+        <p className="Otext">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
+      )}
+      {this.state.selectedItem.beschikbaarheid && (
+        <p className="Otext">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
+      )}
+
+      {/* Address details */}
+      {this.state.selectedItem.adres && (
+        <p className="Otext">Adres: {`${this.state.selectedItem.adres.straat} ${this.state.selectedItem.adres.huisNr} ${this.state.selectedItem.adres.toevoeging}, ${this.state.selectedItem.adres.postcode}`}</p>
+      )}
+
+      {/* Medische gegevens */}
+      {this.state.selectedItem.medischegegevens && this.state.selectedItem.medischegegevens.length > 0 && (
+        <div>
+          <h3>Medische Gegevens</h3>
+          <ul>
+            {this.state.selectedItem.medischegegevens.map((medisch, index) => (
+              <li key={index}>
+                {medisch.beperking && (
+                  <p>Beperking: {medisch.beperking}</p>
+                )}
+                {medisch.hulpmiddelen && (
+                  <p>Hulpmiddelen: {medisch.hulpmiddelen}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Deelnames */}
+      {this.state.selectedItem.deelnames && this.state.selectedItem.deelnames.length > 0 && (
+        <div>
+          <h3>Deelnames</h3>
+          <ul>
+            {this.state.selectedItem.deelnames.map((deelname, index) => (
+              <li key={index}>
+                {deelname.datum && (
+                  <p>Datum: {deelname.datum}</p>
+                )}
+                {deelname.onderzoek && deelname.onderzoek.naam && (
+                  <p>Onderzoek: {deelname.onderzoek.naam}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="Opslaanknop-Verwijderknop-container">
+        <button
+          className="Opslaanknop"
+          onClick={this.handleOpslaanButtonClick}
+        >
+          Opslaan
+        </button>
+        <button
+          className="Verwijderknop"
+          onClick={this.handleVerwijderGebruikerButtonClick}
+        >
+          Verwijderen
+        </button>
+      </div>
+    </div>
+  </div>
+)}
 
        {/* Onderzoek Modal/Pop-up */}
        {this.state.isOnderzoekModalOpen && (
@@ -226,15 +305,15 @@ export class Admin extends Component {
                 &times;
               </span>
               <h2 className="Otitel">Onderzoeksdata</h2>
-              <p className="Otext">Naam van het onderzoek: {this.state.selectedItem.Naam}</p>
-              <p className="Otext">Beschrijving: {this.state.selectedItem.Omschrijving}</p>
-              <p className="Otext">StartDatum: {this.state.selectedItem.StartDatum}</p>
-              <p className="Otext">EindDatum: {this.state.selectedItem.EindDatum}</p>
-              <p className="Otext">Status: {this.state.selectedItem.Status}</p>
-              <p className="Otext">Type: {this.state.selectedItem.Type}</p>
-              <p className="Otext">MedewerkerId: {this.state.selectedItem.MedewerkerId}</p>
-              <p className="Otext">LinkId: {this.state.selectedItem.LinkId}</p>
-              <p className="Otext">LocatieId: {this.state.selectedItem.LocatieId}</p>
+              <p className="Otext">Naam van het onderzoek: {this.state.selectedItem.naam}</p>
+              <p className="Otext">Beschrijving: {this.state.selectedItem.omschrijving}</p>
+              <p className="Otext">StartDatum: {this.state.selectedItem.startDatum}</p>
+              <p className="Otext">EindDatum: {this.state.selectedItem.eindDatum}</p>
+              <p className="Otext">Status: {this.state.selectedItem.status}</p>
+              <p className="Otext">Type: {this.state.selectedItem.type}</p>
+              <p className="Otext">MedewerkerId: {this.state.selectedItem.medewerkerId}</p>
+              <p className="Otext">LinkId: {this.state.selectedItem.linkId}</p>
+              <p className="Otext">LocatieId: {this.state.selectedItem.locatieId}</p>
 
               <div className="Opslaanknop-Verwijderknop-container">
                 <button
@@ -245,7 +324,7 @@ export class Admin extends Component {
                 </button>
                 <button
                   className="Verwijderknop"
-                  onClick={this.handleVerwijderButtonClick}
+                  onClick={this.handleVerwijderOnderzoekButtonClick}
                 >
                   Verwijderen
                 </button>
