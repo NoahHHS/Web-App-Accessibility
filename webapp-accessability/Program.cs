@@ -26,8 +26,6 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-// builder.Services.AddAuthentication()
-//     .AddIdentityServerJwt();
 builder.Services.AddAuthentication()
     .AddJwtBearer(options =>
     {
@@ -43,15 +41,12 @@ builder.Services.AddAuthentication()
         };
     });
 
-
 builder.Services.AddSingleton<IJwtService, JwtService>();
-
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
-// Add Swagger services
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API accessibility back-end", Version = "v1" });
