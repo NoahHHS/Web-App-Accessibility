@@ -59,3 +59,13 @@
 .Profiel-Data {
     font-size: 22px;
 }
+
+.Medische-DataItem{
+    display: block;
+    margin-bottom: 20px;
+}
+
+.Medische-DataLijst {
+    list-style-type: none;
+    text-align: center;
+}

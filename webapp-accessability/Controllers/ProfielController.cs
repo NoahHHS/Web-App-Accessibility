@@ -50,7 +50,7 @@ public class ProfielController : ControllerBase
    }
 
    [HttpGet]
-   [Route("GetGetProfileData")]
+   [Route("GetProfileData")]
    [ProducesResponseType(typeof(ProfielDTO), 200)]
    public async Task<IActionResult> GetProfileData(){
       var currentUser = await GetCurrentUser();

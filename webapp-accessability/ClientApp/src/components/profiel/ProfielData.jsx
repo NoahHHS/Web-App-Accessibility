@@ -59,7 +59,7 @@ const FetchMedischeData = () => {
   const { data: medischeData, isLoading, isError, error } = useQuery({
     queryKey: ['medischeData'],
     queryFn: async () => {
-      const response = await fetch('/Profiel/GetMedischeGegevens');
+      const response = await fetch('https://localhost:7288/profiel/GetMedischeGegevens');
       if (!response.ok) {
         console.error(response);
         throw new Error('Unable to fetch medical data');
@@ -79,10 +79,9 @@ const FetchMedischeData = () => {
 
   return (
     <div className='Medische-DataItem'>
-      <h3>Medische gegevens</h3>
-      <ul>
+      <ul className='Medische-DataLijst'>
         {medischeData.map((item, index) => (
-          <li key={index}>
+          <li className='Medische-DataLijstItem' key={index}>
             <div>
               <ProfielGegeven typeGegeven="Ziekte" value={item.beperking} />
               <ProfielGegeven typeGegeven="Hulpmiddelen" value={item.hulpmiddelen} />
