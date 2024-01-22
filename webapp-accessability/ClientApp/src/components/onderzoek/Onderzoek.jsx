@@ -39,7 +39,7 @@ const Zoekbalk = () => {
 }
 
 const OnderzoekList = [
-  
+  //fetch list van onderzoeken
 ]
 
 function OnderzoekDetails() {
@@ -50,13 +50,35 @@ function OnderzoekDetails() {
   console.log("called");
 }
 
+const sendData = async () => {
+  let id = document.querySelector('.Onderzoek').getAttribute('data-oz-id');
+  const uId = sessionStorage.getItem('GUID');
+
+  const response = await fetch('https://localhost:7288/Onderzoeks/Deelnemen', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      userId: uId,
+      onderzoeksId: id
+    })
+  });
+  console.log(response.ok);
+// INGELOGD ok!!
+
+sessionStorage.setItem('GUID', '147f296c-24c5-4759-a64c-9d76155fe2be');
+
+  setModal(!modal);
+}
+
 if(modal) {
   document.body.classList.add('active-modal')
 } else {
   document.body.classList.remove('active-modal')
-}
+} // for loop voor elk element in OnderzoekList
   return (
-      <section className='Onderzoek'>
+      <section className='Onderzoek' data-oz-id="1">
         <section className='logo'>
         <img src='../../Assets/image.png' width='250px' height='250px' alt='logo accesability'/>
         </section>
@@ -70,7 +92,7 @@ if(modal) {
         <div className="pmodal-content">
           <h2 className="popuptitel" title='Popuptitel'><strong>LET OP</strong></h2>
           <p className="popuptekst" title='Popuptekst'>Je gaat nu deelnemen -onderzoeksnaam-</p>
-          <button className='add-modal' onClick={toggleModal} title='Deelnemen'>Neem Deel</button>
+          <button className='add-modal' onClick={sendData} title='Deelnemen'>Neem Deel</button>
           <button className="cancel-modal" onClick={toggleModal} title='Niet deelnemen'>Cancel</button>
         </div>
       </section>)
