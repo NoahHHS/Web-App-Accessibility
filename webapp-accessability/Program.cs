@@ -57,15 +57,27 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API accessibility back-end", Version = "v1" });
 });
 
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("ReactAppPolicy", builder =>
+//     {
+//         builder.AllowAnyOrigin() // Allow requests from any origin (for development only)
+//                .AllowAnyHeader()
+//                .AllowAnyMethod();
+//     });
+// });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy", builder =>
     {
-        builder.AllowAnyOrigin() // Allow requests from any origin (for development only)
+        builder.WithOrigins("https://localhost:44412") // Update with your React app's origin
                .AllowAnyHeader()
-               .AllowAnyMethod();
+               .AllowAnyMethod()
+               .AllowCredentials(); // Allow credentials (cookies) to be sent with the request
     });
 });
+
 
 var app = builder.Build();
 

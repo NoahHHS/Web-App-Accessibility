@@ -33,6 +33,7 @@ const GebruikerInlogForm = ({ onSubmit }) => {
                     headers: {
                         "Content-Type": "application/json",
                     },
+                    withCredentials: true,
                 }
             );
 
