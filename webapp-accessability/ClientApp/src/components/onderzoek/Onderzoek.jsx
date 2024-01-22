@@ -51,9 +51,11 @@ function OnderzoekDetails() {
 }
 
 const sendData = async () => {
+  // pakt OnderzoekID van data-oz-id attribuut
   let id = document.querySelector('.Onderzoek').getAttribute('data-oz-id');
+  // pakt van sessionstorage de huidige UserId
   const uId = sessionStorage.getItem('GUID');
-
+  // stuurt post request naar deelneem endpoint
   const response = await fetch('https://localhost:7288/Onderzoeks/Deelnemen', {
     method: 'POST',
     headers: {
@@ -66,7 +68,7 @@ const sendData = async () => {
   });
   console.log(response.ok);
 // INGELOGD ok!!
-
+// set een key genaamd 'GUID' in de sessionstorage en als value de huidige userId (is nog hardcoded)
 sessionStorage.setItem('GUID', '147f296c-24c5-4759-a64c-9d76155fe2be');
 
   setModal(!modal);
