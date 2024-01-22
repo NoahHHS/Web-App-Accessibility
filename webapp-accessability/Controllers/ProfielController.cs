@@ -28,8 +28,8 @@ public class ProfielController : ControllerBase
    //var HardCodedUser = _context.ApplicationUsers.First();
    private async Task<ApplicationUser> GetCurrentUser(){
       var user = await _userManager.GetUserAsync(HttpContext.User);
-      
-      return user;
+      var HardCodedUser = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
+      return HardCodedUser;
    }
 
    [HttpPost]
@@ -45,6 +45,7 @@ public class ProfielController : ControllerBase
          Hulpmiddelen = _Hulpmiddelen,
          ApplicationUserId = currentUser.Id
       });
+      _context.SaveChanges();
       return Ok();
    }
 
@@ -57,7 +58,14 @@ public class ProfielController : ControllerBase
          return NotFound();
       }
 
-      var Adres = _context.Adressen.Single(adres => adres.Id == currentUser.AdresId);
+      var Adres = _context.Adressen.FirstOrDefault(adres => adres.Id == currentUser.AdresId);
+      if(Adres == null){
+         Adres = new Adres(){
+            Straat = "",
+            HuisNr = 0,
+            Postcode = ""
+         };
+      }
       var ProfileData = _context.ApplicationUsers.Where(user => user.Id == currentUser.Id.ToString())
                                                  .Select(u => new ProfielDTO(){
                                                    Naam = u.Naam,
@@ -67,7 +75,7 @@ public class ProfielController : ControllerBase
                                                    HuisNr = Adres.HuisNr,
                                                    Postcode = Adres.Postcode
                                                  })
-                                                 .ToList();
+                                                 .FirstOrDefault();
       
       if(ProfileData == null){
          return NotFound();
