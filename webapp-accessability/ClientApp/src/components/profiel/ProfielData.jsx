@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import '../../stylesheets/Profiel.css'
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 export class ProfielData extends Component {
     static displayName = ProfielData.name;
 
   render() {
     return (
+      <QueryClientProvider client={queryClient}>
       <div>
         <h1 className='pagetitle'>Mijn Gegevens</h1>
         <section className='profiel-section'>
@@ -22,11 +30,11 @@ export class ProfielData extends Component {
         </section>
         <section className='profiel-section'>
         <h2 className='subtitle profielh2'>Medische gegevens</h2>
-          <ProfielGegeven typeGegeven="Ziekte"/>
-          <ProfielGegeven typeGegeven="Hulpmiddelen" />
+          <FetchMedischeData />
         </section>
         <ProfileButton/>
       </div>
+      </QueryClientProvider>
     );
   }
 }
@@ -46,3 +54,40 @@ const ProfielGegeven = (prop) => {
         </div>
     );
 }
+
+const FetchMedischeData = () => {
+  const { data: medischeData, isLoading, isError } = useQuery({
+    queryKey: 'medischeData',
+    queryFn: async () => {
+      const response = await fetch('/Profiel/GetMedischeGegevens');
+      if (!response.ok) {
+        throw new Error('Unable to fetch medical data');
+      }
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching medical data</div>;
+  }
+
+  return (
+    <div className='Medische-DataItem'>
+      <h3>Medische gegevens</h3>
+      <ul>
+        {medischeData.map((item, index) => (
+          <li key={index}>
+            <div>
+              <ProfielGegeven typeGegeven="Ziekte" value={item.beperking} />
+              <ProfielGegeven typeGegeven="Hulpmiddelen" value={item.hulpmiddelen} />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
