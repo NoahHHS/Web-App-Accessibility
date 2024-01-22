@@ -14,6 +14,7 @@ import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
 import { Admin } from './components/admin/Admin';
 
+
 const AppRoutes = [
   {
     index: true,
@@ -42,10 +43,12 @@ const AppRoutes = [
   },
   {
     path: '/profiel',
+    requireAuth: true,
     element: <ProfielData/>
   },
   {
     path: '/profiel/edit',
+    requireAuth: true,
     element: <ProfielEdit/>
   },
   {
