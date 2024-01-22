@@ -71,7 +71,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy", builder =>
     {
-        builder.WithOrigins("https://localhost:44412") // Update with your React app's origin
+        builder.WithOrigins("https://localhost:44412")
                .AllowAnyHeader()
                .AllowAnyMethod()
                .AllowCredentials(); // Allow credentials (cookies) to be sent with the request
@@ -99,8 +99,10 @@ else
     app.UseHsts();
 }
 
+// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 // Apply CORS globally

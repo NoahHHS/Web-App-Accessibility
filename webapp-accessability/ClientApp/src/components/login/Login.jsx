@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import '../../stylesheets/RegistreerEnLogin.css';
 
@@ -18,7 +19,8 @@ export const Login = () => {
 const GebruikerInlogForm = ({ onSubmit }) => {
     const [email, setEmail] = useState('');
     const [wachtwoord, setWachtwoord] = useState('');
-    
+    const navigate = useNavigate(); // Create a navigate function
+
     //---------- Afhandeling van formulierinzending ----------
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -37,10 +39,11 @@ const GebruikerInlogForm = ({ onSubmit }) => {
                 }
             );
 
-            // Handle the response, e.g., store the token in local storage
-            const { token, userId } = response.data;
-            localStorage.setItem("JWT_access_token", token);
-            localStorage.setItem("user_id", userId);
+            // Assuming a successful login if the status code is 200
+            if (response.status === 200) {
+                // Perform client-side redirection
+                navigate('/'); 
+            }
 
             // Call the parent onSubmit callback if provided
             if (onSubmit) {
