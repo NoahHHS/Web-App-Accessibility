@@ -27,9 +27,9 @@ public class ProfielController : ControllerBase
 
    //var HardCodedUser = _context.ApplicationUsers.First();
    private async Task<ApplicationUser> GetCurrentUser(){
-      var user = await _userManager.GetUserAsync(HttpContext.User);
-      var HardCodedUser = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
-      return HardCodedUser;
+      //var user = await _userManager.GetUserAsync(HttpContext.User);
+      var user = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
+      return user;
    }
 
    [HttpPost]
