@@ -29,7 +29,10 @@ const GebruikerInlogForm = () => {
         try {
             const response = await apiClient.post("https://localhost:7288/Login", { email, wachtwoord });
             if (response.status === 200) {
-                localStorage.setItem('JWT_access_token', response.data.Token);
+                const { token, userId } = response.data;
+                console.log('Login successful:', token);
+                console.log('UserId:', userId)
+                //localStorage.setItem('JWT_access_token', token);
                 navigate('/'); // Navigate to homepage
             }
         } catch (error) {
