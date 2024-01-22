@@ -56,11 +56,12 @@ const ProfielGegeven = (prop) => {
 }
 
 const FetchMedischeData = () => {
-  const { data: medischeData, isLoading, isError } = useQuery({
-    queryKey: 'medischeData',
+  const { data: medischeData, isLoading, isError, error } = useQuery({
+    queryKey: ['medischeData'],
     queryFn: async () => {
       const response = await fetch('/Profiel/GetMedischeGegevens');
       if (!response.ok) {
+        console.error(response);
         throw new Error('Unable to fetch medical data');
       }
       return response.json();
@@ -72,6 +73,7 @@ const FetchMedischeData = () => {
   }
 
   if (isError) {
+    console.error(error)
     return <div>Error fetching medical data</div>;
   }
 
