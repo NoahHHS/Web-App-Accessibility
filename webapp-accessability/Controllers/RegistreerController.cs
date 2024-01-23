@@ -19,14 +19,14 @@ namespace webapp_accessability.Controllers
             _roleManager = roleManager;
         }
 
-        [HttpPost]
+        [HttpPost("admin")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RegistreerAdminAndMedewerker([FromBody] RegistreerDTO registreer)
         {
             return await Register(registreer);
         }
 
-        [HttpPost("self")]
+        [HttpPost("gebruiker")]
         public async Task<IActionResult> RegisterSelf([FromBody] RegistreerDTO registreer)
         {
             if (!new[] { "Ervaringsdeskundige", "Bedrijf" }.Contains(registreer.Role))
