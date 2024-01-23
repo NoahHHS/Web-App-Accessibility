@@ -7,5 +7,6 @@ public class ProfielDTO
     public DateTime? Beschikbaarheid { get; set; }
     public string Straat { get; set; }
     public int HuisNr { get; set; }
+    public string Toevoeging { get; set; }
     public string Postcode { get; set; }
 }

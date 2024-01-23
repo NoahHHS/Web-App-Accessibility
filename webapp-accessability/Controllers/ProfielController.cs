@@ -135,17 +135,15 @@ public class ProfielController : ControllerBase
          }
    }
 
-   private bool UpdateAdres(ApplicationUser user, ProfielDTO updatedUserData)
-   {
+   private bool UpdateAdres(ApplicationUser user, ProfielDTO updatedUserData){
       bool exist = _context.Adressen.Any(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
 
-      if (!exist)
-      {
-         Adres UpdatedAdres = new Adres()
-         {
+      if (!exist){
+         Adres UpdatedAdres = new Adres(){
                Straat = updatedUserData.Straat,
                HuisNr = updatedUserData.HuisNr,
-               Postcode = updatedUserData.Postcode
+               Postcode = updatedUserData.Postcode,
+               Toevoeging = updatedUserData.Toevoeging
          };
 
          _context.Adressen.Add(UpdatedAdres);
@@ -154,26 +152,23 @@ public class ProfielController : ControllerBase
          return true;
       }
 
-      if (exist && user.AdresId == null)
-      {
+      if (exist && user.AdresId == null){
          var adres = _context.Adressen.First(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
          user.AdresId = adres.Id;
          return true;
       }
 
-      if (exist && user.AdresId != null)
-      {
+      if (exist && user.AdresId != null){
          var adres = _context.Adressen.FirstOrDefault(A => A.Id == user.AdresId);
 
-         if (adres == null)
-         {
+         if (adres == null){
                adres = _context.Adressen.First(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
          }
-         else
-         {
+         else{
                adres.Straat = updatedUserData.Straat;
                adres.Postcode = updatedUserData.Postcode;
                adres.HuisNr = updatedUserData.HuisNr;
+               adres.Toevoeging = updatedUserData.Toevoeging;
          }
 
          _context.Adressen.Update(adres);

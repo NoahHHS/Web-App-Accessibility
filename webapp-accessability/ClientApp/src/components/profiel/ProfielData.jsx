@@ -62,6 +62,7 @@ const ProfielDataContent = (props) => {
         <h2 className='subtitle profielh2'>Adres</h2>
         <ProfielGegeven typeGegeven="Straatnaam" value={profileData.straat} />
         <ProfielGegeven typeGegeven="Huisnummer" value={profileData.huisNr} />
+        <ProfielGegeven typeGegeven="Toevoeging" value={profileData.toevoeging} />
         <ProfielGegeven typeGegeven="Postcode" value={profileData.postcode} />
       </section>
       <section className='profiel-section'>
