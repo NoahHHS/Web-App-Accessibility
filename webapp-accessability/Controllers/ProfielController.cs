@@ -106,6 +106,9 @@ public class ProfielController : ControllerBase
 
       // Find the user in the database
       var user = await _userManager.FindByIdAsync(currentUser.Id);
+      if(user == null){
+         return BadRequest("Account not found");
+      }
 
       // Update address and user
       bool addressUpdated = UpdateAdres(user, updatedUserData);
