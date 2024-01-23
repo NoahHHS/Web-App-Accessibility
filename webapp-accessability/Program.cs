@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,27 +27,52 @@ builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
 builder.Services.AddAuthentication()
-    .AddIdentityServerJwt();
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "https://localhost:7288",
+            ValidAudience = "https://localhost:44412",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
+        };
+    });
+
+builder.Services.AddSingleton<IJwtService, JwtService>();
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
-// Add Swagger services
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API accessibility back-end", Version = "v1" });
 });
 
+// builder.Services.AddCors(options =>
+// {
+//     options.AddPolicy("ReactAppPolicy", builder =>
+//     {
+//         builder.AllowAnyOrigin() // Allow requests from any origin (for development only)
+//                .AllowAnyHeader()
+//                .AllowAnyMethod();
+//     });
+// });
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactAppPolicy", builder =>
     {
-        builder.AllowAnyOrigin() // Allow requests from any origin (for development only)
+        builder.WithOrigins("https://localhost:44412")
                .AllowAnyHeader()
-               .AllowAnyMethod();
+               .AllowAnyMethod()
+               .AllowCredentials(); // Allow credentials (cookies) to be sent with the request
     });
 });
+
 
 var app = builder.Build();
 
@@ -66,8 +94,10 @@ else
     app.UseHsts();
 }
 
+// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
 app.UseRouting();
 
 // Apply CORS globally
