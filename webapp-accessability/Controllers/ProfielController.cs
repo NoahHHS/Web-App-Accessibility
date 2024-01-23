@@ -25,30 +25,8 @@ public class ProfielController : ControllerBase
       _userManager = userManager;
    }
 
-   //var HardCodedUser = _context.ApplicationUsers.First();
-   private async Task<ApplicationUser> GetCurrentUser(){
-      //var user = await _userManager.GetUserAsync(HttpContext.User);
-      var user = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
-      return user;
-   }
 
-   [HttpPost]
-   [Route("MaakMedischeGegeven")]
-   public async Task<IActionResult> MaakMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
-      var currentUser = await GetCurrentUser();
-      if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == _Hulpmiddelen) && (m.Beperking == _Beperking))){
-         return BadRequest("Aandoening al toegevoegd");
-      }
-
-      _context.Medischegegevens.Add(new Medischegegevens{
-         Beperking = _Beperking,
-         Hulpmiddelen = _Hulpmiddelen,
-         ApplicationUserId = currentUser.Id
-      });
-      _context.SaveChanges();
-      return Ok();
-   }
-
+   //-------------------------------------------- HTTP GET Methods --------------------------------------------
    [HttpGet]
    [Route("GetProfileData")]
    [ProducesResponseType(typeof(ProfielDTO), 200)]
@@ -99,6 +77,25 @@ public class ProfielController : ControllerBase
       return MedischeData;
    }
 
+   //-------------------------------------------- HTTP POST Methods --------------------------------------------
+   [HttpPost]
+   [Route("MaakMedischeGegeven")]
+   public async Task<IActionResult> MaakMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
+      var currentUser = await GetCurrentUser();
+      if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == _Hulpmiddelen) && (m.Beperking == _Beperking))){
+         return BadRequest("Aandoening al toegevoegd");
+      }
+
+      _context.Medischegegevens.Add(new Medischegegevens{
+         Beperking = _Beperking,
+         Hulpmiddelen = _Hulpmiddelen,
+         ApplicationUserId = currentUser.Id
+      });
+      _context.SaveChanges();
+      return Ok();
+   }
+
+   //-------------------------------------------- HTTP PUT Methods --------------------------------------------
    [HttpPut]
    [Route("UpdateAccount")]
    public async Task<ActionResult> UpdateAccount(ProfielDTO updatedUserData){
@@ -135,6 +132,7 @@ public class ProfielController : ControllerBase
          }
    }
 
+   //-------------------------------------------- Functional Methods --------------------------------------------
    private bool UpdateAdres(ApplicationUser user, ProfielDTO updatedUserData){
       bool exist = _context.Adressen.Any(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
 
@@ -178,5 +176,12 @@ public class ProfielController : ControllerBase
       }
 
       return false;
+   }
+
+   //var HardCodedUser = _context.ApplicationUsers.First();
+   private async Task<ApplicationUser> GetCurrentUser(){
+      //var user = await _userManager.GetUserAsync(HttpContext.User);
+      var user = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
+      return user;
    }
 }
