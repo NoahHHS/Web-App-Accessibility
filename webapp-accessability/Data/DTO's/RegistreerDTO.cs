@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace webapp_accessability.Models;
-// RegistrationModel
+
 public class RegistreerDTO
 {
     [Required]
@@ -9,13 +9,20 @@ public class RegistreerDTO
     public string Email { get; set; }
 
     [Required]
-    [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-    public string Password { get; set; }
+    [StringLength(100, ErrorMessage = "Het {0} moet ten minste {2} en maximaal {1} tekens lang zijn.", MinimumLength = 6)]
+    public string Wachtwoord { get; set; }
 
     [Required]
-    public string Role { get; set; } // "Admin", "Medewerker", "Ervaringsdeskundige", "Bedrijf"
+    public string Rol { get; set; }
 
-    // Add additional fields as required
+    [Required]
+    public string Straat { get; set; }
+
+    [Required]
+    public int HuisNr { get; set; }
+
+    public string Toevoeging { get; set; }
+
+    [Required]
+    public string Postcode { get; set; }
 }
-
-
