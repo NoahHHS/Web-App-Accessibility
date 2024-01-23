@@ -96,6 +96,22 @@ public class ProfielController : ControllerBase
    }
 
    //-------------------------------------------- HTTP PUT Methods --------------------------------------------
+   [HttpDelete]
+   [Route("DeleteMedischeGegeven")]
+   public async Task<IActionResult> DeleteMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
+      var currentUser = await GetCurrentUser();
+      var MedischeGegeven = _context.Medischegegevens.FirstOrDefault(M => (M.ApplicationUserId == currentUser.Id) && (M.Hulpmiddelen == _Hulpmiddelen) && (M.Beperking == _Beperking));
+      if(MedischeGegeven == null){
+         return BadRequest("Medischegegevens niet verwijderd. Item niet gevonden in database");
+      }
+      else{
+         _context.Medischegegevens.Remove(MedischeGegeven);
+         _context.SaveChanges();
+         return Ok("Medischegegevens verwijderd");
+      }
+   }
+
+   //-------------------------------------------- HTTP PUT Methods --------------------------------------------
    [HttpPut]
    [Route("UpdateAccount")]
    public async Task<ActionResult> UpdateAccount(ProfielDTO updatedUserData){
