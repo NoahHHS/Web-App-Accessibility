@@ -8,6 +8,7 @@ import {
 
 const queryClient = new QueryClient();
 
+//------------------------------ ProfielEdit pagina component ------------------------------
 export class ProfielEdit extends Component {
     static displayName = ProfielEdit.name;
 
@@ -15,15 +16,19 @@ export class ProfielEdit extends Component {
       super(props);
       this.state = {
         userData: {
-          Naam: '',
-          Email: '',
-          Beschikbaarheid: '',
-          Straatnaam: '',
-          Huisnummer: '',
-          Postcode: '',
-          Stad: '',
-          Ziekte: '',
-          Hulpmiddelen: ''
+          naam: '',
+          email: '',
+          beschikbaarheid: '',
+          straatnaam: '',
+          huisnr: '',
+          postcode: '',
+          stad: '',
+          medischeData: [
+            {
+            ziekte: '',
+            hulpmiddelen: ''
+            }
+          ]
         },
       };
     }
