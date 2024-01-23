@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using webapp_accessability.Data;
 using webapp_accessability.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 [ApiController]
 [Route("[controller]")]
@@ -52,22 +53,24 @@ public class OnderzoeksController : ControllerBase
         return Ok(result);
 
     }
-    [HttpPost("onderzoeksDeelnemer")]
-    public IActionResult Deelnemen([FromBody]Deelname deelname)
+    [HttpPost("Deelnemen")]
+    public IActionResult Deelnemen([FromBody] DeelnameDTO deelnameDTO)
     {
-        if (ModelState.IsValid)
+     if (ModelState.IsValid && deelnameDTO.OnderzoeksId.All(char.IsDigit))
         {
-            // Maak een nieuw Onderzoek-object met de ontvangen gegevens
-            var nieuweDeelname = new Deelname
+            var deelname = new Deelname
             {
-                ApplicationUserId = deelname.ApplicationUserId,
-                OnderzoekId = deelname.OnderzoekId  
-                // Vul andere velden in zoals gewenst
+                ApplicationUserId = deelnameDTO.UserId,
+                OnderzoekId = Int32.Parse(deelnameDTO.OnderzoeksId)
             };
-            _onderzoekService.AddDeelnemer(nieuweDeelname);
-}
-    return Ok("Deelname succesvol");
-    
+
+            context.Deelnames.Add(deelname);
+            context.SaveChanges();
+
+            return Ok("Deelname toegevoegd");
+        }
+
+        return BadRequest("Ongeldige invoergegevens");
     }
     }
 
