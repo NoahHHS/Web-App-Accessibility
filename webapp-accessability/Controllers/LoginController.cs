@@ -1,66 +1,73 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using webapp_accessability.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
-[ApiController]
-[Route("[controller]")]
-public class LoginController : ControllerBase
+namespace webapp_accessability.Controllers
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly ILogger<LoginController> _logger;
-
-    public LoginController(
-        UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager,
-        ILogger<LoginController> logger)
+    [ApiController]
+    [Route("[controller]")]
+    public class LoginController : ControllerBase
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _logger = logger;
-    }
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IConfiguration _configuration;
+
+        public LoginController(UserManager<ApplicationUser> userManager, IConfiguration configuration)
+        {
+            _userManager = userManager;
+            _configuration = configuration;
+        }
 
     [HttpPost]
-    public async Task<IActionResult> Login([FromBody] LoginDTO model)
+    public async Task<IActionResult> Login([FromBody] LoginDTO loginModel)
     {
-        try
+        var user = await _userManager.FindByEmailAsync(loginModel.Email);
+        if (user != null && await _userManager.CheckPasswordAsync(user, loginModel.Wachtwoord))
         {
-            if (!ModelState.IsValid)
+            var token = await GenerateJwtToken(user); // Updated to async
+            var cookieOptions = new CookieOptions
             {
-                _logger.LogWarning("Ongeldige inloggegevens verstrekt.");
-                return BadRequest("Ongeldige inloggegevens");
-            }
-
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                _logger.LogWarning($"Inlogpoging met onbekend e-mailadres: {model.Email}");
-                return BadRequest(new { Message = "Onbekend e-mailadres. Wilt u een account aanmaken?" });
-            }
-
-            var result = await _signInManager.PasswordSignInAsync(user, model.Wachtwoord, isPersistent: false, lockoutOnFailure: false);
-            if (!result.Succeeded)
-            {
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("Gebruiker met e-mail {Email} is uitgesloten tot {LockoutEnd}", model.Email, user.LockoutEnd);
-                    return BadRequest(new { Message = "Account is uitgesloten. Probeer het later opnieuw." });
-                }
-
-                _logger.LogWarning($"Ongeldige inlogpoging voor gebruiker: {user.UserName}");
-                return BadRequest(new { Message = "Onjuist wachtwoord." });
-            }
-
-            _logger.LogInformation($"Gebruiker {user.UserName} succesvol ingelogd.");
-            return Ok(new { UserId = user.Id, Message = "Inloggen geslaagd" });
+                HttpOnly = true,
+                Expires = DateTime.Now.AddMinutes(10)
+            };
+            Response.Cookies.Append("AuthCookie", token, cookieOptions);
+            return Ok(new { message = "Success" });
         }
-        catch (Exception ex)
+        return Unauthorized();
+    }
+
+    private async Task<string> GenerateJwtToken(ApplicationUser user)
+    {
+        var userClaims = await _userManager.GetClaimsAsync(user);
+        var roles = await _userManager.GetRolesAsync(user);
+
+        var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
+
+        var authClaims = new List<Claim>
         {
-            _logger.LogError(ex, "Er is een onverwachte fout opgetreden tijdens het inloggen.");
-            return StatusCode(500, "Er is een onverwachte fout opgetreden.");
+            new Claim(ClaimTypes.NameIdentifier, user.Id),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         }
+        .Union(userClaims)
+        .Union(roleClaims);
+
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecretKey"]));
+
+        var token = new JwtSecurityToken(
+            expires: DateTime.Now.AddMinutes(10),
+            claims: authClaims,
+            signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
     }
 }
