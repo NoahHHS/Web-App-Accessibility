@@ -22,43 +22,51 @@ export class Medewerker extends Component {
   }
 
   componentDidMount() {
-    // Simulate fetching data from the database
-    const onderzoekDataFromDB = [
-      'Onderzoek 1',
-      'Onderzoek 2',
-      'Onderzoek 3',
-      'Onderzoek 4',
-      'Onderzoek 5',
-      'Onderzoek 6',
-    ];
+    // Fetch gebruiker data from the Medewerker controller
+    this.fetchGebruikerData();
 
-    const bedrijfAccountDataFromDB = [
-      'BedrijfAccount 1',
-      'BedrijfAccount 2',
-      'BedrijfAccount 3',
-      'BedrijfAccount 4',
-      'BedrijfAccount 5',
-      'BedrijfAccount 6',
-    ];
+    // Fetch bedrijf account data from the Medewerker controller
+    this.fetchBedrijfAccountData();
 
-    const gebruikerDataFromDB = [
-      'Gebruiker 1',
-      'Gebruiker 2',
-      'Gebruiker 3',
-      'Gebruiker 4',
-      'Gebruiker 5',
-      'Gebruiker 6',
-    ];
-
-    this.setState({
-      onderzoekData: onderzoekDataFromDB,
-      bedrijfAccountData: bedrijfAccountDataFromDB,
-      gebruikerData: gebruikerDataFromDB,
-      filteredOnderzoekData: onderzoekDataFromDB,
-      filteredBedrijfAccountData: bedrijfAccountDataFromDB,
-      filteredGebruikerData: gebruikerDataFromDB,
-    });
+    // Fetch onderzoek data from the Medewerker controller
+    this.fetchOnderzoekData();
   }
+
+  fetchGebruikerData = () => {
+    fetch('https://localhost:7288/medewerker/GetGebruikers')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          gebruikerData: data,
+          filteredGebruikerData: data,
+        });
+      })
+      .catch((error) => console.error('Error fetching gebruiker data:', error));
+  };
+
+  fetchBedrijfAccountData = () => {
+    fetch('https://localhost:7288/medewerker/GetBedrijfAccounts')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          bedrijfAccountData: data,
+          filteredBedrijfAccountData: data,
+        });
+      })
+      .catch((error) => console.error('Error fetching bedrijf account data:', error));
+  };
+
+  fetchOnderzoekData = () => {
+    fetch('https://localhost:7288/medewerker/GetOnderzoeken')
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          onderzoekData: data,
+          filteredOnderzoekData: data,
+        });
+      })
+      .catch((error) => console.error('Error fetching onderzoek data:', error));
+  };
 
   openGebruikerModal = () => {
     this.setState({ isGebruikerModalOpen: true });
@@ -94,8 +102,25 @@ export class Medewerker extends Component {
   };
 
   handleAccepterenClick = () => {
-    // To be implemented
-    this.closeModal();
+    const { selectedItem } = this.state;
+  
+    if (selectedItem.id) {
+      // Make a request to update the onderzoek status
+      fetch(`https://localhost:7288/medewerker/UpdateOnderzoekStatus/${selectedItem.id}`, {
+        method: 'PUT',
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Refresh data after the update
+            this.fetchOnderzoekData();
+            // Close the modal
+            this.closeModal();
+          } else {
+            console.error('Error updating onderzoek status');
+          }
+        })
+        .catch((error) => console.error('Error updating onderzoek status:', error));
+    }
   };
 
   handleAfwijzenClick = () => {
@@ -121,7 +146,7 @@ export class Medewerker extends Component {
   handleOnderzoekSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.onderzoekData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.naam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -131,7 +156,7 @@ export class Medewerker extends Component {
   handleBedrijfAccountSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.bedrijfAccountData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.bedrijfsnaam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -141,7 +166,7 @@ export class Medewerker extends Component {
   handleGebruikerSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.gebruikerData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.userName.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -153,11 +178,11 @@ export class Medewerker extends Component {
       <div className="mid-section">
         <h1 className="pagetitle">Medewerker Pagina</h1>
 
-        {/* Aangevraagde Onderzoeken */}
-        <h2 className="itemtitle">Aangevraagde onderzoeken</h2>
+        {/* Onderzoeken */}
+        <h2 className="itemtitle">Onderzoeken</h2>
         <div className="ZoekbalkContainer">
           <Zoekbalk
-            placeholder="Zoek door aangevraagde onderzoeken"
+            placeholder="Zoek door alle onderzoeken"
             data={this.state.onderzoekData}
             onSearch={this.handleOnderzoekSearch}
           />
@@ -171,17 +196,17 @@ export class Medewerker extends Component {
                 onClick={() => this.handleOnderzoekItemClick(onderzoek)}
                 style={{ cursor: 'pointer' }}
               >
-                {onderzoek}
+                {onderzoek.naam}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Aangevraagde Bedrijf Accounts */}
-        <h2 className="itemtitle">Aaangevraagde bedrijf accounts</h2>
+        {/* Bedrijf Accounts */}
+        <h2 className="itemtitle">Bedrijf Accounts</h2>
         <div className="ZoekbalkContainer">
           <Zoekbalk
-            placeholder="Zoek door aangevraagde bedrijf accounts"
+            placeholder="Zoek bedrijf accounts"
             data={this.state.bedrijfAccountData}
             onSearch={this.handleBedrijfAccountSearch}
           />
@@ -219,13 +244,12 @@ export class Medewerker extends Component {
                 onClick={() => this.handleGebruikerItemClick(gebruiker)}
                 style={{ cursor: 'pointer' }}
               >
-                {gebruiker}
+                {gebruiker.userName}
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Onderzoek Modal/Pop-up */}
         {this.state.isOnderzoekModalOpen && (
           <div>
             <div className="modal-overlay"></div>
@@ -234,31 +258,15 @@ export class Medewerker extends Component {
                 &times;
               </span>
               <h2 className="Otitel">Onderzoeksdata</h2>
-              <p className="Otext">Naam van het onderzoek</p>
-              <input
-                type="text"
-                id="titel"
-                className="Oinput"
-                placeholder={this.state.selectedItem}
-              />
-              <p className="Otext">beschrijving</p>
-              <input
-                type="text"
-                id="beschrijving"
-                className="Oinput"
-                placeholder="onderzoek"
-              />
-              <p className="Otext">Locatie onderzoek</p>
-              <input type="text" id="plek" className="Oinput" placeholder="Locatie" />
-              <p className="Otext">Datum onderzoek</p>
-              <input
-                type="date"
-                id="tijd"
-                className="Oinput"
-                placeholder="01/01/2025"
-              />
-              <p className="Otext">Link naar onderzoek.</p>
-              <input type="text" id="link" className="Oinput" placeholder="link" />
+              <p className="Otext">Naam van het onderzoek: {this.state.selectedItem.naam}</p>
+              <p className="Otext">Beschrijving: {this.state.selectedItem.omschrijving}</p>
+              <p className="Otext">StartDatum: {this.state.selectedItem.startDatum}</p>
+              <p className="Otext">EindDatum: {this.state.selectedItem.eindDatum}</p>
+              <p className="Otext">Type: {this.state.selectedItem.type}</p>
+              <p className="Otext">MedewerkerId: {this.state.selectedItem.medewerkerId}</p>
+              <p className="Otext">LinkId: {this.state.selectedItem.linkId}</p>
+              <p className="Otext">LocatieId: {this.state.selectedItem.locatieId}</p>
+
               <div className="Accepteren-Afwijzen-Container">
                 <button
                   className="Accepteren"
@@ -302,20 +310,14 @@ export class Medewerker extends Component {
                 <p className="BedrijfAccountText">
                   Email: {this.state.selectedItem}
                 </p>
-                <div className="Accepteren-Afwijzen-Container">
-                  <button
-                    className="Accepteren"
-                    onClick={this.handleAccepterenClick}
-                  >
-                    Accepteren
-                  </button>
-                  <button
-                    className="Afwijzen"
-                    onClick={this.handleAfwijzenClick}
-                  >
-                    Afwijzen
-                  </button>
-                </div>
+                <div className="Opslaanknop-container">
+                <button
+                  className="Opslaanknop"
+                  onClick={this.handleAddButtonClick}
+                >
+                  Opslaan
+                </button>
+              </div>
               </div>
             </div>
           </div>
@@ -323,15 +325,79 @@ export class Medewerker extends Component {
 
         {/* Gebruiker Modal/Pop-up */}
         {this.state.isGebruikerModalOpen && (
-          <div>
-            <div className="modal-overlay"></div>
-            <div className="modal-container">
-              <span className="sluiten" onClick={this.closeModal}>
-                &times;
-              </span>
-              <h2 className="Otitel">Gebruikersdata</h2>
-              <p className="Otext">Details voor: {this.state.selectedItem}</p>
-              {/* Add more details as needed */}
+        <div>
+        <div className="modal-overlay"></div>
+        <div className="modal-container">
+          <span className="sluiten" onClick={this.closeModal}>
+            &times;
+          </span>
+          <h2 className="Otitel">Gebruikersdata</h2>
+
+          {/* Conditionally render rows */}
+          {this.state.selectedItem.naam && (
+            <p className="Otext">Naam: {this.state.selectedItem.naam}</p>
+          )}
+          {this.state.selectedItem.userName && (
+            <p className="Otext">Gebruikersnaam: {this.state.selectedItem.userName}</p>
+          )}
+          {this.state.selectedItem.email && (
+            <p className="Otext">E-mail: {this.state.selectedItem.email}</p>
+          )}
+          {this.state.selectedItem.rol && (
+            <p className="Otext">Rol: {this.state.selectedItem.rol}</p>
+          )}
+          {this.state.selectedItem.bedrijfsNaam && (
+            <p className="Otext">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
+          )}
+          {this.state.selectedItem.voorkeurBenadering && (
+            <p className="Otext">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
+          )}
+          {this.state.selectedItem.beschikbaarheid && (
+            <p className="Otext">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
+          )}
+
+          {/* Address details */}
+          {this.state.selectedItem.adres && (
+            <p className="Otext">Adres: {`${this.state.selectedItem.adres.straat} ${this.state.selectedItem.adres.huisNr} ${this.state.selectedItem.adres.toevoeging}, ${this.state.selectedItem.adres.postcode}`}</p>
+          )}
+
+          {/* Medische gegevens */}
+          {this.state.selectedItem.medischegegevens && this.state.selectedItem.medischegegevens.length > 0 && (
+            <div>
+              <h3>Medische Gegevens</h3>
+              <ul>
+                {this.state.selectedItem.medischegegevens.map((medisch, index) => (
+                  <li key={index}>
+                    {medisch.beperking && (
+                      <p>Beperking: {medisch.beperking}</p>
+                    )}
+                    {medisch.hulpmiddelen && (
+                      <p>Hulpmiddelen: {medisch.hulpmiddelen}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Deelnames */}
+          {this.state.selectedItem.deelnames && this.state.selectedItem.deelnames.length > 0 && (
+            <div>
+              <h3>Deelnames</h3>
+              <ul>
+                {this.state.selectedItem.deelnames.map((deelname, index) => (
+                  <li key={index}>
+                    {deelname.datum && (
+                      <p>Datum: {deelname.datum}</p>
+                    )}
+                    {deelname.onderzoek && deelname.onderzoek.naam && (
+                      <p>Onderzoek: {deelname.onderzoek.naam}</p>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
               <div className="Opslaanknop-container">
                 <button
                   className="Opslaanknop"

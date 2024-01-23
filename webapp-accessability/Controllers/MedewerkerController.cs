@@ -22,20 +22,22 @@ public class MedewerkerController : ControllerBase
     [Route("GetOnderzoeken")]
     public async Task<ActionResult<IEnumerable<Onderzoek>>> GetOnderzoeken()
     {
-        var onderzoeken = await _context.Onderzoeken.ToListAsync();
+        var onderzoeken = await _context.Onderzoeken
+        .Where(onderzoeken => !onderzoeken.Status)
+        .ToListAsync();
         return onderzoeken;
     }
 
-    // [HttpGet]
-    // [Route("GetBedrijfGebruikers")]
-    // public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetBedrijfGebruikers()
-    // {
-    //     var bedrijfGebruikers = await _context.Users
-    //         .Where(user => user.Rol == "Bedrijf" && user.Status == false)
-    //         .ToListAsync();
+    [HttpGet]
+    [Route("GetBedrijfGebruikers")]
+    public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetBedrijfGebruikers()
+    {
+        var bedrijfGebruikers = await _context.Users
+            .Where(user => user.Rol == "Bedrijf")
+            .ToListAsync();
 
-    //     return bedrijfGebruikers;
-    // }
+        return bedrijfGebruikers;
+    }
 
     [HttpGet]
     [Route("GetGebruikers")]
@@ -45,4 +47,29 @@ public class MedewerkerController : ControllerBase
         return gebruikers;
     }
 
+    [HttpPut]
+    [Route("UpdateOnderzoekStatus/{onderzoekId}")]
+    public async Task<IActionResult> UpdateOnderzoekStatus(int onderzoekId)
+    {
+        var onderzoek = await _context.Onderzoeken.FindAsync(onderzoekId);
+
+        if (onderzoek == null)
+        {
+            return NotFound();
+        }
+
+        onderzoek.Status = true; // Assuming Status is a boolean property
+
+        try
+        {
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            return StatusCode(500);
+        }
+    }
+
 }
+
