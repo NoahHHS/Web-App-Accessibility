@@ -29,7 +29,6 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />,
-    requireAuth: true, // Add requireAuth for protected route
   },
   {
     path: '/privacystatement',
@@ -46,12 +45,10 @@ const AppRoutes = [
   {
     path: '/profiel',
     element: <ProfielData />,
-    requireAuth: true, // Add requireAuth for protected route
   },
   {
     path: '/profiel/edit',
     element: <ProfielEdit />,
-    requireAuth: true, // Add requireAuth for protected route
   },
   {
     path: '/login',
