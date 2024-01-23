@@ -101,30 +101,84 @@ public class ProfielController : ControllerBase
 
    [HttpPut]
    [Route("UpdateAccount")]
-   public async Task<ActionResult> UpdateAccount(String Id, ApplicationUser updatedUser){
+   public async Task<ActionResult> UpdateAccount(ProfielDTO updatedUserData){
+      var currentUser = await GetCurrentUser();
+
       // Find the user in the database
-      var user = await _userManager.FindByIdAsync(Id);
-      if (user == null)
-      {
-         return NotFound("User not found");
-      }
+      var user = await _userManager.FindByIdAsync(currentUser.Id);
+
+      // Update address and user
+      bool addressUpdated = UpdateAdres(user, updatedUserData);
+
 
       // Update user properties
-      user.Naam = updatedUser.Naam;
-      user.Email = updatedUser.Email;
-      user.Beschikbaarheid = updatedUser.Beschikbaarheid;
-      user.Adres = updatedUser.Adres;
-      user.Medischegegevens = updatedUser.Medischegegevens;
+      user.Naam = updatedUserData.Naam;
+      user.Email = updatedUserData.Email;
+      user.Beschikbaarheid = updatedUserData.Beschikbaarheid;
 
       // Update the user in the database
       var result = await _userManager.UpdateAsync(user);
-      if (result.Succeeded)
+      if (result.Succeeded && addressUpdated)
          {
             return Ok("Account updated successfully");
+         }
+      if (result.Succeeded && !addressUpdated)
+         {
+            return BadRequest("Failed to update Adress");
          }
       else
          {
             return BadRequest("Failed to update account");
          }
+   }
+
+   private bool UpdateAdres(ApplicationUser user, ProfielDTO updatedUserData)
+   {
+      bool exist = _context.Adressen.Any(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
+
+      if (!exist)
+      {
+         Adres UpdatedAdres = new Adres()
+         {
+               Straat = updatedUserData.Straat,
+               HuisNr = updatedUserData.HuisNr,
+               Postcode = updatedUserData.Postcode
+         };
+
+         _context.Adressen.Add(UpdatedAdres);
+         _context.SaveChanges();
+         user.AdresId = UpdatedAdres.Id;
+         return true;
+      }
+
+      if (exist && user.AdresId == null)
+      {
+         var adres = _context.Adressen.First(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
+         user.AdresId = adres.Id;
+         return true;
+      }
+
+      if (exist && user.AdresId != null)
+      {
+         var adres = _context.Adressen.FirstOrDefault(A => A.Id == user.AdresId);
+
+         if (adres == null)
+         {
+               adres = _context.Adressen.First(A => (A.Straat == updatedUserData.Straat) && (A.HuisNr == updatedUserData.HuisNr) && (A.Postcode == updatedUserData.Postcode));
+         }
+         else
+         {
+               adres.Straat = updatedUserData.Straat;
+               adres.Postcode = updatedUserData.Postcode;
+               adres.HuisNr = updatedUserData.HuisNr;
+         }
+
+         _context.Adressen.Update(adres);
+         _context.SaveChanges();
+         user.AdresId = adres.Id;
+         return true;
+      }
+
+      return false;
    }
 }
