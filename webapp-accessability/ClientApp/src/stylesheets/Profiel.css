@@ -67,5 +67,6 @@
 
 .Medische-DataLijst {
     list-style-type: none;
-    text-align: center;
+    margin-left: -1.5em; 
+    padding-left: none;
 }

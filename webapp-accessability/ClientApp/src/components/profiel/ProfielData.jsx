@@ -14,29 +14,56 @@ export class ProfielData extends Component {
   render() {
     return (
       <QueryClientProvider client={queryClient}>
-      <div>
-        <h1 className='pagetitle'>Mijn Gegevens</h1>
-        <section className='profiel-section'>
-          <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
-          <ProfielGegeven typeGegeven="Naam"/>
-          <ProfielGegeven typeGegeven="Email"/>
-          <ProfielGegeven typeGegeven="Beschikbaarheid"/>
-        </section>
-        <section className='profiel-section'>
-        <h2 className='subtitle profielh2'>Adres</h2>
-          <ProfielGegeven typeGegeven="Straatnaam"/>
-          <ProfielGegeven typeGegeven="Huisnummer"/>
-          <ProfielGegeven typeGegeven="Postcode"/>
-        </section>
-        <section className='profiel-section'>
-        <h2 className='subtitle profielh2'>Medische gegevens</h2>
-          <FetchMedischeData />
-        </section>
-        <ProfileButton/>
-      </div>
+        <ProfielDataContent />
       </QueryClientProvider>
     );
   }
+}
+
+const ProfielDataContent = () => {
+  const { data: profileData, isLoading, isError, error } = useQuery({
+    queryKey: ['profileData'],
+    queryFn: async () => {
+      const response = await fetch('https://localhost:7288/profiel/GetProfileData');
+      if (!response.ok) {
+        console.error(response);
+        throw new Error('Unable to fetch profile data');
+      }
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    console.error(error);
+    return <div>Error fetching profile data</div>;
+  }
+
+  return(
+    <div>
+      <h1 className='pagetitle'>Mijn Gegevens</h1>
+      <section className='profiel-section'>
+        <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
+        <ProfielGegeven typeGegeven="Naam" value={profileData.naam} />
+        <ProfielGegeven typeGegeven="Email" value={profileData.email} />
+        <ProfielGegeven typeGegeven="Beschikbaarheid" value={profileData.beschikbaarheid} />
+      </section>
+      <section className='profiel-section'>
+        <h2 className='subtitle profielh2'>Adres</h2>
+        <ProfielGegeven typeGegeven="Straatnaam" value={profileData.straat} />
+        <ProfielGegeven typeGegeven="Huisnummer" value={profileData.huisNr} />
+        <ProfielGegeven typeGegeven="Postcode" value={profileData.postcode} />
+      </section>
+      <section className='profiel-section'>
+        <h2 className='subtitle profielh2'>Medische gegevens</h2>
+        <FetchMedischeData />
+      </section>
+      <ProfileButton />
+    </div>
+  );
 }
 
 const ProfileButton = () => {
