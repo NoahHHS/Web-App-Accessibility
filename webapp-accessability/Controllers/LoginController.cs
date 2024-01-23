@@ -12,18 +12,15 @@ public class LoginController : ControllerBase
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly ILogger<LoginController> _logger;
-    private readonly IJwtService _jwtService;
 
     public LoginController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
-        ILogger<LoginController> logger,
-        IJwtService jwtService)
+        ILogger<LoginController> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _logger = logger;
-        _jwtService = jwtService;
     }
 
     [HttpPost]
@@ -57,17 +54,8 @@ public class LoginController : ControllerBase
                 return BadRequest(new { Message = "Onjuist wachtwoord." });
             }
 
-            var token = _jwtService.GenerateJwtToken(user);
-            Response.Cookies.Append("JWT_access_token", token, new CookieOptions
-            {
-                HttpOnly = true,
-                Expires = DateTime.Now.AddMinutes(10),
-                SameSite = SameSiteMode.Strict,
-                Secure = true
-            });
-
             _logger.LogInformation($"Gebruiker {user.UserName} succesvol ingelogd.");
-            return Ok(new { UserId = user.Id, Token = token, Message = "Inloggen geslaagd" });
+            return Ok(new { UserId = user.Id, Message = "Inloggen geslaagd" });
         }
         catch (Exception ex)
         {

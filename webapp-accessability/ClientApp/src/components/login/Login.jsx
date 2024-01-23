@@ -25,22 +25,23 @@ const GebruikerInlogForm = () => {
         e.preventDefault();
         setIsLoading(true);
         setErrorMessage('');
-
+    
         try {
             const response = await apiClient.post("https://localhost:7288/Login", { email, wachtwoord });
             if (response.status === 200) {
-                const { token, userId } = response.data;
-                console.log('Login successful:', token);
-                console.log('UserId:', userId)
-                //localStorage.setItem('JWT_access_token', token);
+                const { userId, message } = response.data;
+                console.log('Login successful:', message);
+                console.log('UserId:', userId);
                 navigate('/'); // Navigate to homepage
             }
         } catch (error) {
-            // Error handling
+            // Handle login error here
+            setErrorMessage("Login failed. Please check your credentials.");
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     return (
         <form onSubmit={handleSubmit}>

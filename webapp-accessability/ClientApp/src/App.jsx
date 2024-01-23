@@ -1,3 +1,5 @@
+// App.jsx
+
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
@@ -14,7 +16,8 @@ export default class App extends Component {
                 <Routes>
                     {AppRoutes.map((route, index) => {
                         const { element, requireAuth, ...rest } = route;
-                        return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} />;
+                        const RouteComponent = requireAuth ? AuthorizeRoute : Route;
+                        return <RouteComponent key={index} {...rest} element={element} />;
                     })}
                 </Routes>
             </Layout>
