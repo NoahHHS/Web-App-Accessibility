@@ -45,10 +45,12 @@ const AppRoutes = [
   {
     path: '/profiel',
     element: <ProfielData />,
+    requireAuth: true,
   },
   {
     path: '/profiel/edit',
     element: <ProfielEdit />,
+    requireAuth: true,
   },
   {
     path: '/login',

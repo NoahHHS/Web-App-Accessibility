@@ -25,55 +25,67 @@ const GebruikerInlogForm = () => {
         e.preventDefault();
         setIsLoading(true);
         setErrorMessage('');
-    
+
         try {
-            const response = await apiClient.post("https://localhost:7288/Login", { email, wachtwoord });
-            if (response.status === 200) {
-                const { userId, message } = response.data;
-                console.log('Login successful:', message);
-                console.log('UserId:', userId);
+            // Using fetch with credentials included
+            const response = await fetch("https://localhost:7288/Login", {
+                method: 'POST',
+                credentials: 'include', // Include credentials in the request
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, wachtwoord }) // Your request body
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Login successful:', data.message);
                 navigate('/'); // Navigate to homepage
+            } else {
+                // Handle non-200 responses
+                setErrorMessage("Login failed. Please check your credentials.");
             }
         } catch (error) {
-            // Handle login error here
-            setErrorMessage("Login failed. Please check your credentials.");
+            // Handle network or other errors
+            setErrorMessage("An error occurred. Please try again.");
         } finally {
             setIsLoading(false);
         }
-    };
+    }
     
 
-    return (
-        <form onSubmit={handleSubmit}>
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            {isLoading && <div className="loading-indicator">Laden...</div>}
-            
-            <label htmlFor="email">Email:</label>
-            <input 
-                className="input-form-field"
-                placeholder="Email"
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-                required
-            />
-      
-            <label htmlFor="wachtwoord">Wachtwoord:</label>
-            <input 
-                className="input-form-field"
-                placeholder="Wachtwoord"
-                type="password" 
-                value={wachtwoord} 
-                onChange={(e) => setWachtwoord(e.target.value)} 
-                required
-            />
+        return (
+            <form onSubmit={handleSubmit}>
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                {isLoading && <div className="loading-indicator">Laden...</div>}
+                
+                <label htmlFor="email">Email:</label>
+                <input 
+                    className="input-form-field"
+                    placeholder="Email"
+                    type="email" 
+                    value={email} 
+                    onChange={(e) => setEmail(e.target.value)} 
+                    required
+                />
+        
+                <label htmlFor="wachtwoord">Wachtwoord:</label>
+                <input 
+                    className="input-form-field"
+                    placeholder="Wachtwoord"
+                    type="password" 
+                    value={wachtwoord} 
+                    onChange={(e) => setWachtwoord(e.target.value)} 
+                    required
+                />
 
-            <div className="center-register-button">
-                <button className="registreer-button" type="submit">Login</button>
-            </div>
-        </form>
-    );
-};
+                <div className="center-register-button">
+                    <button className="registreer-button" type="submit">Login</button>
+                </div>
+            </form>
+        );
+    };
+
 
 const LoginOpties = () => {
     return (
