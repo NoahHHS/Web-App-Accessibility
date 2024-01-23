@@ -8,7 +8,7 @@ const CustomAuthorizeRoute = ({ element, path }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch('https://localhost:7288//authenticatie', { credentials: 'include' }); // zet naar false en component laat niet zien!
+        const response = await fetch('https://localhost:7288/authenticatie/JWTcheck', { credentials: 'include' });
         if (response.ok) {
           setIsAuthorized(true);
         } else {
@@ -23,13 +23,14 @@ const CustomAuthorizeRoute = ({ element, path }) => {
     };
 
     checkAuth();
-  }, [path]); // Re-run the effect if the path changes
+  }, [path]); 
 
   if (isLoading) {
-    return <div>Loading...</div>; // Or any other loading indicator
+    return <div>Loading...</div>; 
   }
 
   return isAuthorized ? element : <Navigate to="/login" />;
 };
 
 export default CustomAuthorizeRoute;
+
