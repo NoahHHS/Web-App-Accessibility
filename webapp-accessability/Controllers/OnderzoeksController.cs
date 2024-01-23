@@ -40,12 +40,19 @@ public class OnderzoeksController : ControllerBase
 
         return Ok(result);
     }
+
+    [HttpGet("GetOnderzoeken")]
+    public IActionResult GetOnderzoeken() {
+        OnderzoekDTO[] DTO;
+
+        return Ok(context.Onderzoeken.Select(oz => new OnderzoekDTO{Id = oz.Id, Beschrijving = oz.Omschrijving, naam = oz.Naam}).ToList());
+    }
     
     [HttpGet("GetNaam")]
     public IActionResult GetNaam(string Id)
     {
         var Onderzoek = context.Onderzoeken.FirstOrDefault(O => O.Id.ToString() == Id);
-        var result = context.Onderzoeken.Select(O => new 
+        var result = context.Onderzoeken.Where(oz => oz.Id.ToString() == Id).Select(O => new 
         {
             Naam = O.Naam
         }).ToList();
