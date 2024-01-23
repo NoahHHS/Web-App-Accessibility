@@ -114,7 +114,7 @@ public class ProfielController : ControllerBase
    //-------------------------------------------- HTTP PUT Methods --------------------------------------------
    [HttpPut]
    [Route("UpdateAccount")]
-   public async Task<ActionResult> UpdateAccount(ProfielDTO updatedUserData){
+   public async Task<ActionResult> UpdateAccount([FromBody] ProfielDTO updatedUserData){
       var currentUser = await GetCurrentUser();
 
       // Find the user in the database

@@ -14,24 +14,6 @@ export class ProfielEdit extends Component {
 
     constructor(props) {
       super(props);
-      this.state = {
-        userData: {
-          naam: '',
-          email: '',
-          beschikbaarheid: '',
-          straatnaam: '',
-          huisnr: '',
-          postcode: '',
-          stad: '',
-          medischeData: [
-            {
-            ziekte: '',
-            hulpmiddelen: ''
-            }
-          ]
-        },
-      };
-    }
 
   render() {
     return (
@@ -47,6 +29,10 @@ export class ProfielEdit extends Component {
 }
 
 //------------------------------ Functional components ------------------------------
+const UpdateAccountData = () = {
+
+}
+
 const SaveButton = () => {
     return(
       <div className='ProfileButton-Content'>
@@ -59,7 +45,7 @@ const SaveButton = () => {
 const VoegMedischToeButton = () => {
   return(
     <div className='ProfileButton-Content'>
-      <button className='ProfileButton' title='Voeg een aandoening toe'><strong>+ Voeg Ziekte Toe</strong></button>
+      <button className='ProfileButton' aria-label='Voeg een aandoening toe'><strong>+ Voeg Ziekte Toe</strong></button>
       <p className='ProfileButton-Warning'>Sla je veranderingen op!<br/>anders worden ze ongedaan gemaakt</p>
     </div>
   );
@@ -67,7 +53,7 @@ const VoegMedischToeButton = () => {
 
 const VerwijderMedischButton = () => {
   return(
-    <button className='VerwijderButton' title='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
+    <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
   );
 }
 
@@ -127,8 +113,8 @@ const ProfielDataContent = (props) => {
 
       <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Adres</h2>
-        <DataItem value="Straatnaam" placeholder={profileData.straatnaam} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
-        <DataItem value="Huisnummer" placeholder={profileData.huisnr} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
+        <DataItem value="Straatnaam" placeholder={profileData.straat} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
+        <DataItem value="Huisnummer" placeholder={profileData.huisNr} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
         <DataItem value="Toevoeging" placeholder={profileData.toevoeging} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
         <DataItem value="Postcode" placeholder={profileData.postcode} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
       </section>
