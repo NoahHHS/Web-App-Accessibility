@@ -70,3 +70,7 @@
     margin-left: -1.5em; 
     padding-left: none;
 }
+
+.typeGegevenNaam {
+    font-weight: bold;
+}

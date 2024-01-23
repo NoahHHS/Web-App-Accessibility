@@ -14,13 +14,13 @@ export class ProfielData extends Component {
   render() {
     return (
       <QueryClientProvider client={queryClient}>
-        <ProfielDataContent />
+        <FetchProfielData />
       </QueryClientProvider>
     );
   }
 }
 
-const ProfielDataContent = () => {
+const FetchProfielData = () => {
   const { data: profileData, isLoading, isError, error } = useQuery({
     queryKey: ['profileData'],
     queryFn: async () => {
@@ -42,6 +42,13 @@ const ProfielDataContent = () => {
     return <div>Error fetching profile data</div>;
   }
 
+  return(
+    <ProfielDataContent data={profileData}/>
+  );
+}
+
+const ProfielDataContent = (props) => {
+  const profileData = props.data;
   return(
     <div>
       <h1 className='pagetitle'>Mijn Gegevens</h1>
@@ -77,7 +84,7 @@ const ProfileButton = () => {
 const ProfielGegeven = (prop) => {
     return(
         <div className='Profiel-DataItem'>
-            <p className='Profiel-Data'>{prop.typeGegeven}: {prop.value}</p>
+            <p className='Profiel-Data'><span className='typeGegevenNaam'>{prop.typeGegeven}</span>: {prop.value}</p>
         </div>
     );
 }
@@ -105,6 +112,14 @@ const FetchMedischeData = () => {
   }
 
   return (
+    <MedischeDataContent data={medischeData}/>
+  );
+};
+
+const MedischeDataContent = (props) => {
+  const medischeData = props.data;
+
+  return(
     <div className='Medische-DataItem'>
       <ul className='Medische-DataLijst'>
         {medischeData.map((item, index) => (
@@ -118,4 +133,4 @@ const FetchMedischeData = () => {
       </ul>
     </div>
   );
-};
+}
