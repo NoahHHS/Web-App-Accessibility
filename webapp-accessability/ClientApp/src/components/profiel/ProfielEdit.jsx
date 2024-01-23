@@ -33,23 +33,8 @@ export class ProfielEdit extends Component {
       <QueryClientProvider client={queryClient}>
         <div>
           <h1 className='pagetitle'>Bewerk Gegevens</h1>
-          <section className='profiel-section'>
-            <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
-            <DataItem value="Naam" aria-label='Naam invoerveld, voer hier je naam in'/>
-            <DataItem value="Email" aria-label='Email invoerveld, voer hier je email in'/>
-            <DataItem value="Beschikbaarheid" aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
-          </section>
-          <section className='profiel-section'>
-          <h2 className='subtitle profielh2'>Adres</h2>
-            <DataItem value="Straatnaam" aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
-            <DataItem value="Huisnummer" aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
-            <DataItem value="Postcode" aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
-          </section>
-          <section className='profiel-section'>
-          <h2 className='subtitle profielh2'>Medische gegevens</h2>
-            <DataItem value="Ziekte" aria-label='Ziekte invoerveld, voer hier je Ziektes in, onderschijd de ziektes met een komma en een spatie'/>
-            <DataItem value="Hulpmiddelen" aria-label='Hulpmiddelen invoerveld, voer de hulpmiddelen in die je gebruikt, onderschijd de middelen met een komma en spatie'/>
-          </section>
+          <FetchProfielData/>
+          <FetchMedischeData/>
           <SaveButton/>
         </div>
       </QueryClientProvider>
@@ -57,6 +42,7 @@ export class ProfielEdit extends Component {
   }
 }
 
+//------------------------------ Functional components ------------------------------
 const SaveButton = () => {
     return(
       <div className='ProfileButton-Content'>
@@ -70,7 +56,53 @@ const DataItem = (prop) => {
   return(
     <div className='DataItem'>
       <p className='DataItem-Name'>{prop.value}</p>
-      <input id='info-name' className="DataItem-Field" type="text" placeholder={prop.value}/>
+      <input id='info-name' className="DataItem-Field" type="text" placeholder={prop.placeholder}/>
+    </div>
+  );
+}
+
+//------------------------------ Page content ------------------------------
+// Component die alle medische gegevens rendered
+const MedischeDataContent = (props) => {
+  const medischeData = props.data
+
+  return(
+    <section className='profiel-section'>
+      <h2 className='subtitle profielh2'>Medische gegevens</h2>
+
+      <ul className='Medische-DataLijst'>
+        {medischeData.map((item, index) => (
+          <li className='Medische-DataLijstItem' key={index}>
+            <div>
+              <DataItem value="Ziekte" placeholder={item.beperking} aria-label='Ziekte invoerveld'/>
+              <DataItem value="Hulpmiddelen" placeholder={item.hulpmiddelen} aria-label='Hulpmiddelen invoerveld'/>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+// Component die alle profiel gegevens rendered
+const ProfielDataContent = (props) => {
+  const profileData = props.data
+
+  return(
+    <div>
+      <section className='profiel-section'>
+      <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
+        <DataItem value="Naam" placeholder={profileData.naam} aria-label='Naam invoerveld, voer hier je naam in'/>
+        <DataItem value="Email" placeholder={profileData.email} aria-label='Email invoerveld, voer hier je email in'/>
+        <DataItem value="Beschikbaarheid" placeholder={profileData.beschikbaarheid} aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
+      </section>
+
+      <section className='profiel-section'>
+      <h2 className='subtitle profielh2'>Adres</h2>
+        <DataItem value="Straatnaam" placeholder={profileData.straatnaam} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
+        <DataItem value="Huisnummer" placeholder={profileData.huisnr} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
+        <DataItem value="Postcode" placeholder={profileData.postcode} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
+      </section>
     </div>
   );
 }
