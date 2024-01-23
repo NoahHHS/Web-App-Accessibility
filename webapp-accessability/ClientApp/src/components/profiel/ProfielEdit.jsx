@@ -40,7 +40,6 @@ export class ProfielEdit extends Component {
           <h1 className='pagetitle'>Bewerk Gegevens</h1>
           <FetchProfielData/>
           <FetchMedischeData/>
-          <SaveButton/>
         </div>
       </QueryClientProvider>
     );
@@ -57,12 +56,36 @@ const SaveButton = () => {
     );
 }
 
+const VoegMedischToeButton = () => {
+  return(
+    <div className='ProfileButton-Content'>
+      <button className='ProfileButton' title='Voeg een aandoening toe'><strong>+ Voeg Ziekte Toe</strong></button>
+      <p className='ProfileButton-Warning'>Sla je veranderingen op!<br/>anders worden ze ongedaan gemaakt</p>
+    </div>
+  );
+}
+
+const VerwijderMedischButton = () => {
+  return(
+    <button className='VerwijderButton' title='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
+  );
+}
+
 const DataItem = (prop) => {
   return(
     <div className='DataItem'>
       <p className='DataItem-Name'>{prop.value}</p>
       <input id='info-name' className="DataItem-Field" type="text" placeholder={prop.placeholder}/>
     </div>
+  );
+}
+
+const DataItemMedisch = (prop) => {
+  return(
+      <div className='Profiel-DataItem'>
+          <p className='Profiel-Data'><span className='typeGegevenNaam'>Beperking</span>: {prop.beperking}</p>
+          <p className='Profiel-Data'><span className='typeGegevenNaam'>Hulpmiddelen</span>: {prop.hulpmiddelen}</p>
+      </div>
   );
 }
 
@@ -74,17 +97,17 @@ const MedischeDataContent = (props) => {
   return(
     <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Medische gegevens</h2>
-
-      <ul className='Medische-DataLijst'>
-        {medischeData.map((item, index) => (
-          <li className='Medische-DataLijstItem' key={index}>
-            <div>
-              <DataItem value="Ziekte" placeholder={item.beperking} aria-label='Ziekte invoerveld'/>
-              <DataItem value="Hulpmiddelen" placeholder={item.hulpmiddelen} aria-label='Hulpmiddelen invoerveld'/>
-            </div>
-          </li>
-        ))}
-      </ul>
+        <ul className='Medische-DataLijst'>
+          {medischeData.map((item, index) => (
+            <li className='Medische-DataLijstItem' key={index}>
+              <div className='ListItemBox'>
+                <DataItemMedisch value="Ziekte" beperking={item.beperking} hulpmiddelen={item.hulpmiddelen}/>
+                <VerwijderMedischButton/>
+              </div>
+            </li>
+          ))}
+        </ul>
+      <VoegMedischToeButton/>
     </section>
   );
 }
@@ -109,6 +132,7 @@ const ProfielDataContent = (props) => {
         <DataItem value="Toevoeging" placeholder={profileData.toevoeging} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
         <DataItem value="Postcode" placeholder={profileData.postcode} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
       </section>
+      <SaveButton/>
     </div>
   );
 }
