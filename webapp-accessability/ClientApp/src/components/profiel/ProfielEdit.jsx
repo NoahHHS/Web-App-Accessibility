@@ -145,12 +145,12 @@ const MedischeDataContent = (props) => {
             <li className='Medische-DataLijstItem' key={index}>
               <div className='ListItemBox'>
                 <DataItemMedisch value="Ziekte" beperking={item.beperking} hulpmiddelen={item.hulpmiddelen}/>
-                <VerwijderMedischButton/>
+                <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
               </div>
             </li>
           ))}
         </ul>
-        <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
+        <VoegMedischToeButton/>
     </section>
   );
 }
