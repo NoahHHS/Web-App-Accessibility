@@ -30,7 +30,9 @@ export class Admin extends Component {
 
   fetchGebruikerData = () => {
     // Fetch gebruiker data from the API or database
-    fetch('https://localhost:7288/admin/GetGebruikers')
+    fetch('https://localhost:7288/admin/GetGebruikers',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -43,7 +45,9 @@ export class Admin extends Component {
 
   fetchOnderzoekData = () => {
     // Fetch onderzoek data from the API or database
-    fetch('https://localhost:7288/admin/GetOnderzoeken')
+    fetch('https://localhost:7288/admin/GetOnderzoeken',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -87,6 +91,7 @@ export class Admin extends Component {
     if (selectedItem.id) {
       // Delete onderzoek
       fetch(`https://localhost:7288/admin/VerwijderOnderzoek/${selectedItem.id}`, {
+        credentials: 'include',
         method: 'DELETE',
       })
         .then((response) => response.json())
@@ -106,6 +111,7 @@ export class Admin extends Component {
     if (selectedItem.id) {
       // Delete gebruiker
       fetch(`https://localhost:7288/admin/VerwijderGebruiker/${selectedItem.id}`, {
+        credentials: 'include',
         method: 'DELETE',
       })
         .then((response) => response.json())

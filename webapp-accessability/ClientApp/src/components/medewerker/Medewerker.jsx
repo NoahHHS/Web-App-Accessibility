@@ -33,7 +33,9 @@ export class Medewerker extends Component {
   }
 
   fetchGebruikerData = () => {
-    fetch('https://localhost:7288/medewerker/GetGebruikers')
+    fetch('https://localhost:7288/medewerker/GetGebruikers',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -45,7 +47,9 @@ export class Medewerker extends Component {
   };
 
   fetchBedrijfAccountData = () => {
-    fetch('https://localhost:7288/Medewerker/GetBedrijfGebruikers')
+    fetch('https://localhost:7288/Medewerker/GetBedrijfGebruikers',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -57,7 +61,9 @@ export class Medewerker extends Component {
   };
 
   fetchOnderzoekData = () => {
-    fetch('https://localhost:7288/medewerker/GetOnderzoeken')
+    fetch('https://localhost:7288/medewerker/GetOnderzoeken',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -107,6 +113,7 @@ export class Medewerker extends Component {
     if (selectedItem.id) {
       // Make a request to update the onderzoek status
       fetch(`https://localhost:7288/medewerker/UpdateOnderzoekStatus/${selectedItem.id}`, {
+        credentials: 'include',
         method: 'PUT',
       })
         .then((response) => {
