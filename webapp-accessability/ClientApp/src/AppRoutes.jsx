@@ -14,6 +14,9 @@ import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
 import { Admin } from './components/admin/Admin';
 
+
+import { useAuth } from './components/context/AuthContext';
+
 const AppRoutes = [
   {
     index: true,
@@ -25,48 +28,49 @@ const AppRoutes = [
   },
   {
     path: '/fetch-data',
-    requireAuth: true,
-    element: <FetchData />
+    element: <FetchData />,
   },
   {
     path: '/privacystatement',
-    element: <Privacystatement/>
+    element: <Privacystatement />
   },
   {
     path: '/bedrijfs',
-    element: <Bedrijfs/>
+    element: <Bedrijfs />
   },
   {
     path: '/medewerker',
-    element: <Medewerker/>
+    element: <Medewerker />
   },
   {
     path: '/profiel',
-    element: <ProfielData/>
+    element: <ProfielData />,
+    requireAuth: true,
   },
   {
     path: '/profiel/edit',
-    element: <ProfielEdit/>
+    element: <ProfielEdit />,
+    requireAuth: true,
   },
   {
     path: '/login',
-    element: <Login/>
+    element: <Login />
   },
   {
     path: '/registreer',
-    element: <Registreer/>
+    element: <Registreer />
   },
   {
     path: '/onderzoek',
-    element: <Onderzoek/>
+    element: <Onderzoek />
   },
   {
     path: '/overons',
-    element: <OverOns/>
+    element: <OverOns />
   },
   {
     path: '/admin',
-    element: <Admin/>
+    element: <Admin />
   },
   ...ApiAuthorzationRoutes
 ];

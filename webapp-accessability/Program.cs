@@ -1,66 +1,75 @@
 using webapp_accessability.Data;
 using webapp_accessability.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>() // Make sure you add this to support roles
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddIdentityServer()
     .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
-builder.Services.AddAuthentication()
-    .AddJwtBearer(options =>
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+});
+
+// JWT Authentication Configuration
+var jwtSecretKey = builder.Configuration.GetValue<string>("JwtSecretKey");
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        options.TokenValidationParameters = new TokenValidationParameters
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecretKey)),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:7288",
-            ValidAudience = "https://localhost:44412",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_secret_key"))
-        };
-    });
+            context.Token = context.Request.Cookies["AuthCookie"];
+            return Task.CompletedTask;
+        }
+    };
+});
 
-builder.Services.AddSingleton<IJwtService, JwtService>();
 
-builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API accessibility back-end", Version = "v1" });
 });
-
-// builder.Services.AddCors(options =>
-// {
-//     options.AddPolicy("ReactAppPolicy", builder =>
-//     {
-//         builder.AllowAnyOrigin() // Allow requests from any origin (for development only)
-//                .AllowAnyHeader()
-//                .AllowAnyMethod();
-//     });
-// });
 
 builder.Services.AddCors(options =>
 {
@@ -69,49 +78,58 @@ builder.Services.AddCors(options =>
         builder.WithOrigins("https://localhost:44412")
                .AllowAnyHeader()
                .AllowAnyMethod()
-               .AllowCredentials(); // Allow credentials (cookies) to be sent with the request
+               .AllowCredentials();
     });
 });
-
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    // Add Swagger middleware
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API accessibility back-end");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API accessibility back-end V1");
     });
-
     app.UseMigrationsEndPoint();
 }
 else
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-// Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
 
-// Apply CORS globally
 app.UseCors("ReactAppPolicy");
 
 app.UseAuthentication();
-app.UseIdentityServer();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+// Initialize roles
+InitializeRoles(app.Services.CreateScope().ServiceProvider).GetAwaiter().GetResult();
+
+
+app.MapControllers();
 app.MapRazorPages();
 
-app.MapFallbackToFile("index.html");
-
 app.Run();
+
+async Task InitializeRoles(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+    string[] roleNames = { "Admin", "Medewerker", "Ervaringsdeskundige", "Bedrijf" };
+    foreach (var roleName in roleNames)
+    {
+        var roleExist = await roleManager.RoleExistsAsync(roleName);
+        if (!roleExist)
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}

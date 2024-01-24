@@ -1,169 +1,121 @@
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using webapp_accessability.Models;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Security.Cryptography;
 
-[ApiController]
-[Route("[controller]")]
-public class RegistreerController : ControllerBase
+namespace webapp_accessability.Controllers
 {
-    private readonly UserManager<ApplicationUser> _applicationUser;
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly ILogger<RegistreerController> _logger;
-
-    public RegistreerController(
-        UserManager<ApplicationUser> userManager, 
-        SignInManager<ApplicationUser> signInManager,
-        ILogger<RegistreerController> logger)
+    [ApiController]
+    [Route("[controller]")]
+    public class RegistreerController : ControllerBase
     {
-        _applicationUser = userManager;
-        _signInManager = signInManager;
-        _logger = logger;
-    }
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IConfiguration _configuration;
 
-    [HttpPost]
-    public async Task<IActionResult> Register([FromBody] RegistreerDTO model)
-    {
-        if (ModelState.IsValid)
+    public RegistreerController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
-            var user = new ApplicationUser
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _configuration = configuration;
+        }
+
+        [HttpPost("admin")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RegistreerAdminAndMedewerker([FromBody] RegistreerDTO registreer)
+        {
+            return await Register(registreer);
+        }
+
+        [HttpPost("gebruiker")]
+        public async Task<IActionResult> RegisterSelf([FromBody] RegistreerDTO registreer)
+        {
+            if (!new[] { "Ervaringsdeskundige", "Bedrijf" }.Contains(registreer.Rol))
             {
-                UserName = model.Email,
-                Email = model.Email,
-                // Set other properties as needed
+                return BadRequest("Invalid role for self-registration.");
+            }
+
+            return await Register(registreer);
+        }
+
+        private async Task<IActionResult> Register(RegistreerDTO registreer)
+        {
+            Console.WriteLine($"Received data: {registreer.Email}, {registreer.Rol}, {registreer.Postcode}"); // Log the received data
+            var adres = new Adres
+            {
+                Straat = registreer.Straat,
+                HuisNr = registreer.HuisNr,
+                Toevoeging = registreer.Toevoeging,
+                Postcode = registreer.Postcode
             };
 
-            var result = await _applicationUser.CreateAsync(user, model.Password);
+            var user = new ApplicationUser 
+            { 
+                UserName = registreer.Email, 
+                Email = registreer.Email,
+                Adres = adres, // Assuming direct assignment is handled by your ORM
+                Rol = registreer.Rol
+            };
+            
+            var result = await _userManager.CreateAsync(user, registreer.Wachtwoord);
 
             if (result.Succeeded)
             {
-                // Customize as needed - here we're signing in the user after successful registration
-                await _signInManager.SignInAsync(user, isPersistent: false);
-
-                // You can generate and return a JWT token if needed
-                //var token = GenerateJwtToken(user);
-
-                return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
-            }
-            else
-            {
-                _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
-                // Registration failed, handle errors
-                //return BadRequest(result.Errors);
-                return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
-            }
-        }
-
-        // Invalid registration data, handle accordingly
-        return BadRequest("Invalid registration data");
-    }
-
-    [HttpPost("Account")]
-    public async Task<IActionResult> RegisterNormaalGebruiker([FromBody] GebruikerRegistreerDTO model)
-    {
-        if (ModelState.IsValid)
-        {
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                // Set other properties as needed
-            };
-
-            var result = await _applicationUser.CreateAsync(user, model.Wachtwoord);
-
-            if (result.Succeeded)
-            {
-                // Customize as needed - here we're signing in the user after successful registration
-                await _signInManager.SignInAsync(user, isPersistent: false);
-
-                // You can generate and return a JWT token if needed
-                //var token = GenerateJwtToken(user);
-
-                return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
-            }
-            else
-            {
-                _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
-                // Registration failed, handle errors
-                //return BadRequest(result.Errors);
-                return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
-            }
-        }
-
-        // Invalid registration data, handle accordingly
-        return BadRequest("Invalid registration data");
-    }
-
-    [HttpPost("Bedrijfsaccount")]
-    public async Task<IActionResult> RegisterBedrijfsGebruiker([FromBody] BedrijfRegistreerDTO model)
-    {
-        if (ModelState.IsValid)
-        {
-            var user = new ApplicationUser
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                // Set other properties as needed
-            };
-
-            var result = await _applicationUser.CreateAsync(user, model.Wachtwoord);
-
-            if (result.Succeeded)
-            {
-                // Customize as needed - here we're signing in the user after successful registration
-                await _signInManager.SignInAsync(user, isPersistent: false);
-
-                // You can generate and return a JWT token if needed
-                //var token = GenerateJwtToken(user);
-
-                return Ok(new { UserId = user.Id, Message = "Registratie successvol" });
-            }
-            else
-            {
-                _logger.LogError($"User registration failed. Errors: {string.Join(", ", result.Errors)}");
-                // Registration failed, handle errors
-                //return BadRequest(result.Errors);
-                return BadRequest(new { Message = "User registration failed", Errors = result.Errors.Select(error => error.Description) });
-            }
-        }
-
-        // Invalid registration data, handle accordingly
-        return BadRequest("Invalid registration data");
-    }
-
-    // Method to generate a JWT token
-    private string GenerateJwtToken(ApplicationUser user)
-    {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        
-        // Use RandomNumberGenerator to generate a random key
-        using (var randomNumberGenerator = RandomNumberGenerator.Create())
-        {
-            var keyBytes = new byte[32]; // 32 bytes for a 256-bit key
-            randomNumberGenerator.GetBytes(keyBytes);
-            var base64Key = Convert.ToBase64String(keyBytes);
-
-            var key = Encoding.ASCII.GetBytes(base64Key);
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[]
+                if (!await _roleManager.RoleExistsAsync(registreer.Rol))
                 {
-                    new Claim(ClaimTypes.Name, user.Id),
-                    // Add other claims as needed
-                }),
-                Expires = DateTime.Now.AddMinutes(10), // Token expiration time
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+                    return BadRequest($"Rol '{registreer.Rol}' bestaat niet.");
+                }
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+                await _userManager.AddToRoleAsync(user, registreer.Rol);
+
+                // Generate JWT token for the newly registered user
+                var token = await GenerateJwtToken(user);
+                var cookieOptions = new CookieOptions
+                {
+                    HttpOnly = true,
+                    Expires = DateTime.Now.AddMinutes(10)
+                };
+                Response.Cookies.Append("AuthCookie", token, cookieOptions);
+
+                return Ok(new { message = "Gebruiker succesvol geregistreerd" });
+            }
+
+            return BadRequest(result.Errors);
+        }
+
+
+
+
+        private async Task<string> GenerateJwtToken(ApplicationUser user)
+        {
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var roleClaims = roles.Select(r => new Claim(ClaimTypes.Role, r)).ToList();
+
+            var authClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+
+            var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecretKey"]));
+
+            var token = new JwtSecurityToken(
+                expires: DateTime.Now.AddMinutes(10),
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
