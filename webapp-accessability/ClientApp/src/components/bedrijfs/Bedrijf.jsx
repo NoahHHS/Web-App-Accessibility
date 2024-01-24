@@ -15,30 +15,26 @@ export class Bedrijfs extends Component {
       plek: '',
       tijd: '',
       link: '',
-      onderzoekData: [], // State to store onderzoek data
-      filteredOnderzoekData: [], // State to store filtered onderzoek data
+      onderzoekData: [],
+      filteredOnderzoekData: [],
     };
   }
 
   componentDidMount() {
-    // Simulate fetching data from the database
-    // Replace this with an API call to fetch actual data
-    const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
-  
-    // Fetch onderzoekData for the bedrijf
-    fetch(`https://localhost:7288/Bedrijfs/GetOnderzoeken/${bedrijfId}`,{ 
-    credentials: 'include',
-  })
+    const bedrijfId = 'bedrijf-id-1';
+
+    fetch(`https://localhost:7288/Bedrijfs/GetOnderzoeken/${bedrijfId}`, {
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
           onderzoekData: data,
-          filteredOnderzoekData: data, // Initialize with all data
+          filteredOnderzoekData: data,
         });
       })
       .catch((error) => console.error('Error fetching onderzoek data:', error));
   }
-  
 
   openModal = () => {
     this.setState({ isModalOpen: true });
@@ -60,15 +56,12 @@ export class Bedrijfs extends Component {
   };
 
   handleAddButtonClick = async () => {
-    // Validate input values here (e.g., check if required fields are filled)
     if (!this.state.naam || !this.state.beschrijving || !this.state.plek || !this.state.tijd) {
-      // Handle validation error, show a message or prevent the action
       console.error('Please fill in all required fields.');
       return;
     }
-  
-    // Replace this with an API call to send the new onderzoek data to the server
-    const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
+
+    const bedrijfId = 'bedrijf-id-1';
     const newOnderzoek = {
       naam: this.state.naam,
       omschrijving: this.state.beschrijving,
@@ -77,7 +70,7 @@ export class Bedrijfs extends Component {
       link: this.state.link,
       bedrijfId: bedrijfId,
     };
-  
+
     try {
       const response = await fetch('https://localhost:7288/Bedrijfs/CreateOnderzoek', {
         credentials: 'include',
@@ -87,12 +80,9 @@ export class Bedrijfs extends Component {
         },
         body: JSON.stringify(newOnderzoek),
       });
-  
+
       if (response.ok) {
-        // Fetch updated onderzoekData after adding a new onderzoek
         this.fetchOnderzoekData();
-        
-        // Close the modal
         this.closeModal();
       } else {
         console.error('Failed to create onderzoek. Please try again.');
@@ -101,15 +91,17 @@ export class Bedrijfs extends Component {
       console.error('Error creating onderzoek:', error);
     }
   };
-  
+
+  fetchOnderzoekData = () => {
+    // Implement the logic to fetch updated data after adding a new onderzoek
+    // You can use a similar fetch as in componentDidMount
+  };
 
   handleSearch = (searchTerm) => {
-    // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.onderzoekData.filter((item) =>
       item.naam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Update the state or perform any other action with the filtered data
     this.setState({ filteredOnderzoekData: filteredData });
   };
 
@@ -120,12 +112,11 @@ export class Bedrijfs extends Component {
         <div className="ZoekbalkContainer">
           <Zoekbalk
             placeholder="zoek uw onderzoeken"
-            data={this.state.onderzoekData} // Pass the list to be searched
+            data={this.state.onderzoekData}
             onSearch={this.handleSearch}
           />
         </div>
 
-        {/* Display the filtered or original list based on the search */}
         <div className="OnderzoekList-container">
           <ul className="OnderzoekList">
             {this.state.filteredOnderzoekData.map((onderzoek, index) => (
@@ -142,7 +133,6 @@ export class Bedrijfs extends Component {
           </button>
         </div>
 
-        {/* Modal/Pop-up */}
         {this.state.isModalOpen && (
           <div>
             <div className="modal-overlay"></div>
