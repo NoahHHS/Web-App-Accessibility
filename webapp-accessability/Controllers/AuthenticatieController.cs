@@ -19,10 +19,12 @@ namespace webapp_accessability.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                _logger.LogInformation("User is authenticated.");
-                return Ok();
+                var token = Request.Cookies["AuthCookie"];
+                if (!string.IsNullOrEmpty(token))
+                {
+                    return Ok(token);
+                }
             }
-            _logger.LogWarning("User is not authenticated.");
             return Unauthorized();
         }
     }
