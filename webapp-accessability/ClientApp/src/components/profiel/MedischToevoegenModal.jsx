@@ -5,7 +5,7 @@ const MedischToevoegenModal = ({ isOpen, onClose, onAddMedischData }) => {
   const [beperking, setBeperking] = useState('');
   const [hulpmiddelen, setHulpmiddelen] = useState('');
 
-  const handleAddClick = () => {
+  const handleAddClick = async () => {
     // Validate input or perform any other necessary checks
 
     // Call the callback function to add the medical data
@@ -16,7 +16,33 @@ const MedischToevoegenModal = ({ isOpen, onClose, onAddMedischData }) => {
 
     // Close the modal
     onClose();
+
+    try {
+        const response = await fetch('https://localhost:7288/profiel/MaakMedischeGegeven', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            beperking,
+            hulpmiddelen,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Failed to add medical data: ${response.statusText}`);
+        }
+  
+        // Handle success, e.g., show a success message or update the UI
+        console.log('Medical data added successfully');
+      } catch (error) {
+        console.error('Error adding medical data:', error);
+        // Handle error, e.g., show an error message
+      }
   };
+
+  
 
   return (
     <div className={`medisch-modal ${isOpen ? 'open' : 'closed'}`}>
