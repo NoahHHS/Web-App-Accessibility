@@ -36,21 +36,27 @@ const AppRoutes = [
   },
   {
     path: '/bedrijfs',
-    element: <Bedrijfs />
+    element: <Bedrijfs />,
+    requireAuth: true,
+    requiredRoles: ['Bedrijf', 'Admin']
   },
   {
     path: '/medewerker',
-    element: <Medewerker />
+    element: <Medewerker />,
+    requireAuth: true,
+    requiredRoles: ['Medewerker', 'Admin']
   },
   {
     path: '/profiel',
     element: <ProfielData />,
     requireAuth: true,
+    requiredRoles: ['Bedrijf', 'Medewerker', 'Admin', 'Ervaringsdeskundige']
   },
   {
     path: '/profiel/edit',
     element: <ProfielEdit />,
     requireAuth: true,
+    requiredRoles: ['Bedrijf', 'Medewerker', 'Admin', 'Ervaringsdeskundige']
   },
   {
     path: '/login',
@@ -70,7 +76,9 @@ const AppRoutes = [
   },
   {
     path: '/admin',
-    element: <Admin />
+    element: <Admin />,
+    requireAuth: true,
+    requiredRoles: ['Admin']
   },
   ...ApiAuthorzationRoutes
 ];

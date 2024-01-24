@@ -5,5 +5,8 @@
     "feather-icons": "^4.29.1",
     "react-feather": "^2.0.10",
     "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.3"
   }
 }

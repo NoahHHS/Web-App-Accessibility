@@ -9,6 +9,7 @@ using webapp_accessability.Models;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = "Admin")]
 public class AdminController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
