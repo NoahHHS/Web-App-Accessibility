@@ -45,7 +45,7 @@ export class Medewerker extends Component {
   };
 
   fetchBedrijfAccountData = () => {
-    fetch('https://localhost:7288/medewerker/GetBedrijfAccounts')
+    fetch('https://localhost:7288/Medewerker/GetBedrijfGebruikers')
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -212,19 +212,23 @@ export class Medewerker extends Component {
           />
         </div>
         <div className="BedrijfAccountList-container">
-          <ul className="BedrijfAccountList">
-            {this.state.filteredBedrijfAccountData.map((bedrijfAccount, index) => (
+        <ul className="BedrijfAccountList">
+          {this.state.filteredBedrijfAccountData.length > 0 ? (
+            this.state.filteredBedrijfAccountData.map((bedrijfAccount, index) => (
               <li
                 key={index}
                 className="BedrijfAccountList-item"
                 onClick={() => this.handleBedrijfAccountItemClick(bedrijfAccount)}
                 style={{ cursor: 'pointer' }}
               >
-                {bedrijfAccount}
+                {bedrijfAccount.naam}
               </li>
-            ))}
-          </ul>
-        </div>
+            ))
+          ) : (
+            <p>No Bedrijf Accounts found</p>
+          )}
+        </ul>
+      </div>
 
         {/* Gebruikers */}
         <h2 className="itemtitle">Gebruikers</h2>
@@ -294,22 +298,33 @@ export class Medewerker extends Component {
                   &times;
                 </span>
                 <h2 className="Otitel">BedrijfAccount data</h2>
-                <p className="BedrijfAccountText">
-                  {this.state.selectedItem} vraagt een bedrijfs account aan.
-                </p>
-                <h3 className="BedrijfAccountSubtitel">Persoonsgegevens</h3>
-                <p className="BedrijfAccountText">
-                  Naam: {this.state.selectedItem}
-                </p>
-                <p className="BedrijfAccountText">
-                  Bedrijf: {this.state.selectedItem}
-                </p>
-                <p className="BedrijfAccountText">
-                  Telefoon: {this.state.selectedItem}
-                </p>
-                <p className="BedrijfAccountText">
-                  Email: {this.state.selectedItem}
-                </p>
+                {/* Conditionally render rows */}
+                  {this.state.selectedItem.naam && (
+                    <p className="BedrijfAccountText">Naam: {this.state.selectedItem.naam}</p>
+                  )}
+                  {this.state.selectedItem.userName && (
+                    <p className="BedrijfAccountText">Gebruikersnaam: {this.state.selectedItem.userName}</p>
+                  )}
+                  {this.state.selectedItem.email && (
+                    <p className="BedrijfAccountText">E-mail: {this.state.selectedItem.email}</p>
+                  )}
+                  {this.state.selectedItem.rol && (
+                    <p className="BedrijfAccountText">Rol: {this.state.selectedItem.rol}</p>
+                  )}
+                  {this.state.selectedItem.bedrijfsNaam && (
+                    <p className="BedrijfAccountText">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
+                  )}
+                  {this.state.selectedItem.voorkeurBenadering && (
+                    <p className="BedrijfAccountText">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
+                  )}
+                  {this.state.selectedItem.beschikbaarheid && (
+                    <p className="BedrijfAccountText">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
+                  )}
+
+                  {/* Address details */}
+                  {this.state.selectedItem.adres && (
+                    <p className="Otext">Adres: {`${this.state.selectedItem.adres.straat} ${this.state.selectedItem.adres.huisNr} ${this.state.selectedItem.adres.toevoeging}, ${this.state.selectedItem.adres.postcode}`}</p>
+                  )}
                 <div className="Opslaanknop-container">
                 <button
                   className="Opslaanknop"
@@ -335,25 +350,25 @@ export class Medewerker extends Component {
 
           {/* Conditionally render rows */}
           {this.state.selectedItem.naam && (
-            <p className="Otext">Naam: {this.state.selectedItem.naam}</p>
+            <p className="GebruikerAccountText">Naam: {this.state.selectedItem.naam}</p>
           )}
           {this.state.selectedItem.userName && (
-            <p className="Otext">Gebruikersnaam: {this.state.selectedItem.userName}</p>
+            <p className="GebruikerAccountText">Gebruikersnaam: {this.state.selectedItem.userName}</p>
           )}
           {this.state.selectedItem.email && (
-            <p className="Otext">E-mail: {this.state.selectedItem.email}</p>
+            <p className="GebruikerAccountText">E-mail: {this.state.selectedItem.email}</p>
           )}
           {this.state.selectedItem.rol && (
-            <p className="Otext">Rol: {this.state.selectedItem.rol}</p>
+            <p className="GebruikerAccountText">Rol: {this.state.selectedItem.rol}</p>
           )}
           {this.state.selectedItem.bedrijfsNaam && (
-            <p className="Otext">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
+            <p className="GebruikerAccountText">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
           )}
           {this.state.selectedItem.voorkeurBenadering && (
-            <p className="Otext">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
+            <p className="GebruikerAccountText">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
           )}
           {this.state.selectedItem.beschikbaarheid && (
-            <p className="Otext">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
+            <p className="GebruikerAccountText">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
           )}
 
           {/* Address details */}
