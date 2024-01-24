@@ -82,6 +82,9 @@ public class ProfielController : ControllerBase
    [Route("MaakMedischeGegeven")]
    public async Task<IActionResult> MaakMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
       var currentUser = await GetCurrentUser();
+      if(_Beperking == null || _Beperking == "" || _Hulpmiddelen == null || _Hulpmiddelen == ""){
+         return BadRequest("Een waarde was leeg gelaten");
+      }
       if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == _Hulpmiddelen) && (m.Beperking == _Beperking))){
          return BadRequest("Aandoening al toegevoegd");
       }
