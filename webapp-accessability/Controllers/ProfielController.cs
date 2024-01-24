@@ -9,6 +9,7 @@ namespace webapp_accessability.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = "Admin,Medewerker,Bedrijf,Ervaringsdeskundige")]
 public class ProfielController : ControllerBase
 {
    private readonly ApplicationDbContext _context;

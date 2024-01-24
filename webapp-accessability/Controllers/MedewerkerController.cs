@@ -9,6 +9,7 @@ using webapp_accessability.Models;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize(Roles = "Medewerker")]
 public class MedewerkerController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
