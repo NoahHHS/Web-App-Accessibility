@@ -24,7 +24,7 @@ const FetchProfielData = () => {
   const { data: profileData, isLoading, isError, error } = useQuery({
     queryKey: ['profileData'],
     queryFn: async () => {
-      const response = await fetch('https://localhost:7288/profiel/GetProfileData');
+      const response = await fetch('https://localhost:7288/profiel/GetProfileData', {credentials: 'include'});
       if (!response.ok) {
         console.error(response);
         throw new Error('Unable to fetch profile data');
@@ -62,6 +62,7 @@ const ProfielDataContent = (props) => {
         <h2 className='subtitle profielh2'>Adres</h2>
         <ProfielGegeven typeGegeven="Straatnaam" value={profileData.straat} />
         <ProfielGegeven typeGegeven="Huisnummer" value={profileData.huisNr} />
+        <ProfielGegeven typeGegeven="Toevoeging" value={profileData.toevoeging} />
         <ProfielGegeven typeGegeven="Postcode" value={profileData.postcode} />
       </section>
       <section className='profiel-section'>
@@ -93,7 +94,7 @@ const FetchMedischeData = () => {
   const { data: medischeData, isLoading, isError, error } = useQuery({
     queryKey: ['medischeData'],
     queryFn: async () => {
-      const response = await fetch('https://localhost:7288/profiel/GetMedischeGegevens');
+      const response = await fetch('https://localhost:7288/profiel/GetMedischeGegevens' , {credentials: 'include'});
       if (!response.ok) {
         console.error(response);
         throw new Error('Unable to fetch medical data');

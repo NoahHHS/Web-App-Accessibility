@@ -6,7 +6,7 @@ import { Home } from "./components/Home";
 import { Privacystatement } from "./components/privacystatement"
 import { OverOns } from './components/overons/OverOns';
 import { Onderzoek } from './components/onderzoek/Onderzoek';
-import { ProfielEdit } from './components/profiel/ProfielEdit';
+import ProfielEdit from './components/profiel/ProfielEdit';
 import { ProfielData } from './components/profiel/ProfielData';
 // import { Login } from './components/api-authorization/Login';
 import { Login } from './components/login/Login';
