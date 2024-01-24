@@ -10,7 +10,7 @@ using webapp_accessability.Models;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize(Roles = "Bedrijf")]
+[Authorize(Roles = "Admin,Bedrijf")]
 public class BedrijfsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
@@ -31,52 +31,55 @@ public class BedrijfsController : ControllerBase
         return onderzoeken;
     }
 
-    [HttpPost]
-    [Route("CreateOnderzoek")]
-    public async Task<ActionResult<Onderzoek>> CreateOnderzoek(OnderzoekCreatieDTO onderzoekDTO)
+[HttpPost]
+[Route("CreateOnderzoek")]
+public async Task<ActionResult<Onderzoek>> CreateOnderzoek(OnderzoekCreatieDTO onderzoekDTO)
+{
+    // Validate the model state
+    if (!ModelState.IsValid)
     {
-        // Validate the model state
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        // Create OnderzoekLink entity
-        var link = new OnderzoekLink
-        {
-            Link = onderzoekDTO.Link?.Link // Ensure Link is not null before accessing Link property
-        };
-
-        // Create Adres entity
-        var adres = new Adres
-        {
-            Straat = onderzoekDTO.Locatie?.Adres?.Straat,
-            HuisNr = onderzoekDTO.Locatie?.Adres?.HuisNr ?? 0,
-            Toevoeging = onderzoekDTO.Locatie?.Adres?.Toevoeging,
-            Postcode = onderzoekDTO.Locatie?.Adres?.Postcode
-        };
-
-        // Create OnderzoekLocatie entity
-        var locatie = new OnderzoekLocatie
-        {
-            Adres = adres
-        };
-
-        // Create Onderzoek entity
-        var onderzoek = new Onderzoek
-        {
-            Naam = onderzoekDTO.Naam,
-            Omschrijving = onderzoekDTO.Omschrijving,
-            StartDatum = onderzoekDTO.StartDatum,
-            Link = link,
-            Locatie = locatie
-            // Add other properties as needed
-        };
-
-        // Add entities to context and save changes
-        _context.Onderzoeken.Add(onderzoek);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction("GetOnderzoeken", new { id = onderzoek.Id }, onderzoek);
+        return BadRequest(ModelState);
     }
+
+    // Create OnderzoekLink entity
+    var link = new OnderzoekLink
+    {   
+        Link = onderzoekDTO.Link?.Link // Ensure Link is not null before accessing Link property
+    };
+
+    _context.OnderzoekLinks.Add(link);
+    await _context.SaveChangesAsync(); // Opslaan om een ID te genereren
+
+    // Create Adres entity
+    var adres = new Adres
+    {
+        Straat = onderzoekDTO.Locatie?.Adres?.Straat,
+        HuisNr = onderzoekDTO.Locatie?.Adres?.HuisNr ?? 0,
+        Toevoeging = onderzoekDTO.Locatie?.Adres?.Toevoeging,
+        Postcode = onderzoekDTO.Locatie?.Adres?.Postcode
+    };
+
+    // Create OnderzoekLocatie entity
+    var locatie = new OnderzoekLocatie
+    {
+        Adres = adres
+    };
+
+    // Create Onderzoek entity with LinkId now that it's known
+    var onderzoek = new Onderzoek
+    {
+        Naam = onderzoekDTO.Naam,
+        Omschrijving = onderzoekDTO.Omschrijving,
+        StartDatum = onderzoekDTO.StartDatum,
+        // LinkId = link.Id,  // Set the foreign key value
+        Locatie = locatie
+        // Add other properties as needed
+    };
+
+    // Add Onderzoek to context and save changes
+    _context.Onderzoeken.Add(onderzoek);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction("GetOnderzoeken", new { id = onderzoek.Id }, onderzoek);
+}
 }

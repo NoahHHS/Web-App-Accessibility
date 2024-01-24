@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Net.Http.Headers;
 
 namespace webapp_accessability.Models
 {
@@ -12,7 +14,7 @@ namespace webapp_accessability.Models
 
         [Required(ErrorMessage = "The startDatum field is required.")]
         public DateTime StartDatum { get; set; }
-
+        public int? LinkId { get; set; }
         public OnderzoekLinkDTO Link { get; set; } // Adjust if necessary
 
         public OnderzoekLocatieDTO Locatie { get; set; } // Adjust if necessary
@@ -21,6 +23,7 @@ namespace webapp_accessability.Models
     public class OnderzoekLinkDTO
     {
         [Required(ErrorMessage = "The link field is required.")]
+        public int id { get; set;}
         public string Link { get; set; }
     }
 
