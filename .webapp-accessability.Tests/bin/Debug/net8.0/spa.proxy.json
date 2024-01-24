@@ -1,0 +1,8 @@
+{
+"SpaProxyServer": {
+"ServerUrl": "https://localhost:44412",
+"LaunchCommand": "npm start",
+"WorkingDirectory": "c:\\Users\\Noaha\\Documents\\GitHub\\Web-App-Accessibility\\webapp-accessability\\ClientApp\\",
+"MaxTimeoutInSeconds": "120"
+}
+}

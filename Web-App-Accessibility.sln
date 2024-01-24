@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "webapp-accessability", "webapp-accessability\webapp-accessability.csproj", "{BC481305-57AB-4470-9623-B37A45DC3F79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = ".webapp-accessability.Tests", ".webapp-accessability.Tests\.webapp-accessability.Tests.csproj", "{1F077B83-0FEA-4F05-B448-ECE94C8187CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BC481305-57AB-4470-9623-B37A45DC3F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC481305-57AB-4470-9623-B37A45DC3F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC481305-57AB-4470-9623-B37A45DC3F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F077B83-0FEA-4F05-B448-ECE94C8187CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F077B83-0FEA-4F05-B448-ECE94C8187CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F077B83-0FEA-4F05-B448-ECE94C8187CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F077B83-0FEA-4F05-B448-ECE94C8187CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
