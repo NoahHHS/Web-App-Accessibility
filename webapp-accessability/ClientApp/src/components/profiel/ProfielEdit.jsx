@@ -14,7 +14,7 @@ export class ProfielEdit extends Component {
 
     constructor(props) {
       super(props);
-
+    }
   render() {
     return (
       <QueryClientProvider client={queryClient}>
@@ -29,10 +29,6 @@ export class ProfielEdit extends Component {
 }
 
 //------------------------------ Functional components ------------------------------
-const UpdateAccountData = () = {
-
-}
-
 const SaveButton = () => {
     return(
       <div className='ProfileButton-Content'>
