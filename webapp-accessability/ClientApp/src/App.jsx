@@ -7,19 +7,26 @@ import { Layout } from './components/Layout';
 import './custom.css';
 
 export default class App extends Component {
-    static displayName = App.name;
+    // ... other code ...
 
     render() {
         return (
             <Layout>
                 <Routes>
                     {AppRoutes.map((route, index) => {
-                        const { element, requireAuth, ...rest } = route;
+                        const { element, requireAuth, requiredRoles, ...rest } = route;
                         return (
                             <Route 
                                 key={index} 
                                 {...rest} 
-                                element={requireAuth ? <CustomAuthorizeRoute element={element} /> : element} 
+                                element={
+                                    requireAuth ? 
+                                    <CustomAuthorizeRoute 
+                                        element={element} 
+                                        requiredRoles={requiredRoles || ["Admin", "Medewerker", "Ervaringsdeskundige", "Bedrijf"]} // Pass requiredRoles
+                                    /> : 
+                                    element
+                                } 
                             />
                         );
                     })}
