@@ -80,18 +80,18 @@ public class ProfielController : ControllerBase
    //-------------------------------------------- HTTP POST Methods --------------------------------------------
    [HttpPost]
    [Route("MaakMedischeGegeven")]
-   public async Task<IActionResult> MaakMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
+   public async Task<IActionResult> MaakMedischeGegevenAsync(MedischDTO updatedMedisch){
       var currentUser = await GetCurrentUser();
-      if(_Beperking == null || _Beperking == "" || _Hulpmiddelen == null || _Hulpmiddelen == ""){
+      if(updatedMedisch.Beperking == null || updatedMedisch.Beperking == "" || updatedMedisch.Hulpmiddelen == null || updatedMedisch.Hulpmiddelen == ""){
          return BadRequest("Een waarde was leeg gelaten");
       }
-      if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == _Hulpmiddelen) && (m.Beperking == _Beperking))){
+      if(_context.Medischegegevens.Any(m => (m.ApplicationUserId == currentUser.Id) && (m.Hulpmiddelen == updatedMedisch.Hulpmiddelen) && (m.Beperking == updatedMedisch.Beperking))){
          return BadRequest("Aandoening al toegevoegd");
       }
 
       _context.Medischegegevens.Add(new Medischegegevens{
-         Beperking = _Beperking,
-         Hulpmiddelen = _Hulpmiddelen,
+         Beperking = updatedMedisch.Beperking,
+         Hulpmiddelen = updatedMedisch.Hulpmiddelen,
          ApplicationUserId = currentUser.Id
       });
       _context.SaveChanges();
