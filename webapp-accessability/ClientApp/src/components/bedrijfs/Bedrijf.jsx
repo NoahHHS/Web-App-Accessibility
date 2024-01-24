@@ -10,7 +10,11 @@ export class Bedrijfs extends Component {
     super(props);
     this.state = {
       isModalOpen: false,
-      inputData: '',
+      naam: '',
+      beschrijving: '',
+      plek: '',
+      tijd: '',
+      link: '',
       onderzoekData: [], // State to store onderzoek data
       filteredOnderzoekData: [], // State to store filtered onderzoek data
     };
@@ -18,41 +22,88 @@ export class Bedrijfs extends Component {
 
   componentDidMount() {
     // Simulate fetching data from the database
-    const onderzoekDataFromDB = ['Onderzoek 1', 'Onderzoek 2', 'Onderzoek 3'];
-
-    this.setState({
-      onderzoekData: onderzoekDataFromDB,
-      filteredOnderzoekData: onderzoekDataFromDB, // Initialize with all data
-    });
+    // Replace this with an API call to fetch actual data
+    const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
+  
+    // Fetch onderzoekData for the bedrijf
+    fetch(`https://localhost:7288/Bedrijfs/GetOnderzoeken/${bedrijfId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          onderzoekData: data,
+          filteredOnderzoekData: data, // Initialize with all data
+        });
+      })
+      .catch((error) => console.error('Error fetching onderzoek data:', error));
   }
+  
 
   openModal = () => {
     this.setState({ isModalOpen: true });
   };
 
   closeModal = () => {
-    this.setState({ isModalOpen: false });
+    this.setState({
+      isModalOpen: false,
+      naam: '',
+      beschrijving: '',
+      plek: '',
+      tijd: '',
+      link: '',
+    });
   };
 
   handleInputChange = (e) => {
-    this.setState({ inputData: e.target.value });
+    this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleAddButtonClick = () => {
-    // Simulate adding data to the list
-    const newOnderzoekData = [...this.state.onderzoekData, this.state.inputData];
-
-    // Update state with the new data
-    this.setState({ onderzoekData: newOnderzoekData, filteredOnderzoekData: newOnderzoekData });
-
-    // Close the modal
-    this.closeModal();
+  handleAddButtonClick = async () => {
+    // Validate input values here (e.g., check if required fields are filled)
+    if (!this.state.naam || !this.state.beschrijving || !this.state.plek || !this.state.tijd) {
+      // Handle validation error, show a message or prevent the action
+      console.error('Please fill in all required fields.');
+      return;
+    }
+  
+    // Replace this with an API call to send the new onderzoek data to the server
+    const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
+    const newOnderzoek = {
+      Naam: this.state.naam,
+      Omschrijving: this.state.beschrijving,
+      Locatie: this.state.plek,
+      StartDatum: this.state.tijd,
+      Link: this.state.link,
+      BedrijfId: bedrijfId,
+    };
+  
+    try {
+      const response = await fetch('https://localhost:7288/Bedrijfs/CreateOnderzoek', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newOnderzoek),
+      });
+  
+      if (response.ok) {
+        // Fetch updated onderzoekData after adding a new onderzoek
+        this.fetchOnderzoekData();
+        
+        // Close the modal
+        this.closeModal();
+      } else {
+        console.error('Failed to create onderzoek. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error creating onderzoek:', error);
+    }
   };
+  
 
   handleSearch = (searchTerm) => {
     // Implement your search logic here, e.g., filtering the list
     const filteredData = this.state.onderzoekData.filter((item) =>
-      item.toLowerCase().includes(searchTerm.toLowerCase())
+      item.naam.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     // Update the state or perform any other action with the filtered data
@@ -76,7 +127,7 @@ export class Bedrijfs extends Component {
           <ul className="OnderzoekList">
             {this.state.filteredOnderzoekData.map((onderzoek, index) => (
               <li key={index} className="OnderzoekList-item">
-                {onderzoek}
+                {onderzoek.naam}
               </li>
             ))}
           </ul>
@@ -98,20 +149,47 @@ export class Bedrijfs extends Component {
               </span>
               <h2 className="Otitel">Onderzoeksdata</h2>
               <p className="Otext">Naam van het onderzoek</p>
-              <input type="text" id="titel" className="Oinput" />
-              <p className="Otext">geef een beschrijving van het onderzoek</p>
-              <textarea type="text" id="beschrijving" className="Otextarea" />
+              <input
+                type="text"
+                id="naam"
+                className="Oinput"
+                value={this.state.naam}
+                onChange={this.handleInputChange}
+              />
+              <p className="Otext">Geef een beschrijving van het onderzoek</p>
+              <textarea
+                type="text"
+                id="beschrijving"
+                className="Otextarea"
+                value={this.state.beschrijving}
+                onChange={this.handleInputChange}
+              />
               <p className="Otext">Waar bevindt het onderzoek zich?</p>
-              <input type="text" id="plek" className="Oinput" />
+              <input
+                type="text"
+                id="plek"
+                className="Oinput"
+                value={this.state.plek}
+                onChange={this.handleInputChange}
+              />
               <p className="Otext">Wanneer is het onderzoek?</p>
-              <input type="date" id="tijd" className="Oinput" />
+              <input
+                type="date"
+                id="tijd"
+                className="Oinput"
+                value={this.state.tijd}
+                onChange={this.handleInputChange}
+              />
               <p className="Otext">Voeg hier de link naar het onderzoek toe.</p>
-              <input type="text" id="link" className="Oinput" />
-              <div className="ToevoegKnop-container ">
-                <button
-                  className="ToevoegKnop"
-                  onClick={this.handleAddButtonClick}
-                >
+              <input
+                type="text"
+                id="link"
+                className="Oinput"
+                value={this.state.link}
+                onChange={this.handleInputChange}
+              />
+              <div className="ToevoegKnop-container">
+                <button className="ToevoegKnop" onClick={this.handleAddButtonClick}>
                   Toevoegen
                 </button>
               </div>

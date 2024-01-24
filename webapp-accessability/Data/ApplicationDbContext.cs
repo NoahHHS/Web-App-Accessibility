@@ -128,6 +128,15 @@ namespace webapp_accessability.Data;
                 .HasForeignKey<OnderzoekLocatie>(ol => ol.Id) // Id van OnderzoekLocatie als FK naar Adres
                 .IsRequired();
 
+            // Configuratie ApplicationUser 1 <--> Onderzoek 0..*
+            // -------------------------------------------
+            // ApplicationUser (Bedrijf) heeft 0..* Onderzoeken
+            // Onderzoek heeft 1 ApplicationUser (Bedrijf)
+            modelBuilder.Entity<Onderzoek>()
+                .HasOne(o => o.Bedrijf)
+                .WithMany(b => b.Onderzoeken)
+                .HasForeignKey(o => o.BedrijfId);
+
 
             // PRIMAIRE SLEUTELS
             modelBuilder.Entity<Adres>()

@@ -33,7 +33,7 @@ public class MedewerkerController : ControllerBase
     public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetBedrijfGebruikers()
     {
         var bedrijfGebruikers = await _context.Users
-            .Where(user => user.Rol == "Bedrijf")
+            .Where(user => user.BedrijfsNaam != null)
             .ToListAsync();
 
         return bedrijfGebruikers;

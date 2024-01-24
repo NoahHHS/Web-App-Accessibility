@@ -23,7 +23,7 @@ public class AdminController : ControllerBase
     public async Task<ActionResult<IEnumerable<Onderzoek>>> GetOnderzoeken()
     {
         var onderzoeken = await _context.Onderzoeken.ToListAsync();
-        return onderzoeken;
+        return Ok(onderzoeken); // Ensure proper serialization
     }
 
     [HttpDelete]
@@ -47,7 +47,7 @@ public class AdminController : ControllerBase
     public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetGebruikers()
     {
         var gebruikers = await _context.Users.ToListAsync();
-        return gebruikers;
+        return Ok(gebruikers); // Ensure proper serialization
     }
 
     [HttpDelete]

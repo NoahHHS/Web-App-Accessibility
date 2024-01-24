@@ -28,4 +28,8 @@ public class Onderzoek
 
     public int? OnderzoekComponentId { get; set; }
     public OnderzoekComponent OnderzoekComponent { get; set; }
+
+    // Nieuwe foreign key voor ApplicationUser (Bedrijf)
+    public string BedrijfId { get; set; }
+    public ApplicationUser Bedrijf { get; set; }
 }

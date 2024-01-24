@@ -6,6 +6,8 @@ namespace webapp_accessability.Models;
 public class ApplicationUser : IdentityUser
 {
     public string? Naam { get; set; }
+    public string? Achternaam { get; set; }
+
     public string? Token { get; set; }
     public string? Rol { get; set; }
     public string? BedrijfsNaam { get; set; }
@@ -25,5 +27,8 @@ public class ApplicationUser : IdentityUser
 
     // Navigatie-eigenschap voor Onderzoek (1-op-1)
     public Onderzoek? Onderzoek { get; set; }
+
+    // Nieuwe navigatie-eigenschap voor Onderzoeken
+    public ICollection<Onderzoek> Onderzoeken { get; set; }
 
 }
