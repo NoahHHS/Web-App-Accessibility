@@ -8,6 +8,12 @@ using SQLitePCL;
 using webapp_accessability.Data;
 using webapp_accessability.Models;
 
+// For the find user method:
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
+
 namespace webapp_accessability.Controllers;
 
 [ApiController]
@@ -17,13 +23,16 @@ public class ProfielController : ControllerBase
 {
    private readonly ApplicationDbContext _context;
    private readonly UserManager<ApplicationUser> _userManager;
+   private readonly IConfiguration _configuration;
    
    public ProfielController(
       ApplicationDbContext context,
-      UserManager<ApplicationUser> userManager
+      UserManager<ApplicationUser> userManager,
+      IConfiguration configuration
    ){
       _context = context;
       _userManager = userManager;
+      _configuration = configuration;
    }
 
 
@@ -203,10 +212,56 @@ public class ProfielController : ControllerBase
       return false;
    }
 
-   //var HardCodedUser = _context.ApplicationUsers.First();
-   private async Task<ApplicationUser> GetCurrentUser(){
-      //var user = await _userManager.GetUserAsync(HttpContext.User);
-      var user = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
-      return user;
+   //-------------------------------------- Find Current User --------------------------------------
+   //for hardcode purposes use this:
+   //var user = _context.ApplicationUsers.First(u => u.Email == "ruben@test.nl");
+   private async Task<ApplicationUser> GetCurrentUser()
+   {
+      // Retrieve the token from the AuthCookie
+      var token = Request.Cookies["AuthCookie"];
+
+      if (string.IsNullOrEmpty(token))
+      {
+         return null; // or handle as needed
+      }
+
+      try
+      {
+         // Token validation parameters
+         var tokenValidationParameters = new TokenValidationParameters
+         {
+               ValidateIssuerSigningKey = true,
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecretKey"])),
+               ValidateIssuer = false,
+               ValidateAudience = false,
+               ClockSkew = TimeSpan.Zero // Optional: adjust as needed
+         };
+
+         var tokenHandler = new JwtSecurityTokenHandler();
+         var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var validatedToken);
+
+         // Ensure the token is a JWT token
+         if (!(validatedToken is JwtSecurityToken jwtToken))
+         {
+               return null; // or handle as needed
+         }
+
+         // Extract the user ID from the token
+         var userId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+         if (userId == null)
+         {
+               return null; // or handle as needed
+         }
+
+         // Retrieve the user by their ID
+         var user = await _userManager.FindByIdAsync(userId);
+         return user;
+      }
+      catch (Exception ex)
+      {
+         // Handle or log the exception as needed
+         return null;
+      }
    }
 }
