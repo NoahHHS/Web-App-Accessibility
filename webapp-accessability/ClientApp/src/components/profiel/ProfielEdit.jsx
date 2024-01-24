@@ -105,12 +105,6 @@ const VoegMedischToeButton = () => {
   );
 }
 
-const VerwijderMedischButton = () => {
-  return(
-    <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
-  );
-}
-
 const DataItem = (props) => {
   const { field, value, data, onInputChange } = props;
 
@@ -156,7 +150,7 @@ const MedischeDataContent = (props) => {
             </li>
           ))}
         </ul>
-      <VoegMedischToeButton/>
+        <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
     </section>
   );
 }
