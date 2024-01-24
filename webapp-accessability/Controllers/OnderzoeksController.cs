@@ -79,5 +79,13 @@ public class OnderzoeksController : ControllerBase
 
         return BadRequest("Ongeldige invoergegevens");
     }
+
+    [HttpGet("Zoek")]
+    public IActionResult Zoek(string naam)
+    {
+        return Ok(context.Onderzoeken.Where(data => data.Naam.Contains(naam)).Select(oz => new OnderzoekDTO 
+        { Id = oz.Id, naam = oz.Naam, Beschrijving = oz.Omschrijving, Link = 
+        context.OnderzoekLinks.Where(ozl => ozl.Id == oz.LinkId).FirstOrDefault().Link}));
+    }
     }
 

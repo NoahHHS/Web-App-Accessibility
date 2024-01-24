@@ -26,21 +26,38 @@ const PaginaTitel = () => {
   )
 }
 
-const Zoekbalk = () => {
-  return(
-    <div>
-      <section className='Zoekbalk' >
-        <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
-        <button className='search' aria-label="Zoek input"><div class="search-icon" title='zoekbalk-knop'>&#128269;</div></button>
-      </section>
-    </div>
-  )
-  }
- const Onderzoeklijst = []
-function OnderzoekDetails() {
+// const Zoekbalk = () => {
+//   return(
+//     <div>
+//       <section className='Zoekbalk' >
+//         <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
+//         <button className='search' aria-label="Zoek input"><div class="search-icon" onClick={handleSearch} title='zoekbalk-knop'>&#128269;</div></button>
+//       </section>
+//     </div>
+//   )
+//   }
+function OnderzoekDetails() { /* ============================= */
   const [modal, setModal] = useState(false);
   const [onderzoek, setOnderzoek] = useState([]);
 
+  let shouldrender = true;
+
+  const handleSearch = () => {
+    const searchQuery = document.querySelector('.OnderzoekSearchInput').value;
+if(searchQuery.trim() == "") {
+  shouldrender = true;
+  console.log("set?");
+  return;
+}
+
+    fetch(`https://localhost:7288/Onderzoeks/Zoek?naam=${searchQuery}`)
+    .then(response => response.json())
+    .then(resp => setOnderzoek(resp))
+    .catch(err => console.log(err));
+
+    shouldrender = false;
+  }
+  
   const toggleModal = () => {
   setModal(!modal);
   console.log("called");
@@ -71,18 +88,29 @@ sessionStorage.setItem('GUID', '147f296c-24c5-4759-a64c-9d76155fe2be');
 }
 
 useEffect(() => {
-  fetch('https://localhost:7288/Onderzoeks/GetOnderzoeken')
+  if(shouldrender) {
+    console.log("called");
+    fetch('https://localhost:7288/Onderzoeks/GetOnderzoeken')
   .then(response => response.json())
   .then(jsonData => setOnderzoek(jsonData))
   .catch(error => console.log(error))
+  }
 }, []);
 
 if(modal) {
   document.body.classList.add('active-modal')
 } else {
   document.body.classList.remove('active-modal')
-} // for loop voor elk element in OnderzoekList
+} //loop voor elk element in OnderzoekList7
   return (
+    <>
+    <div>
+      <section className='Zoekbalk' >
+        <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
+        <button className='search' aria-label="Zoek input"><div class="search-icon" onClick={handleSearch} title='zoekbalk-knop'>&#128269;</div></button>
+      </section>
+    </div>
+        {
         onderzoek.map((key, i) => (
           <section className='Onderzoek' data-oz-id={key.id}>
         <section className='logo'>
@@ -105,7 +133,8 @@ if(modal) {
 }
       </section>
         ))
-      
+        }
+        </>
   )
 }
 
@@ -114,7 +143,6 @@ const OnderzoekTop = () => {
     <section id='onderzoek'>
       <div className='Top'>
         <PaginaTitel />
-        <Zoekbalk />
       </div>
     </section>
   )
