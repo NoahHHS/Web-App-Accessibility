@@ -132,28 +132,83 @@ const DataItemMedisch = (prop) => {
   );
 }
 
+const VerwijderMedischButton = ({ beperking, hulpmiddelen, onDeleteMedischeGegeven }) => {
+  const handleDeleteClick = () => {
+    onDeleteMedischeGegeven(beperking, hulpmiddelen);
+  };
+
+  return (
+    <button
+      className='VerwijderButton'
+      aria-label='Verwijder een aandoening'
+      onClick={handleDeleteClick}
+    >
+      <strong>Verwijder aandoening</strong>
+    </button>
+  );
+};
+
+
 //------------------------------ Page content ------------------------------
 // Component die alle medische gegevens rendered
 const MedischeDataContent = (props) => {
-  const medischeData = props.data
+  const medischeData = props.data;
 
-  return(
+  const handleDeleteMedischeGegeven = (beperking, hulpmiddelen) => {
+    console.log('Beperking:', beperking);
+    console.log('Hulpmiddelen:', hulpmiddelen);
+
+    fetch(`https://localhost:7288/profiel/DeleteMedischeGegeven?_Beperking=${encodeURIComponent(beperking)}&_Hulpmiddelen=${encodeURIComponent(hulpmiddelen)}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to delete: ${response.statusText}`);
+      }
+  
+      // If the response is not JSON, simply return the response text
+      if (!response.headers.get('content-type')?.includes('application/json')) {
+        return response.text();
+      }
+  
+      // Otherwise, parse the JSON response
+      return response.json();
+    })
+    .then((data) => {
+      console.log('Success:', data);
+      // Handle success, e.g., refresh the data
+      // You may want to refetch the data or update the state to reflect the changes
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Handle error, e.g., show an error message
+    });
+  };
+
+  return (
     <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Medische gegevens</h2>
-        <ul className='Medische-DataLijst'>
-          {medischeData.map((item, index) => (
-            <li className='Medische-DataLijstItem' key={index}>
-              <div className='ListItemBox'>
-                <DataItemMedisch value="Ziekte" beperking={item.beperking} hulpmiddelen={item.hulpmiddelen}/>
-                <button className='VerwijderButton' aria-label='Verwijder een aandoening'><strong>Verwijder aandoening</strong></button>
-              </div>
-            </li>
-          ))}
-        </ul>
-        <VoegMedischToeButton/>
+      <ul className='Medische-DataLijst'>
+        {medischeData.map((item, index) => (
+          <li className='Medische-DataLijstItem' key={index}>
+            <div className='ListItemBox'>
+              <DataItemMedisch value="Ziekte" beperking={item.beperking} hulpmiddelen={item.hulpmiddelen} />
+              <VerwijderMedischButton
+                beperking={item.beperking}
+                hulpmiddelen={item.hulpmiddelen}
+                onDeleteMedischeGegeven={handleDeleteMedischeGegeven}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+      <VoegMedischToeButton />
     </section>
   );
-}
+};
 
 // Component die alle profiel gegevens rendered
 const ProfielDataContent = (props) => {

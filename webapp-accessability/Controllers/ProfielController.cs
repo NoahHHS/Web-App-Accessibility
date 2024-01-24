@@ -101,7 +101,11 @@ public class ProfielController : ControllerBase
    //-------------------------------------------- HTTP PUT Methods --------------------------------------------
    [HttpDelete]
    [Route("DeleteMedischeGegeven")]
-   public async Task<IActionResult> DeleteMedischeGegevenAsync(string _Beperking, string _Hulpmiddelen){
+   public async Task<IActionResult> DeleteMedischeGegeven([FromQuery] string _Beperking, [FromQuery] string _Hulpmiddelen){
+      if (string.IsNullOrEmpty(_Beperking) || string.IsNullOrEmpty(_Hulpmiddelen))
+      {
+         return BadRequest("Medischegegevens niet verwijderd. Geen waardes mee gekregen");
+      }
       var currentUser = await GetCurrentUser();
       var MedischeGegeven = _context.Medischegegevens.FirstOrDefault(M => (M.ApplicationUserId == currentUser.Id) && (M.Hulpmiddelen == _Hulpmiddelen) && (M.Beperking == _Beperking));
       if(MedischeGegeven == null){
