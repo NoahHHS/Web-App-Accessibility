@@ -38,7 +38,7 @@ const AppRoutes = [
     path: '/bedrijfs',
     element: <Bedrijfs />,
     requireAuth: true,
-    requiredRoles: ['Bedrijf', 'Medewerker', 'Admin']
+    requiredRoles: ['Bedrijf', 'Admin']
   },
   {
     path: '/medewerker',

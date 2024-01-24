@@ -9,7 +9,7 @@ using webapp_accessability.Models;
 
 [ApiController]
 [Route("[controller]")]
-[Authorize(Roles = "Bedrijf")]
+[Authorize(Roles = "Admin,Bedrijf")]
 public class BedrijfsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
