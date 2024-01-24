@@ -46,6 +46,24 @@ const ProfielEdit = () => {
       });
   };
 
+  // Fetch profile data on component mount
+  useEffect(() => {
+    const fetchProfielData = async () => {
+      try {
+        const response = await fetch('https://localhost:7288/profiel/GetProfileData');
+        if (!response.ok) {
+          throw new Error('Unable to fetch profile data');
+        }
+        const data = await response.json();
+        setFormData(data);
+      } catch (error) {
+        console.error('Error fetching profile data:', error);
+      }
+    };
+
+    fetchProfielData();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <div>
@@ -83,7 +101,6 @@ const VoegMedischToeButton = () => {
   return(
     <div className='ProfileButton-Content'>
       <button className='ProfileButton' aria-label='Voeg een aandoening toe'><strong>+ Voeg Ziekte Toe</strong></button>
-      <p className='ProfileButton-Warning'>Sla je veranderingen op!<br/>anders worden ze ongedaan gemaakt</p>
     </div>
   );
 }
@@ -152,6 +169,7 @@ const ProfielDataContent = (props) => {
     <div>
       <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
+      <p className='ProfileButton-Warning'>Alle invoervelden zijn verplicht in te vuillen<br/> Kan je iets niet invullen? vul een '-' of gewoon een spatie in.</p>
         <DataItem value="Naam" field='naam' placeholder={profileData.naam} data={props.data} onInputChange={props.onInputChange} aria-label='Naam invoerveld, voer hier je naam in'/>
         <DataItem value="Email" field='email' placeholder={profileData.email} data={props.data} onInputChange={props.onInputChange} aria-label='Email invoerveld, voer hier je email in'/>
         <DataItem value="Beschikbaarheid" field='beschikbaarheid' placeholder={profileData.beschikbaarheid} data={props.data} onInputChange={props.onInputChange} aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
@@ -161,7 +179,7 @@ const ProfielDataContent = (props) => {
       <h2 className='subtitle profielh2'>Adres</h2>
         <DataItem value="Straatnaam" field='straat' placeholder={profileData.straat} data={props.data} onInputChange={props.onInputChange} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
         <DataItem value="Huisnummer" field='huisNr' placeholder={profileData.huisNr} data={props.data} onInputChange={props.onInputChange} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
-        <DataItem value="Toevoeging" field='toevoeging' placeholder={profileData.toevoeging} data={props.data} onInputChange={props.onInputChange} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
+        <DataItem value="Toevoeging" field='toevoeging' placeholder={profileData.toevoeging} data={props.data} onInputChange={props.onInputChange} aria-label='Toevoeging invoerveld, vul een spatie in of een andere toets als je er geen toevoeging hebt'/>
         <DataItem value="Postcode" field='postcode' placeholder={profileData.postcode} data={props.data} onInputChange={props.onInputChange} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
       </section>
       <SaveButton onSaveButtonClick={props.onSaveButtonClick} />
