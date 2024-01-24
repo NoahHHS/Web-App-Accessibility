@@ -30,7 +30,9 @@ export class Admin extends Component {
 
   fetchGebruikerData = () => {
     // Fetch gebruiker data from the API or database
-    fetch('https://localhost:7288/admin/GetGebruikers')
+    fetch('https://localhost:7288/admin/GetGebruikers',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -43,7 +45,9 @@ export class Admin extends Component {
 
   fetchOnderzoekData = () => {
     // Fetch onderzoek data from the API or database
-    fetch('https://localhost:7288/admin/GetOnderzoeken')
+    fetch('https://localhost:7288/admin/GetOnderzoeken',{
+      credentials: 'include',
+    })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -87,6 +91,7 @@ export class Admin extends Component {
     if (selectedItem.id) {
       // Delete onderzoek
       fetch(`https://localhost:7288/admin/VerwijderOnderzoek/${selectedItem.id}`, {
+        credentials: 'include',
         method: 'DELETE',
       })
         .then((response) => response.json())
@@ -106,6 +111,7 @@ export class Admin extends Component {
     if (selectedItem.id) {
       // Delete gebruiker
       fetch(`https://localhost:7288/admin/VerwijderGebruiker/${selectedItem.id}`, {
+        credentials: 'include',
         method: 'DELETE',
       })
         .then((response) => response.json())
@@ -214,30 +220,30 @@ export class Admin extends Component {
 
       {/* Conditionally render rows */}
       {this.state.selectedItem.naam && (
-        <p className="Otext">Naam: {this.state.selectedItem.naam}</p>
+        <p className="GebruikerAccountText">Naam: {this.state.selectedItem.naam}</p>
       )}
       {this.state.selectedItem.userName && (
-        <p className="Otext">Gebruikersnaam: {this.state.selectedItem.userName}</p>
+        <p className="GebruikerAccountText">Gebruikersnaam: {this.state.selectedItem.userName}</p>
       )}
       {this.state.selectedItem.email && (
-        <p className="Otext">E-mail: {this.state.selectedItem.email}</p>
+        <p className="GebruikerAccountText">E-mail: {this.state.selectedItem.email}</p>
       )}
       {this.state.selectedItem.rol && (
-        <p className="Otext">Rol: {this.state.selectedItem.rol}</p>
+        <p className="GebruikerAccountText">Rol: {this.state.selectedItem.rol}</p>
       )}
       {this.state.selectedItem.bedrijfsNaam && (
-        <p className="Otext">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
+        <p className="GebruikerAccountText">Bedrijfsnaam: {this.state.selectedItem.bedrijfsNaam}</p>
       )}
       {this.state.selectedItem.voorkeurBenadering && (
-        <p className="Otext">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
+        <p className="GebruikerAccountText">Voorkeur Benadering: {this.state.selectedItem.voorkeurBenadering}</p>
       )}
       {this.state.selectedItem.beschikbaarheid && (
-        <p className="Otext">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
+        <p className="GebruikerAccountText">Beschikbaarheid: {this.state.selectedItem.beschikbaarheid}</p>
       )}
 
       {/* Address details */}
       {this.state.selectedItem.adres && (
-        <p className="Otext">Adres: {`${this.state.selectedItem.adres.straat} ${this.state.selectedItem.adres.huisNr} ${this.state.selectedItem.adres.toevoeging}, ${this.state.selectedItem.adres.postcode}`}</p>
+        <p className="GebruikerAccountText">Adres: {`${this.state.selectedItem.adres.straat} ${this.state.selectedItem.adres.huisNr} ${this.state.selectedItem.adres.toevoeging}, ${this.state.selectedItem.adres.postcode}`}</p>
       )}
 
       {/* Medische gegevens */}
@@ -305,15 +311,15 @@ export class Admin extends Component {
                 &times;
               </span>
               <h2 className="Otitel">Onderzoeksdata</h2>
-              <p className="Otext">Naam van het onderzoek: {this.state.selectedItem.naam}</p>
-              <p className="Otext">Beschrijving: {this.state.selectedItem.omschrijving}</p>
-              <p className="Otext">StartDatum: {this.state.selectedItem.startDatum}</p>
-              <p className="Otext">EindDatum: {this.state.selectedItem.eindDatum}</p>
-              <p className="Otext">Status: {this.state.selectedItem.status}</p>
-              <p className="Otext">Type: {this.state.selectedItem.type}</p>
-              <p className="Otext">MedewerkerId: {this.state.selectedItem.medewerkerId}</p>
-              <p className="Otext">LinkId: {this.state.selectedItem.linkId}</p>
-              <p className="Otext">LocatieId: {this.state.selectedItem.locatieId}</p>
+              <p className="OnderzoekText">Naam van het onderzoek: {this.state.selectedItem.naam}</p>
+              <p className="OnderzoekText">Beschrijving: {this.state.selectedItem.omschrijving}</p>
+              <p className="OnderzoekText">StartDatum: {this.state.selectedItem.startDatum}</p>
+              <p className="OnderzoekText">EindDatum: {this.state.selectedItem.eindDatum}</p>
+              <p className="OnderzoekText">Status: {this.state.selectedItem.status}</p>
+              <p className="OnderzoekText">Type: {this.state.selectedItem.type}</p>
+              <p className="OnderzoekText">MedewerkerId: {this.state.selectedItem.medewerkerId}</p>
+              <p className="OnderzoekText">LinkId: {this.state.selectedItem.linkId}</p>
+              <p className="OnderzoekText">LocatieId: {this.state.selectedItem.locatieId}</p>
 
               <div className="Opslaanknop-Verwijderknop-container">
                 <button

@@ -26,7 +26,9 @@ export class Bedrijfs extends Component {
     const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
   
     // Fetch onderzoekData for the bedrijf
-    fetch(`https://localhost:7288/Bedrijfs/GetOnderzoeken/${bedrijfId}`)
+    fetch(`https://localhost:7288/Bedrijfs/GetOnderzoeken/${bedrijfId}`,{ 
+    credentials: 'include',
+  })
       .then((response) => response.json())
       .then((data) => {
         this.setState({
@@ -68,16 +70,17 @@ export class Bedrijfs extends Component {
     // Replace this with an API call to send the new onderzoek data to the server
     const bedrijfId = 'bedrijf-id-1'; // Replace with actual logic to get the logged-in bedrijf's ID
     const newOnderzoek = {
-      Naam: this.state.naam,
-      Omschrijving: this.state.beschrijving,
-      Locatie: this.state.plek,
-      StartDatum: this.state.tijd,
-      Link: this.state.link,
-      BedrijfId: bedrijfId,
+      naam: this.state.naam,
+      omschrijving: this.state.beschrijving,
+      locatie: this.state.plek,
+      startDatum: this.state.tijd,
+      link: this.state.link,
+      bedrijfId: bedrijfId,
     };
   
     try {
       const response = await fetch('https://localhost:7288/Bedrijfs/CreateOnderzoek', {
+        credentials: 'include',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
