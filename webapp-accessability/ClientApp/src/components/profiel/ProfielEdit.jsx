@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import '../../stylesheets/Profiel.css'
+// Import for TanStack Query
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from '@tanstack/react-query'
+// Import the MedischToevoegenModal component
+import MedischToevoegenModal from './MedischToevoegenModal';
 
 const queryClient = new QueryClient();
 
 //------------------------------ ProfielEdit pagina component ------------------------------
 const ProfielEdit = () => {
+  const [showMedischToevoegenModal, setShowMedischToevoegenModal] = useState(false);
   const [formData, setFormData] = useState({
     naam: '',
     email: '',
@@ -19,6 +23,11 @@ const ProfielEdit = () => {
     toevoeging: '',
     postcode: '',
   });
+
+  const handleAddMedischData = (data) => {
+    // Perform any necessary actions, such as sending a request to add data to the server
+    console.log('Adding medical data:', data);
+  };
 
   const handleInputChange = (field, value) => {
     setFormData({
@@ -75,6 +84,19 @@ const ProfielEdit = () => {
           onSaveButtonClick={handleSaveButtonClick}
         />
         <FetchMedischeData />
+
+        {/* Render the button to open the modal */}
+        <VoegMedischToeButton onClick={() => {
+          console.log('Button clicked');
+          setShowMedischToevoegenModal(true);
+        }} />
+
+        {/* Render the modal */}
+        <MedischToevoegenModal
+          isOpen={showMedischToevoegenModal}
+          onClose={() => setShowMedischToevoegenModal(false)}
+          onAddMedischData={handleAddMedischData}
+        />
       </div>
     </QueryClientProvider>
   );
@@ -98,13 +120,15 @@ const SaveButton = (props) => {
   );
 };
 
-const VoegMedischToeButton = () => {
-  return(
+const VoegMedischToeButton = ({ onClick }) => {
+  return (
     <div className='ProfileButton-Content'>
-      <button className='ProfileButton' aria-label='Voeg een aandoening toe'><strong>+ Voeg Ziekte Toe</strong></button>
+      <button className='ProfileButton' aria-label='voeg een aandoening of beperking toe' title='voeg een aandoening of beperking toe' onClick={onClick}>
+        <strong>+ Voeg Toe</strong>
+      </button>
     </div>
   );
-}
+};
 
 const DataItem = (props) => {
   const { field, value, data, onInputChange } = props;
@@ -207,7 +231,6 @@ const MedischeDataContent = (props) => {
           </li>
         ))}
       </ul>
-      <VoegMedischToeButton />
     </section>
   );
 };

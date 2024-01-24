@@ -1,0 +1,85 @@
+  .medisch-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .medisch-modal.open {
+    display: flex;
+  }
+  
+  .medisch-modal-content {
+    background-color: #fff;
+    color: black;
+    border-radius: 8px;
+    text-align: center;
+  }
+  .medisch-model-block{
+    padding: 20px;
+  }
+  .mmblock1 {
+    background-color: rgb(226, 226, 226);
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+  }
+
+  .medisch-modal-title {
+    padding-top: none;
+  }
+
+  .medisch-modal-beschrijving{
+    font-size: small;
+  }
+
+  .medisch-modal-warning{
+    color: rgb(255, 35, 1);
+  }
+
+  .medisch-modal-label {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px; /* Adjust margin as needed for spacing */
+  }
+  
+  .medisch-modal-input {
+    width: 70%; /* Ensure the input takes full width */
+    box-sizing: border-box; /* Include padding and border in the width */
+    background-color: rgb(226, 226, 226);
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px; /* Adjust margin as needed for spacing */
+  }
+  
+  .medisch-modal-buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .medisch-modal-button{
+    filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.628));
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+  }
+  .medisch-voegtoe{
+    background-color: #21CEA1;
+  }
+  .medisch-voegtoe:hover{
+    background-color: #10a57e;
+    color: white;
+  }
+  .medisch-annuleer{
+    background-color: #E7321A;
+  }
+  .medisch-annuleer:hover{
+    background-color: #af2512;
+    color: white;
+  }
