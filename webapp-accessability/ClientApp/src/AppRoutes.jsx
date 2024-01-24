@@ -6,13 +6,14 @@ import { Home } from "./components/Home";
 import { Privacystatement } from "./components/privacystatement"
 import { OverOns } from './components/overons/OverOns';
 import { Onderzoek } from './components/onderzoek/Onderzoek';
-import { ProfielEdit } from './components/profiel/ProfielEdit';
+import ProfielEdit from './components/profiel/ProfielEdit';
 import { ProfielData } from './components/profiel/ProfielData';
 // import { Login } from './components/api-authorization/Login';
 import { Login } from './components/login/Login';
 import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
 import { Admin } from './components/admin/Admin';
+import { Chat } from './components/chatBox/chatBox';
 
 
 import { useAuth } from './components/context/AuthContext';
@@ -79,6 +80,10 @@ const AppRoutes = [
     element: <Admin />,
     requireAuth: true,
     requiredRoles: ['Admin']
+  },
+  {
+    path: '/chat',
+    element: <Chat/>
   },
   ...ApiAuthorzationRoutes
 ];
