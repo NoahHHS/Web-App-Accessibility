@@ -114,18 +114,19 @@ public class ProfielController : ControllerBase
    //-------------------------------------------- HTTP PUT Methods --------------------------------------------
    [HttpPut]
    [Route("UpdateAccount")]
-   public async Task<ActionResult> UpdateAccount([FromBody] ProfielDTO updatedUserData){
+   public async Task<ActionResult> UpdateAccount(ProfielDTO updatedUserData)
+   {
       var currentUser = await GetCurrentUser();
 
       // Find the user in the database
       var user = await _userManager.FindByIdAsync(currentUser.Id);
-      if(user == null){
-         return BadRequest("Account not found");
+      if (user == null)
+      {
+         return BadRequest(new { error = "Account not found" });
       }
 
       // Update address and user
       bool addressUpdated = UpdateAdres(user, updatedUserData);
-
 
       // Update user properties
       user.Naam = updatedUserData.Naam;
@@ -135,17 +136,17 @@ public class ProfielController : ControllerBase
       // Update the user in the database
       var result = await _userManager.UpdateAsync(user);
       if (result.Succeeded && addressUpdated)
-         {
-            return Ok("Account updated successfully");
-         }
+      {
+         return Ok(new { message = "Account updated successfully" });
+      }
       if (result.Succeeded && !addressUpdated)
-         {
-            return BadRequest("Failed to update Adress");
-         }
+      {
+         return BadRequest(new { error = "Failed to update Address" });
+      }
       else
-         {
-            return BadRequest("Failed to update account");
-         }
+      {
+         return BadRequest(new { error = "Failed to update account" });
+      }
    }
 
    //-------------------------------------------- Functional Methods --------------------------------------------

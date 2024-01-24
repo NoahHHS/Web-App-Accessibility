@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../stylesheets/Profiel.css'
 import {
   QueryClient,
@@ -9,34 +9,75 @@ import {
 const queryClient = new QueryClient();
 
 //------------------------------ ProfielEdit pagina component ------------------------------
-export class ProfielEdit extends Component {
-    static displayName = ProfielEdit.name;
+const ProfielEdit = () => {
+  const [formData, setFormData] = useState({
+    naam: '',
+    email: '',
+    beschikbaarheid: '',
+    straat: '',
+    huisNr: 0,
+    toevoeging: '',
+    postcode: '',
+  });
 
-    constructor(props) {
-      super(props);
-    }
-  render() {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <div>
-          <h1 className='pagetitle'>Bewerk Gegevens</h1>
-          <FetchProfielData/>
-          <FetchMedischeData/>
-        </div>
-      </QueryClientProvider>
-    );
-  }
-}
+  const handleInputChange = (field, value) => {
+    setFormData({
+      ...formData,
+      [field]: value,
+    });
+  };
+
+  const handleSaveButtonClick = () => {
+    fetch('https://localhost:7288/profiel/UpdateAccount', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        // Handle success, e.g., show a success message
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        // Handle error, e.g., show an error message
+      });
+  };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <h1 className='pagetitle'>Bewerk Gegevens</h1>
+        <ProfielDataContent
+          data={formData}
+          onInputChange={handleInputChange}
+          onSaveButtonClick={handleSaveButtonClick}
+        />
+        <FetchMedischeData />
+      </div>
+    </QueryClientProvider>
+  );
+};
 
 //------------------------------ Functional components ------------------------------
-const SaveButton = () => {
-    return(
-      <div className='ProfileButton-Content'>
-        <button className='ProfileButton' title='Sla veranderingen op'><strong>Save</strong></button>
-        <p className='ProfileButton-Warning'>Sla je veranderingen op!<br/>anders worden ze ongedaan gemaakt</p>
-      </div>
-    );
-}
+const SaveButton = (props) => {
+  return (
+    <div className='ProfileButton-Content'>
+      <button
+        className='ProfileButton'
+        title='Sla veranderingen op'
+        onClick={props.onSaveButtonClick}
+      >
+        <strong>Save</strong>
+      </button>
+      <p className='ProfileButton-Warning'>
+        Sla je veranderingen op!<br />anders worden ze ongedaan gemaakt
+      </p>
+    </div>
+  );
+};
 
 const VoegMedischToeButton = () => {
   return(
@@ -53,14 +94,23 @@ const VerwijderMedischButton = () => {
   );
 }
 
-const DataItem = (prop) => {
-  return(
+const DataItem = (props) => {
+  const { field, value, data, onInputChange } = props;
+
+  return (
     <div className='DataItem'>
-      <p className='DataItem-Name'>{prop.value}</p>
-      <input id='info-name' className="DataItem-Field" type="text" placeholder={prop.placeholder}/>
+      <p className='DataItem-Name'>{value}</p>
+      <input
+        id={`info-${field}`}
+        className='DataItem-Field'
+        type='text'
+        placeholder={value} // Use value instead of placeholder
+        value={data[field] || ''}
+        onChange={(e) => onInputChange(field, e.target.value)}
+      />
     </div>
   );
-}
+};
 
 const DataItemMedisch = (prop) => {
   return(
@@ -102,19 +152,19 @@ const ProfielDataContent = (props) => {
     <div>
       <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Persoonlijke gegevens</h2>
-        <DataItem value="Naam" placeholder={profileData.naam} aria-label='Naam invoerveld, voer hier je naam in'/>
-        <DataItem value="Email" placeholder={profileData.email} aria-label='Email invoerveld, voer hier je email in'/>
-        <DataItem value="Beschikbaarheid" placeholder={profileData.beschikbaarheid} aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
+        <DataItem value="Naam" field='naam' placeholder={profileData.naam} data={props.data} onInputChange={props.onInputChange} aria-label='Naam invoerveld, voer hier je naam in'/>
+        <DataItem value="Email" field='email' placeholder={profileData.email} data={props.data} onInputChange={props.onInputChange} aria-label='Email invoerveld, voer hier je email in'/>
+        <DataItem value="Beschikbaarheid" field='beschikbaarheid' placeholder={profileData.beschikbaarheid} data={props.data} onInputChange={props.onInputChange} aria-label='Beschikbaarheid invoerveld, voer hier je beschikbaarheid in'/>
       </section>
 
       <section className='profiel-section'>
       <h2 className='subtitle profielh2'>Adres</h2>
-        <DataItem value="Straatnaam" placeholder={profileData.straat} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
-        <DataItem value="Huisnummer" placeholder={profileData.huisNr} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
-        <DataItem value="Toevoeging" placeholder={profileData.toevoeging} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
-        <DataItem value="Postcode" placeholder={profileData.postcode} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
+        <DataItem value="Straatnaam" field='straat' placeholder={profileData.straat} data={props.data} onInputChange={props.onInputChange} aria-label='Straatnaam invoerveld, voer hier je straatnaam in'/>
+        <DataItem value="Huisnummer" field='huisNr' placeholder={profileData.huisNr} data={props.data} onInputChange={props.onInputChange} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
+        <DataItem value="Toevoeging" field='toevoeging' placeholder={profileData.toevoeging} data={props.data} onInputChange={props.onInputChange} aria-label='huisnummer invoerveld, voer hier de bijhorende huisnummer in'/>
+        <DataItem value="Postcode" field='postcode' placeholder={profileData.postcode} data={props.data} onInputChange={props.onInputChange} aria-label='Postcode invoerveld, voer hier je postcode in, geen spaties'/>
       </section>
-      <SaveButton/>
+      <SaveButton onSaveButtonClick={props.onSaveButtonClick} />
     </div>
   );
 }
@@ -175,3 +225,5 @@ const FetchProfielData = () => {
     <ProfielDataContent data={profileData}/>
   );
 }
+
+export default ProfielEdit;
