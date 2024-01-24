@@ -118,7 +118,7 @@ if(modal) {
         <div className="pmodal-content">
           <h2 className="popuptitel" title='Popuptitel'><strong>LET OP</strong></h2>
           <p className="popuptekst" title='Popuptekst'>Je gaat nu deelnemen {key.naam}</p>
-          <button className='add-modal' onClick={sendData} title='Deelnemen'>Neem Deel</button>
+          <a href='https://docs.google.com/forms/d/e/1FAIpQLScTIQFO7FcKCbtQVI-98c989eWlgMqzhiAlbvb7cN73upA-4A/viewform?usp=sf_link'><button className='add-modal' onClick={sendData} title='Deelnemen'>Neem Deel</button></a>
           <button className="cancel-modal" onClick={toggleModal} title='Niet deelnemen'>Cancel</button>
         </div>
       </section>)

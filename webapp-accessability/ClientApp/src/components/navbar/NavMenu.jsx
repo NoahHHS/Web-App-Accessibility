@@ -35,6 +35,7 @@ const Navitems = () => {
                 <a className='nav-item' title='Ga naar je profielspagina' href="/profiel">Profiel</a>
                 <a className='nav-item' title='Leer meer over ons' href="/overons">Over Ons</a>
                 <a className='nav-item' title='Krijg inzicht op je privacy' href="/privacystatement">Privacy</a>
+                <a className='nav-item' title='Praat met een medewerker over je problemen' href="/chat">Chat</a>
             </div>
             <ButtonLogIn />
         </div>
