@@ -26,16 +26,7 @@ const PaginaTitel = () => {
   )
 }
 
-// const Zoekbalk = () => {
-//   return(
-//     <div>
-//       <section className='Zoekbalk' >
-//         <input type="text" class="OnderzoekSearchInput" placeholder="Zoek onderzoek bij naam" title='zoekbalk-input'/>
-//         <button className='search' aria-label="Zoek input"><div class="search-icon" onClick={handleSearch} title='zoekbalk-knop'>&#128269;</div></button>
-//       </section>
-//     </div>
-//   )
-//   }
+
 function OnderzoekDetails() { /* ============================= */
   const [modal, setModal] = useState(false);
   const [onderzoek, setOnderzoek] = useState([]);
@@ -50,7 +41,7 @@ if(searchQuery.trim() == "") {
   return;
 }
 
-    fetch(`https://localhost:7288/Onderzoeks/Zoek?naam=${searchQuery}`)
+    fetch(`https://localhost:7288/Onderzoeks/Zoek?naam=${searchQuery}` , {credentials: 'include'})
     .then(response => response.json())
     .then(resp => setOnderzoek(resp))
     .catch(err => console.log(err));
@@ -71,6 +62,7 @@ const sendData = async () => {
   // stuurt post request naar deelneem endpoint
   const response = await fetch('https://localhost:7288/Onderzoeks/Deelnemen', {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
@@ -90,7 +82,7 @@ sessionStorage.setItem('GUID', '147f296c-24c5-4759-a64c-9d76155fe2be');
 useEffect(() => {
   if(shouldrender) {
     console.log("called");
-    fetch('https://localhost:7288/Onderzoeks/GetOnderzoeken')
+    fetch('https://localhost:7288/Onderzoeks/GetOnderzoeken', {credentials: 'include'})
   .then(response => response.json())
   .then(jsonData => setOnderzoek(jsonData))
   .catch(error => console.log(error))

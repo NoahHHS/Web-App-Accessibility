@@ -13,6 +13,7 @@ import { Login } from './components/login/Login';
 import { Registreer } from './components/registreer/Registreer';
 import { Medewerker } from './components/medewerker/Medewerker';
 import { Admin } from './components/admin/Admin';
+import { Chat } from './components/chatBox/chatBox';
 
 const AppRoutes = [
   {
@@ -67,6 +68,10 @@ const AppRoutes = [
   {
     path: '/admin',
     element: <Admin/>
+  },
+  {
+    path: '/chat',
+    element: <Chat/>
   },
   ...ApiAuthorzationRoutes
 ];
