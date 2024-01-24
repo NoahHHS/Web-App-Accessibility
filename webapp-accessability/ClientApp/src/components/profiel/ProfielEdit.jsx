@@ -198,32 +198,5 @@ const FetchMedischeData = () => {
   );
 };
 
-// Fetch profiel gegevens van de database via ProfielController
-const FetchProfielData = () => {
-  const { data: profileData, isLoading, isError, error } = useQuery({
-    queryKey: ['profileData'],
-    queryFn: async () => {
-      const response = await fetch('https://localhost:7288/profiel/GetProfileData');
-      if (!response.ok) {
-        console.error(response);
-        throw new Error('Unable to fetch profile data');
-      }
-      return response.json();
-    },
-  });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    console.error(error);
-    return <div>Error fetching profile data</div>;
-  }
-
-  return(
-    <ProfielDataContent data={profileData}/>
-  );
-}
 
 export default ProfielEdit;
